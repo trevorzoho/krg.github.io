@@ -391,8 +391,7 @@
 <nav>
   <div class="container nav-inner">
     <a href="index.html" class="nav-logo">
-      <div class="logo-icon">K</div>
-      Keystone Realty Group
+      <img src="krg-logo-nav.png" alt="Keystone Realty Group" height="40" style="display:block;" />
     </a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
@@ -475,7 +474,10 @@
           <div class="modal-address" id="modal-address"></div>
           <div class="modal-mls" id="modal-mls"></div>
         </div>
-        <button class="modal-save-btn" id="modal-save">♡ Save</button>
+        <div style="display:flex;gap:8px;">
+          <button class="modal-save-btn" id="modal-save">♡ Save</button>
+          <button class="modal-save-btn" id="modal-share">🔗 Share</button>
+        </div>
       </div>
 
       <!-- Quick specs -->
@@ -1036,6 +1038,21 @@ function renderPagination(current, total) {
 // Initial render
 renderPage(1);
 
+// ── Deep-link support ──────────────────────────────────────
+// If the URL contains #listing-{id}, navigate to the right page and open the modal.
+// Works when linked from the home page, external sites, or shared directly.
+(function () {
+  const match = window.location.hash.match(/^#listing-(\d+)$/);
+  if (!match) return;
+  const id = parseInt(match[1]);
+  const idx = listings.findIndex(l => l.id === id);
+  if (idx === -1) return;
+  const page = Math.floor(idx / PER_PAGE) + 1;
+  if (page !== 1) renderPage(page);
+  // Small delay so the card grid is in the DOM before the modal opens
+  setTimeout(() => openModal(id), 60);
+})();
+
 // ── Modal logic ─────────────────────────────────────────────
 function openModal(id) {
   const d = listings.find(l => l.id === id);
@@ -1094,13 +1111,28 @@ function openModal(id) {
     saveBtn.style.color = saved ? 'white' : '';
   };
 
+  // Update URL hash so this listing has a shareable/linkable URL
+  history.replaceState(null, '', '#listing-' + id);
+
   document.getElementById('listingModal').classList.add('open');
   document.body.style.overflow = 'hidden';
+
+  // Share button — copies current URL to clipboard
+  const shareBtn = document.getElementById('modal-share');
+  shareBtn.textContent = '🔗 Share';
+  shareBtn.onclick = () => {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      shareBtn.textContent = '✓ Copied!';
+      setTimeout(() => shareBtn.textContent = '🔗 Share', 2000);
+    });
+  };
 }
 
 function closeModal() {
   document.getElementById('listingModal').classList.remove('open');
   document.body.style.overflow = '';
+  // Clear the hash without adding a history entry
+  history.replaceState(null, '', window.location.pathname + window.location.search);
 }
 
 // Tab switching
