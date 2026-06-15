@@ -362,6 +362,10 @@
     .modal-agent-name { font-weight: 700; color: var(--navy); font-size: 1.05rem; }
     .modal-agent-title { font-size: 0.8rem; color: var(--gold); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin: 3px 0 8px; }
     .modal-agent-bio { font-size: 0.88rem; color: #555; line-height: 1.5; }
+    
+    .modal-agent-email { font-size: 0.9rem; color: var(--gray); margin-top: 6px; }
+    .modal-agent-email a:hover { text-decoration: underline; }
+
     .modal-agent-phone { font-size: 0.88rem; color: var(--navy); font-weight: 600; margin-top: 10px; }
 
     /* CTA footer */
@@ -500,6 +504,7 @@
             <div class="modal-agent-title" id="modal-agent-title"></div>
             <div class="modal-agent-bio" id="modal-agent-bio"></div>
             <div class="modal-agent-phone" id="modal-agent-phone"></div>
+            <div class="modal-agent-email" id="modal-agent-email"></div>
           </div>
         </div>
       </div>
@@ -561,376 +566,3686 @@
 // ── Property Data ──────────────────────────────────────────
 const listings = [
   {
-    id: 1,
-    price: '$649,000',
-    address: '142 Maplewood Drive, Austin, TX 78701',
-    mls: 'MLS# ATX-2026-04831',
-    img: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=900&q=80',
-    badges: [{ label: 'For Sale', cls: '' }, { label: 'New Listing', cls: 'green' }],
-    beds: 4, baths: 3, sqft: '2,450', garage: '2-Car', lot: '0.28 ac',
-    desc: 'Gorgeous 4-bedroom colonial on a quiet cul-de-sac in the heart of Austin. Fully updated kitchen with quartz countertops and stainless appliances, hardwood floors throughout the main level, and a dedicated home office. The spacious backyard features a large deck and mature oak trees — perfect for entertaining. Located in top-rated AISD schools. Walking distance to Barton Creek greenbelt trailheads.',
-    features: ['Updated chef\'s kitchen', 'Hardwood floors throughout', 'Dedicated home office', 'Large backyard deck', 'Walk-in master closet', 'Dual-zone HVAC', 'Ring doorbell & smart locks', 'Top-rated AISD schools'],
-    details: [
-      { label: 'Property Type', val: 'Single Family' },
-      { label: 'Year Built', val: '2008' },
-      { label: 'Lot Size', val: '0.28 acres' },
-      { label: 'HOA Fee', val: '$120/mo' },
-      { label: 'Taxes (2025)', val: '$9,840/yr' },
-      { label: 'Cooling', val: 'Dual-Zone Central' },
-      { label: 'Heating', val: 'Gas Forced Air' },
-      { label: 'Parking', val: '2-Car Attached Garage' },
+    "id": 1,
+    "price": "$631,787",
+    "address": "9648 Sunset Ridge Rd, Round Rock, TX 78664",
+    "mls": "MLS# ATX-2026-05914",
+    "img": "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      },
+      {
+        "label": "Open House Sat 1–4pm",
+        "cls": "blue"
+      }
     ],
-    agent: { name: 'Amanda Kim', title: 'Founding Partner', avatar: '👩‍💼', bio: '18 years in Austin real estate. Specializes in luxury homes and relocation clients. Top producer 10 years running.', phone: '(512) 455-0101' }
-  },
-  {
-    id: 2,
-    price: '$432,500',
-    address: '87 Elmwood Lane, Round Rock, TX 78664',
-    mls: 'MLS# ATX-2026-03217',
-    img: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=900&q=80',
-    badges: [{ label: 'For Sale', cls: '' }, { label: 'Open House Sat 1–4pm', cls: 'blue' }],
-    beds: 3, baths: 2, sqft: '1,890', garage: '2-Car', lot: '0.19 ac',
-    desc: 'Charming 3-bedroom ranch-style home in one of Round Rock\'s most sought-after neighborhoods. The recently renovated master bath features a frameless glass shower and dual vanity. Open-concept living and kitchen area is ideal for entertaining, with a large island and modern pendant lighting. A generous covered patio overlooks the beautifully landscaped backyard with mature trees providing natural shade.',
-    features: ['Renovated master bathroom', 'Open-concept kitchen & living', 'Large kitchen island', 'Covered patio', 'Mature shade trees', 'New roof (2024)', 'Sprinkler system', 'Close to Dell Diamond & 45 toll'],
-    details: [
-      { label: 'Property Type', val: 'Single Family' },
-      { label: 'Year Built', val: '2002' },
-      { label: 'Lot Size', val: '0.19 acres' },
-      { label: 'HOA Fee', val: 'None' },
-      { label: 'Taxes (2025)', val: '$6,210/yr' },
-      { label: 'Cooling', val: 'Central Air' },
-      { label: 'Heating', val: 'Gas Forced Air' },
-      { label: 'Parking', val: '2-Car Attached Garage' },
+    "beds": 3,
+    "baths": 4,
+    "sqft": "2,726",
+    "garage": "2-Car",
+    "lot": "0.19 ac",
+    "desc": "Stunning single family home nestled in a quiet neighborhood with mature oak trees. Recently updated kitchen with quartz countertops and stainless steel appliances. Master suite features a spa-like bath.",
+    "features": [
+      "Covered back patio",
+      "Smart home pre-wired",
+      "Sprinkler system",
+      "Updated chef's kitchen",
+      "Hardwood floors throughout",
+      "2-car garage",
+      "Corner lot",
+      "Cul-de-sac street"
     ],
-    agent: { name: 'Jason Martinez', title: 'Senior Agent', avatar: '👨‍💼', bio: 'Certified Negotiation Expert with a background in finance. Helps buyers compete in fast-moving markets.', phone: '(512) 455-0102' }
-  },
-  {
-    id: 3,
-    price: '$1,150,000',
-    address: '310 Ridgeline Blvd, Westlake Hills, TX 78746',
-    mls: 'MLS# ATX-2026-07752',
-    img: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=900&q=80',
-    badges: [{ label: 'For Sale', cls: '' }],
-    beds: 5, baths: 4, sqft: '4,100', garage: '3-Car', lot: '1.2 ac',
-    desc: 'Stunning contemporary estate perched in Westlake Hills with sweeping hill country views. The chef\'s kitchen is outfitted with Wolf and Sub-Zero appliances, a 12-foot island, and custom cabinetry. Resort-style backyard features a heated pool, spa, and outdoor kitchen. The media room, game room, and dedicated gym make this home perfect for every lifestyle. Located in the prestigious Eanes ISD — consistently ranked #1 in Texas.',
-    features: ['Wolf & Sub-Zero appliances', 'Resort-style heated pool & spa', 'Outdoor kitchen & fire pit', 'Media room & home gym', 'Three-car garage with EV charger', 'Control4 smart home system', 'Whole-home generator', 'Eanes ISD schools (#1 in TX)'],
-    details: [
-      { label: 'Property Type', val: 'Single Family Estate' },
-      { label: 'Year Built', val: '2017' },
-      { label: 'Lot Size', val: '1.2 acres' },
-      { label: 'HOA Fee', val: '$350/mo' },
-      { label: 'Taxes (2025)', val: '$21,400/yr' },
-      { label: 'Cooling', val: 'Multi-Zone Central' },
-      { label: 'Heating', val: 'Radiant + Gas' },
-      { label: 'Parking', val: '3-Car Attached Garage + Circular Drive' },
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Single Family Home"
+      },
+      {
+        "label": "Year Built",
+        "val": "1980"
+      },
+      {
+        "label": "Lot Size",
+        "val": "0.19 ac"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "$150/mo"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$11,400"
+      },
+      {
+        "label": "Cooling",
+        "val": "Mini-Split"
+      },
+      {
+        "label": "Heating",
+        "val": "Central Electric"
+      },
+      {
+        "label": "Parking",
+        "val": "2-Car Garage"
+      }
     ],
-    agent: { name: 'Priya Nair', title: 'Buyer\'s Specialist', avatar: '👩‍💼', bio: 'Guides buyers with patience and clarity. Expertise in South Austin, Travis Heights, SoCo, and Westlake neighborhoods.', phone: '(512) 455-0103' }
+    "agent": {
+      "name": "Lisa Barlow",
+      "title": "Buyer's Specialist",
+      "avatar": "👩‍💼",
+      "bio": "Buyer's specialist guiding clients with patience and clarity. Expertise in South Austin, Travis Heights, and SoCo neighborhoods.",
+      "phone": "(512) 455-0104",
+      "email": "trevor.l+sales2@zohotest.com"
+    }
   },
   {
-    id: 4,
-    price: '$378,000',
-    address: '500 W 2nd St #1204, Austin, TX 78701',
-    mls: 'MLS# ATX-2026-02109',
-    img: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=900&q=80',
-    badges: [{ label: 'For Sale', cls: '' }, { label: 'Condo', cls: 'blue' }],
-    beds: 2, baths: 2, sqft: '1,120', garage: '1-Car', lot: 'N/A',
-    desc: 'Sleek downtown high-rise condo on the 12th floor with floor-to-ceiling windows showcasing panoramic Austin skyline views. Open floor plan with polished concrete floors, quartz countertops, and custom built-ins throughout. Building amenities include 24-hour concierge, rooftop pool and lounge, state-of-the-art fitness center, and secured parking. Steps from 2nd Street District restaurants, Lady Bird Lake, and the hike-and-bike trail.',
-    features: ['Panoramic skyline views', 'Floor-to-ceiling windows', 'Rooftop pool & lounge', '24-hour concierge', 'Fitness center & yoga studio', 'Secured underground parking', 'Guest suite available', 'Walk score: 98'],
-    details: [
-      { label: 'Property Type', val: 'High-Rise Condo' },
-      { label: 'Year Built', val: '2019' },
-      { label: 'Floor', val: '12th of 28' },
-      { label: 'HOA Fee', val: '$680/mo' },
-      { label: 'Taxes (2025)', val: '$5,940/yr' },
-      { label: 'Cooling', val: 'Central Air' },
-      { label: 'Heating', val: 'Electric' },
-      { label: 'Parking', val: '1 Secured Underground Space' },
+    "id": 2,
+    "price": "$455,514",
+    "address": "9364 Oltorf St #1391, Round Rock, TX 78681",
+    "mls": "MLS# ATX-2026-83238",
+    "img": "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      },
+      {
+        "label": "Condo",
+        "cls": "blue"
+      }
     ],
-    agent: { name: 'Carlos Vega', title: 'Commercial & Investment', avatar: '👨‍💼', bio: 'Specializes in multi-family and commercial properties. Former CPA, bringing financial rigor to every deal.', phone: '(512) 455-0104' }
-  },
-  {
-    id: 5,
-    price: '$519,900',
-    address: '2214 Barton Creek Blvd, Austin, TX 78735',
-    mls: 'MLS# ATX-2026-05488',
-    img: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900&q=80',
-    badges: [{ label: 'For Sale', cls: '' }, { label: 'Price Reduced', cls: 'green' }],
-    beds: 4, baths: 3, sqft: '2,200', garage: '2-Car', lot: '0.22 ac',
-    desc: 'Well-maintained 4-bedroom home steps from the Barton Creek Greenbelt, offering miles of hiking and biking trails right from your neighborhood. Soaring vaulted ceilings and abundant natural light define the main living areas. A sun-filled sunroom off the kitchen makes a perfect reading nook or home office. The backyard is beautifully landscaped with raised garden beds, a fountain, and a flagstone patio. Updated appliances and fresh interior paint throughout.',
-    features: ['Greenbelt access nearby', 'Vaulted ceilings', 'Sun-filled sunroom', 'Flagstone patio', 'Raised garden beds', 'Updated appliances (2023)', 'Fresh interior paint', 'Large master walk-in closet'],
-    details: [
-      { label: 'Property Type', val: 'Single Family' },
-      { label: 'Year Built', val: '1999' },
-      { label: 'Lot Size', val: '0.22 acres' },
-      { label: 'HOA Fee', val: '$85/mo' },
-      { label: 'Taxes (2025)', val: '$7,760/yr' },
-      { label: 'Cooling', val: 'Central Air' },
-      { label: 'Heating', val: 'Gas Forced Air' },
-      { label: 'Parking', val: '2-Car Attached Garage' },
+    "beds": 3,
+    "baths": 2,
+    "sqft": "1,101",
+    "garage": "1-Car",
+    "lot": "N/A",
+    "desc": "Gorgeous condo offering an open-concept floor plan with soaring ceilings. Gourmet kitchen flows into a spacious living area. Large backyard with covered patio, perfect for entertaining.",
+    "features": [
+      "Private balcony",
+      "Guest suite available",
+      "In-unit washer/dryer",
+      "Walk score 95+",
+      "Floor-to-ceiling windows",
+      "Covered parking",
+      "Secured building entry",
+      "Fitness center"
     ],
-    agent: { name: 'Amanda Kim', title: 'Founding Partner', avatar: '👩‍💼', bio: '18 years in Austin real estate. Specializes in luxury homes and relocation clients. Top producer 10 years running.', phone: '(512) 455-0101' }
-  },
-  {
-    id: 6,
-    price: '$3,200 / mo',
-    address: '904 Lamar Blvd, Austin, TX 78703',
-    mls: 'MLS# ATX-2026-RENT-0812',
-    img: 'https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=900&q=80',
-    badges: [{ label: 'For Rent', cls: '' }],
-    beds: 3, baths: 2, sqft: '1,640', garage: '1-Car', lot: '0.14 ac',
-    desc: 'Stylish 3-bedroom craftsman bungalow just steps from the South Lamar corridor — one of Austin\'s most vibrant neighborhoods packed with restaurants, coffee shops, and boutiques. The fully updated kitchen features quartz countertops, subway tile backsplash, and a farmhouse sink. A private fenced backyard with a deck and string lights is perfect for year-round outdoor living. Available July 1. Pets welcome (up to 2, 50 lbs each, with deposit).',
-    features: ['Updated quartz kitchen', 'Private fenced backyard', 'Off-street parking', 'Pet friendly (up to 2 pets)', 'Walk to South Lamar dining', 'In-unit washer/dryer', 'Central A/C & heat', 'Available July 1'],
-    details: [
-      { label: 'Property Type', val: 'Craftsman Bungalow' },
-      { label: 'Year Built', val: '1962' },
-      { label: 'Lease Term', val: '12 months' },
-      { label: 'Deposit', val: '$3,200' },
-      { label: 'Pets', val: 'Yes (deposit required)' },
-      { label: 'Cooling', val: 'Central Air' },
-      { label: 'Heating', val: 'Gas Forced Air' },
-      { label: 'Parking', val: '1 Driveway Space' },
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Condo"
+      },
+      {
+        "label": "Year Built",
+        "val": "1988"
+      },
+      {
+        "label": "Lot Size",
+        "val": "N/A"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "$300/mo"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$10,700"
+      },
+      {
+        "label": "Cooling",
+        "val": "Window Units"
+      },
+      {
+        "label": "Heating",
+        "val": "Heat Pump"
+      },
+      {
+        "label": "Parking",
+        "val": "1-Car Garage"
+      }
     ],
-    agent: { name: 'Jason Martinez', title: 'Senior Agent', avatar: '👨‍💼', bio: 'Certified Negotiation Expert with a background in finance. Helps buyers compete in fast-moving markets.', phone: '(512) 455-0102' }
-  },
-
-  // ── Page 2 ────────────────────────────────────────────────
-  {
-    id: 7,
-    price: '$289,000',
-    address: '418 Willow Creek Ct, Cedar Park, TX 78613',
-    mls: 'MLS# ATX-2026-01143',
-    img: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=900&q=80',
-    badges: [{ label: 'For Sale', cls: '' }, { label: 'Starter Home', cls: 'blue' }],
-    beds: 2, baths: 2, sqft: '1,340', garage: '1-Car', lot: '0.12 ac',
-    desc: 'An affordable and move-in-ready 2-bedroom starter home in Cedar Park\'s desirable Crossing at Carriage Hills community. Open floor plan, updated fixtures, and a cozy backyard patio. Close to H-E-B, Dell Children\'s North, and the new Metro Rail station.',
-    features: ['Move-in ready', 'Updated light fixtures', 'Backyard patio', 'Near metro rail', 'Low HOA', 'Fresh interior paint', 'Stainless appliances', 'Community pool'],
-    details: [{ label: 'Property Type', val: 'Single Family' }, { label: 'Year Built', val: '2003' }, { label: 'Lot Size', val: '0.12 acres' }, { label: 'HOA Fee', val: '$65/mo' }, { label: 'Taxes (2025)', val: '$4,100/yr' }, { label: 'Cooling', val: 'Central Air' }, { label: 'Heating', val: 'Gas' }, { label: 'Parking', val: '1-Car Attached Garage' }],
-    agent: { name: 'Priya Nair', title: 'Buyer\'s Specialist', avatar: '👩‍💼', bio: 'Guides first-time buyers with patience and clarity. Expertise in Austin, Cedar Park, and Round Rock.', phone: '(512) 455-0103' }
+    "agent": {
+      "name": "Lisa Barlow",
+      "title": "Buyer's Specialist",
+      "avatar": "👩‍💼",
+      "bio": "Buyer's specialist guiding clients with patience and clarity. Expertise in South Austin, Travis Heights, and SoCo neighborhoods.",
+      "phone": "(512) 455-0104",
+      "email": "trevor.l+sales2@zohotest.com"
+    }
   },
   {
-    id: 8,
-    price: '$725,000',
-    address: '1902 Berkman Dr, Austin, TX 78723',
-    mls: 'MLS# ATX-2026-06611',
-    img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=80',
-    badges: [{ label: 'For Sale', cls: '' }, { label: 'New Construction', cls: 'green' }],
-    beds: 4, baths: 3, sqft: '2,780', garage: '2-Car', lot: '0.18 ac',
-    desc: 'Brand new construction in the vibrant Mueller neighborhood — one of Austin\'s most walkable communities. Designer finishes throughout including 10-ft ceilings, wide-plank engineered hardwood, and an open chef\'s kitchen with waterfall-edge island. Energy Star certified. Rooftop deck with downtown skyline views.',
-    features: ['New construction', 'Rooftop deck with skyline views', 'Energy Star certified', 'Waterfall-edge island', '10-ft ceilings', 'Wide-plank hardwood', 'Smart home pre-wired', 'Walk to Mueller Lake Park'],
-    details: [{ label: 'Property Type', val: 'Single Family' }, { label: 'Year Built', val: '2026' }, { label: 'Lot Size', val: '0.18 acres' }, { label: 'HOA Fee', val: '$195/mo' }, { label: 'Taxes (2025)', val: '$11,200/yr' }, { label: 'Cooling', val: 'Multi-Zone Central' }, { label: 'Heating', val: 'Gas Forced Air' }, { label: 'Parking', val: '2-Car Attached Garage' }],
-    agent: { name: 'Amanda Kim', title: 'Founding Partner', avatar: '👩‍💼', bio: '18 years in Austin real estate. Specializes in luxury homes and relocation clients. Top producer 10 years running.', phone: '(512) 455-0101' }
+    "id": 3,
+    "price": "$340,707",
+    "address": "6967 Slaughter Ln, Austin, TX 78704",
+    "mls": "MLS# ATX-2026-75830",
+    "img": "https://images.unsplash.com/photo-1613977257363-707ba9348227?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      },
+      {
+        "label": "Price Reduced",
+        "cls": "green"
+      }
+    ],
+    "beds": 2,
+    "baths": 2,
+    "sqft": "1,878",
+    "garage": "1-Car",
+    "lot": "0.11 ac",
+    "desc": "Charming townhouse in one of Austin's most sought-after neighborhoods. Original hardwood floors, updated bathrooms, and an expansive deck overlooking the greenbelt.",
+    "features": [
+      "Rooftop deck with city views",
+      "Dog park nearby",
+      "Close to dining & shops",
+      "Private ground-floor patio",
+      "Gated community",
+      "Epoxy garage floor",
+      "Community pool",
+      "No lawn maintenance"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Townhouse"
+      },
+      {
+        "label": "Year Built",
+        "val": "2007"
+      },
+      {
+        "label": "Lot Size",
+        "val": "0.11 ac"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "$250/mo"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$7,500"
+      },
+      {
+        "label": "Cooling",
+        "val": "Central Air"
+      },
+      {
+        "label": "Heating",
+        "val": "Radiant"
+      },
+      {
+        "label": "Parking",
+        "val": "1-Car Garage"
+      }
+    ],
+    "agent": {
+      "name": "Clark Kent",
+      "title": "Sales Manager",
+      "avatar": "👨‍💼",
+      "bio": "Sales manager and Certified Negotiation Expert with a background in finance. Helps buyers compete in fast-moving markets.",
+      "phone": "(512) 455-0102",
+      "email": "trevor.l+salesmanager@zohotest.com"
+    }
   },
   {
-    id: 9,
-    price: '$895,000',
-    address: '6204 Lakeside Cove, Lago Vista, TX 78645',
-    mls: 'MLS# ATX-2026-09920',
-    img: 'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=900&q=80',
-    badges: [{ label: 'For Sale', cls: '' }],
-    beds: 4, baths: 3, sqft: '3,200', garage: '2-Car', lot: '0.54 ac',
-    desc: 'Stunning lakefront property on Lake Travis with breathtaking water views from nearly every room. A wraparound deck and private boat dock make this the ultimate waterfront retreat. The open-concept interior features soaring ceilings, a stone fireplace, and floor-to-ceiling windows. Located in a gated community with private lake access.',
-    features: ['Lakefront with private dock', 'Wraparound deck', 'Floor-to-ceiling windows', 'Stone fireplace', 'Gated community', 'Boat storage', 'Sunset views', 'Short-term rental eligible'],
-    details: [{ label: 'Property Type', val: 'Single Family / Waterfront' }, { label: 'Year Built', val: '2011' }, { label: 'Lot Size', val: '0.54 acres' }, { label: 'HOA Fee', val: '$280/mo' }, { label: 'Taxes (2025)', val: '$13,800/yr' }, { label: 'Cooling', val: 'Dual-Zone Central' }, { label: 'Heating', val: 'Gas Forced Air' }, { label: 'Parking', val: '2-Car Attached Garage + Boat Pad' }],
-    agent: { name: 'Carlos Vega', title: 'Commercial & Investment', avatar: '👨‍💼', bio: 'Specializes in investment and waterfront properties. Former CPA, bringing financial rigor to every deal.', phone: '(512) 455-0104' }
+    "id": 4,
+    "price": "$314,025",
+    "address": "9074 Barton Creek Blvd, Austin, TX 78702",
+    "mls": "MLS# ATX-2026-82134",
+    "img": "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      }
+    ],
+    "beds": 4,
+    "baths": 2,
+    "sqft": "1,242",
+    "garage": "2-Car",
+    "lot": "0.06 ac",
+    "desc": "Move-in ready townhouse with fresh paint and new carpet throughout. Modern kitchen with island seating and walk-in pantry. Minutes from top-rated schools and shopping.",
+    "features": [
+      "Community pool",
+      "Lock-and-leave lifestyle",
+      "Private ground-floor patio",
+      "Epoxy garage floor",
+      "Dog park nearby",
+      "Gated community",
+      "Close to dining & shops",
+      "Rooftop deck with city views"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Townhouse"
+      },
+      {
+        "label": "Year Built",
+        "val": "1992"
+      },
+      {
+        "label": "Lot Size",
+        "val": "0.06 ac"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "$225/mo"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$7,800"
+      },
+      {
+        "label": "Cooling",
+        "val": "Window Units"
+      },
+      {
+        "label": "Heating",
+        "val": "Radiant"
+      },
+      {
+        "label": "Parking",
+        "val": "2-Car Garage"
+      }
+    ],
+    "agent": {
+      "name": "Clark Kent",
+      "title": "Sales Manager",
+      "avatar": "👨‍💼",
+      "bio": "Sales manager and Certified Negotiation Expert with a background in finance. Helps buyers compete in fast-moving markets.",
+      "phone": "(512) 455-0102",
+      "email": "trevor.l+salesmanager@zohotest.com"
+    }
   },
   {
-    id: 10,
-    price: '$225,000',
-    address: '1414 E 6th St #302, Austin, TX 78702',
-    mls: 'MLS# ATX-2026-01887',
-    img: 'https://images.unsplash.com/photo-1512918728672-1072b369dd8b?w=900&q=80',
-    badges: [{ label: 'For Sale', cls: '' }, { label: 'Condo', cls: 'blue' }],
-    beds: 1, baths: 1, sqft: '680', garage: '1-Car', lot: 'N/A',
-    desc: 'Hip East Austin condo steps from the best bars, restaurants, and coffee shops on 6th Street. This third-floor unit features polished concrete floors, an exposed brick accent wall, custom kitchen cabinetry, and a private balcony. Secured entry, in-unit laundry, and one covered parking spot. Perfect for a first purchase or investment rental.',
-    features: ['Exposed brick accent wall', 'Private balcony', 'In-unit washer/dryer', 'Polished concrete floors', 'Secured building entry', 'Walk to 6th St restaurants', 'Strong rental history', 'Low utilities'],
-    details: [{ label: 'Property Type', val: 'Condo' }, { label: 'Year Built', val: '2015' }, { label: 'Floor', val: '3rd of 4' }, { label: 'HOA Fee', val: '$320/mo' }, { label: 'Taxes (2025)', val: '$3,480/yr' }, { label: 'Cooling', val: 'Central Air' }, { label: 'Heating', val: 'Electric' }, { label: 'Parking', val: '1 Covered Assigned Space' }],
-    agent: { name: 'Jason Martinez', title: 'Senior Agent', avatar: '👨‍💼', bio: 'Certified Negotiation Expert. Helps buyers find value in competitive urban markets.', phone: '(512) 455-0102' }
+    "id": 5,
+    "price": "$571,364",
+    "address": "5011 Cedar Hollow Rd #1531, Austin, TX 78746",
+    "mls": "MLS# ATX-2026-32994",
+    "img": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      },
+      {
+        "label": "Condo",
+        "cls": "blue"
+      }
+    ],
+    "beds": 2,
+    "baths": 2,
+    "sqft": "1,079",
+    "garage": "1-Car",
+    "lot": "N/A",
+    "desc": "Luxurious condo with custom finishes at every turn. Chef's kitchen with commercial-grade appliances. Primary suite with sitting area, two walk-in closets, and a resort-style bath.",
+    "features": [
+      "Walk score 95+",
+      "Concierge services",
+      "Private balcony",
+      "Guest suite available",
+      "Rooftop terrace",
+      "Secured building entry",
+      "Covered parking",
+      "In-unit washer/dryer"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Condo"
+      },
+      {
+        "label": "Year Built",
+        "val": "2024"
+      },
+      {
+        "label": "Lot Size",
+        "val": "N/A"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "$350/mo"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$11,400"
+      },
+      {
+        "label": "Cooling",
+        "val": "None"
+      },
+      {
+        "label": "Heating",
+        "val": "Radiant"
+      },
+      {
+        "label": "Parking",
+        "val": "1-Car Garage"
+      }
+    ],
+    "agent": {
+      "name": "Clark Kent",
+      "title": "Sales Manager",
+      "avatar": "👨‍💼",
+      "bio": "Sales manager and Certified Negotiation Expert with a background in finance. Helps buyers compete in fast-moving markets.",
+      "phone": "(512) 455-0102",
+      "email": "trevor.l+salesmanager@zohotest.com"
+    }
   },
   {
-    id: 11,
-    price: '$1,450,000',
-    address: '205 Pecan Grove Rd, Rollingwood, TX 78746',
-    mls: 'MLS# ATX-2026-11042',
-    img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80',
-    badges: [{ label: 'For Sale', cls: '' }],
-    beds: 6, baths: 5, sqft: '5,400', garage: '3-Car', lot: '1.5 ac',
-    desc: 'An extraordinary 6-bedroom compound in coveted Rollingwood, one of Austin\'s most exclusive zip codes. The resort-style grounds feature a pool, tennis court, outdoor kitchen, and a 1-acre park-like yard backing to a greenbelt. The interior showcases hand-scraped hardwoods, a wine cellar, and a grand foyer with a sweeping staircase. Guest quarters above the garage with private entrance.',
-    features: ['Pool & tennis court', 'Wine cellar', 'Guest quarters above garage', 'Grand foyer & staircase', 'Backs to greenbelt', 'Outdoor kitchen', 'Home theater', 'Eanes ISD schools'],
-    details: [{ label: 'Property Type', val: 'Estate' }, { label: 'Year Built', val: '2005' }, { label: 'Lot Size', val: '1.5 acres' }, { label: 'HOA Fee', val: 'None' }, { label: 'Taxes (2025)', val: '$28,600/yr' }, { label: 'Cooling', val: 'Multi-Zone Central' }, { label: 'Heating', val: 'Radiant + Gas' }, { label: 'Parking', val: '3-Car + Circular Driveway' }],
-    agent: { name: 'Amanda Kim', title: 'Founding Partner', avatar: '👩‍💼', bio: '18 years in Austin real estate. Top producer specializing in Austin\'s most prestigious neighborhoods.', phone: '(512) 455-0101' }
+    "id": 6,
+    "price": "$455,388",
+    "address": "1299 Oltorf St, Lakeway, TX 78734",
+    "mls": "MLS# ATX-2026-22621",
+    "img": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      },
+      {
+        "label": "Townhouse",
+        "cls": "blue"
+      }
+    ],
+    "beds": 2,
+    "baths": 2,
+    "sqft": "1,165",
+    "garage": "1-Car",
+    "lot": "0.06 ac",
+    "desc": "Light-filled townhouse with floor-to-ceiling windows and an enviable location. Open kitchen with breakfast bar, generous storage, and premium finishes throughout.",
+    "features": [
+      "Close to dining & shops",
+      "Epoxy garage floor",
+      "Gated community",
+      "Lock-and-leave lifestyle",
+      "Built-in shelving",
+      "No lawn maintenance",
+      "Dog park nearby",
+      "Community pool"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Townhouse"
+      },
+      {
+        "label": "Year Built",
+        "val": "2023"
+      },
+      {
+        "label": "Lot Size",
+        "val": "0.06 ac"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "$225/mo"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$9,300"
+      },
+      {
+        "label": "Cooling",
+        "val": "None"
+      },
+      {
+        "label": "Heating",
+        "val": "Radiant"
+      },
+      {
+        "label": "Parking",
+        "val": "1-Car Garage"
+      }
+    ],
+    "agent": {
+      "name": "Clark Kent",
+      "title": "Sales Manager",
+      "avatar": "👨‍💼",
+      "bio": "Sales manager and Certified Negotiation Expert with a background in finance. Helps buyers compete in fast-moving markets.",
+      "phone": "(512) 455-0102",
+      "email": "trevor.l+salesmanager@zohotest.com"
+    }
   },
   {
-    id: 12,
-    price: '$485,000',
-    address: '3310 S Congress Ave #B, Austin, TX 78704',
-    mls: 'MLS# ATX-2026-04302',
-    img: 'https://images.unsplash.com/photo-1576941089067-2de3c901e126?w=900&q=80',
-    badges: [{ label: 'For Sale', cls: '' }, { label: 'Townhouse', cls: 'blue' }],
-    beds: 3, baths: 2, sqft: '1,750', garage: '1-Car', lot: '0.06 ac',
-    desc: 'Sleek South Congress townhouse in the middle of Austin\'s coolest corridor. Rooftop deck with downtown views, open-concept main floor with quartz counters and a gas range, and a private ground-floor patio. Two blocks from SOCO shops and restaurants. Low-maintenance living with no lawn to maintain — ideal for the modern urban lifestyle.',
-    features: ['Rooftop deck with city views', 'Gas range & quartz counters', 'Private ground-floor patio', 'No HOA', '2 blocks from SOCO', 'Epoxy garage floor', 'Built-in shelving', 'Walkable neighborhood'],
-    details: [{ label: 'Property Type', val: 'Townhouse' }, { label: 'Year Built', val: '2018' }, { label: 'Lot Size', val: '0.06 acres' }, { label: 'HOA Fee', val: 'None' }, { label: 'Taxes (2025)', val: '$7,200/yr' }, { label: 'Cooling', val: 'Central Air' }, { label: 'Heating', val: 'Gas Forced Air' }, { label: 'Parking', val: '1-Car Attached Garage' }],
-    agent: { name: 'Priya Nair', title: 'Buyer\'s Specialist', avatar: '👩‍💼', bio: 'Specializes in South Austin, SoCo, and Travis Heights neighborhoods.', phone: '(512) 455-0103' }
-  },
-
-  // ── Page 3 ────────────────────────────────────────────────
-  {
-    id: 13,
-    price: '$558,000',
-    address: '711 Avery Ranch Blvd, Austin, TX 78717',
-    mls: 'MLS# ATX-2026-05901',
-    img: 'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=900&q=80',
-    badges: [{ label: 'For Sale', cls: '' }],
-    beds: 4, baths: 3, sqft: '2,620', garage: '2-Car', lot: '0.24 ac',
-    desc: 'Beautiful 4-bedroom home in Avery Ranch — one of North Austin\'s most amenity-rich master-planned communities. Features a sparkling community pool, tennis courts, and miles of hike-and-bike trails. The home has an updated kitchen, a game room, and a covered patio. Zoned to highly rated Leander ISD.',
-    features: ['Community pool & tennis', 'Hike & bike trail access', 'Game room', 'Covered back patio', 'Updated kitchen', 'Leander ISD schools', 'Corner lot', 'Near 183A toll road'],
-    details: [{ label: 'Property Type', val: 'Single Family' }, { label: 'Year Built', val: '2006' }, { label: 'Lot Size', val: '0.24 acres' }, { label: 'HOA Fee', val: '$155/mo' }, { label: 'Taxes (2025)', val: '$8,400/yr' }, { label: 'Cooling', val: 'Central Air' }, { label: 'Heating', val: 'Gas Forced Air' }, { label: 'Parking', val: '2-Car Attached Garage' }],
-    agent: { name: 'Jason Martinez', title: 'Senior Agent', avatar: '👨‍💼', bio: 'Certified Negotiation Expert with a background in finance. Helps buyers compete in fast-moving markets.', phone: '(512) 455-0102' }
-  },
-  {
-    id: 14,
-    price: '$315,000',
-    address: '204 Eagle Ridge Dr, Pflugerville, TX 78660',
-    mls: 'MLS# ATX-2026-02744',
-    img: 'https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=900&q=80',
-    badges: [{ label: 'For Sale', cls: '' }, { label: 'Price Reduced', cls: 'green' }],
-    beds: 3, baths: 2, sqft: '1,560', garage: '2-Car', lot: '0.16 ac',
-    desc: 'Charming 3-bedroom home in Pflugerville with recent price reduction — a rare opportunity in this popular suburb. Fresh paint inside and out, new carpet in bedrooms, and a spacious backyard with a wooden deck. The kitchen features updated countertops and a breakfast bar. Close to Lake Pflugerville, Stone Hill Town Center, and new Samsung & Tesla facilities.',
-    features: ['New carpet & fresh paint', 'Wooden deck', 'Breakfast bar', 'Large backyard', 'Close to Lake Pflugerville', 'Near major employers', '2-car garage', 'Cul-de-sac street'],
-    details: [{ label: 'Property Type', val: 'Single Family' }, { label: 'Year Built', val: '2001' }, { label: 'Lot Size', val: '0.16 acres' }, { label: 'HOA Fee', val: '$48/mo' }, { label: 'Taxes (2025)', val: '$4,620/yr' }, { label: 'Cooling', val: 'Central Air' }, { label: 'Heating', val: 'Gas Forced Air' }, { label: 'Parking', val: '2-Car Attached Garage' }],
-    agent: { name: 'Priya Nair', title: 'Buyer\'s Specialist', avatar: '👩‍💼', bio: 'Guides first-time buyers with patience and clarity throughout the greater Austin metro.', phone: '(512) 455-0103' }
-  },
-  {
-    id: 15,
-    price: '$2,100 / mo',
-    address: '1820 Chestnut Ave #4, Austin, TX 78702',
-    mls: 'MLS# ATX-2026-RENT-1501',
-    img: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=900&q=80',
-    badges: [{ label: 'For Rent', cls: '' }],
-    beds: 2, baths: 1, sqft: '950', garage: 'None', lot: 'N/A',
-    desc: 'Bright and airy 2-bedroom apartment in the heart of East Austin with a bohemian flair. Original hardwood floors, high ceilings, and large windows throughout. Updated kitchen with butcher-block countertops. Shared laundry on-site, private front porch, and covered parking. Walking distance to Café Medici, Contigo, and the best coffee in Austin.',
-    features: ['Original hardwood floors', 'High ceilings', 'Private front porch', 'Butcher-block countertops', 'Walk to East 6th dining', 'Covered parking', 'On-site laundry', 'Available Aug 1'],
-    details: [{ label: 'Property Type', val: 'Apartment' }, { label: 'Year Built', val: '1948' }, { label: 'Lease Term', val: '12 months' }, { label: 'Deposit', val: '$2,100' }, { label: 'Pets', val: 'Cats only (deposit req.)' }, { label: 'Cooling', val: 'Window Units' }, { label: 'Heating', val: 'Gas Forced Air' }, { label: 'Parking', val: '1 Covered Space' }],
-    agent: { name: 'Carlos Vega', title: 'Commercial & Investment', avatar: '👨‍💼', bio: 'Manages residential and commercial rental properties across the Austin metro area.', phone: '(512) 455-0104' }
-  },
-  {
-    id: 16,
-    price: '$672,000',
-    address: '5540 River Hills Dr, Georgetown, TX 78628',
-    mls: 'MLS# ATX-2026-07134',
-    img: 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=900&q=80',
-    badges: [{ label: 'For Sale', cls: '' }, { label: 'New Listing', cls: 'green' }],
-    beds: 4, baths: 3, sqft: '2,980', garage: '3-Car', lot: '0.35 ac',
-    desc: 'Stunning 4-bedroom home in Georgetown\'s prestigious River Hills neighborhood with a 3-car garage and resort-style backyard. The kitchen is a chef\'s dream with double ovens, a 6-burner gas range, and a farmhouse sink. The primary suite features a spa bath with a freestanding soaking tub and separate steam shower.',
-    features: ['3-car garage', 'Resort-style backyard', 'Double ovens & 6-burner range', 'Freestanding soaking tub', 'Steam shower', 'Extended covered patio', 'Irrigation system', 'Georgetown ISD'],
-    details: [{ label: 'Property Type', val: 'Single Family' }, { label: 'Year Built', val: '2019' }, { label: 'Lot Size', val: '0.35 acres' }, { label: 'HOA Fee', val: '$90/mo' }, { label: 'Taxes (2025)', val: '$10,100/yr' }, { label: 'Cooling', val: 'Dual-Zone Central' }, { label: 'Heating', val: 'Gas Forced Air' }, { label: 'Parking', val: '3-Car Attached Garage' }],
-    agent: { name: 'Amanda Kim', title: 'Founding Partner', avatar: '👩‍💼', bio: '18 years in Austin real estate. Top producer specializing in luxury and suburban homes.', phone: '(512) 455-0101' }
-  },
-  {
-    id: 17,
-    price: '$487,500',
-    address: '3902 Bee Cave Rd #12, Bee Cave, TX 78738',
-    mls: 'MLS# ATX-2026-04977',
-    img: 'https://images.unsplash.com/photo-1554995207-c18c203602cb?w=900&q=80',
-    badges: [{ label: 'For Sale', cls: '' }, { label: 'Townhouse', cls: 'blue' }],
-    beds: 3, baths: 2, sqft: '1,920', garage: '2-Car', lot: '0.08 ac',
-    desc: 'Lock-and-leave townhouse in Bee Cave near the Hill Country Galleria. Elegant finishes throughout including a quartz kitchen, tray ceilings, and a covered balcony with hill country views. The community features a resort-style pool, dog park, and gated entry. Minutes from Lake Travis, Whole Foods, and top-rated Lake Travis ISD schools.',
-    features: ['Hill country views', 'Lock-and-leave lifestyle', 'Resort-style pool', 'Gated community', 'Dog park', 'Tray ceilings', 'Near Hill Country Galleria', 'Lake Travis ISD'],
-    details: [{ label: 'Property Type', val: 'Townhouse' }, { label: 'Year Built', val: '2021' }, { label: 'Lot Size', val: '0.08 acres' }, { label: 'HOA Fee', val: '$250/mo' }, { label: 'Taxes (2025)', val: '$7,600/yr' }, { label: 'Cooling', val: 'Central Air' }, { label: 'Heating', val: 'Gas Forced Air' }, { label: 'Parking', val: '2-Car Attached Garage' }],
-    agent: { name: 'Priya Nair', title: 'Buyer\'s Specialist', avatar: '👩‍💼', bio: 'Specializes in Westlake, Bee Cave, and Lakeway communities.', phone: '(512) 455-0103' }
+    "id": 7,
+    "price": "$572,579",
+    "address": "5837 Chestnut Ave, Buda, TX 78610",
+    "mls": "MLS# ATX-2026-77008",
+    "img": "https://images.unsplash.com/photo-1576941089067-2de3c901e126?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      }
+    ],
+    "beds": 2,
+    "baths": 2,
+    "sqft": "2,249",
+    "garage": "1-Car",
+    "lot": "0.1 ac",
+    "desc": "Beautifully maintained townhouse on a premium lot with hill country views. Updated HVAC, roof, and plumbing. Low-maintenance yard with drought-tolerant landscaping.",
+    "features": [
+      "Lock-and-leave lifestyle",
+      "Gated community",
+      "Dog park nearby",
+      "Rooftop deck with city views",
+      "Built-in shelving",
+      "Community pool",
+      "Close to dining & shops",
+      "Private ground-floor patio"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Townhouse"
+      },
+      {
+        "label": "Year Built",
+        "val": "2001"
+      },
+      {
+        "label": "Lot Size",
+        "val": "0.1 ac"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "$150/mo"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$11,300"
+      },
+      {
+        "label": "Cooling",
+        "val": "None"
+      },
+      {
+        "label": "Heating",
+        "val": "Central Electric"
+      },
+      {
+        "label": "Parking",
+        "val": "1-Car Garage"
+      }
+    ],
+    "agent": {
+      "name": "Clark Kent",
+      "title": "Sales Manager",
+      "avatar": "👨‍💼",
+      "bio": "Sales manager and Certified Negotiation Expert with a background in finance. Helps buyers compete in fast-moving markets.",
+      "phone": "(512) 455-0102",
+      "email": "trevor.l+salesmanager@zohotest.com"
+    }
   },
   {
-    id: 18,
-    price: '$925,000',
-    address: '4411 Crestway Dr, Austin, TX 78731',
-    mls: 'MLS# ATX-2026-09215',
-    img: 'https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?w=900&q=80',
-    badges: [{ label: 'For Sale', cls: '' }],
-    beds: 5, baths: 4, sqft: '3,650', garage: '2-Car', lot: '0.42 ac',
-    desc: 'Timeless 5-bedroom home in Tarrytown, one of Austin\'s most coveted in-town neighborhoods. Classic architecture with a modern interior renovation — custom kitchen with Thermador appliances, a spa-inspired primary bath, and a study lined with built-in bookshelves. The shaded backyard has a sparkling pool, pergola, and room to garden. Just minutes to Lake Austin Spa, Mozart\'s, and UT.',
-    features: ['Thermador appliances', 'Pool & pergola', 'Built-in bookshelves in study', 'Spa-inspired primary bath', 'Walk to Lake Austin', 'Large lot with mature oaks', 'Minutes to UT campus', 'AISD Tarrytown Elementary'],
-    details: [{ label: 'Property Type', val: 'Single Family' }, { label: 'Year Built', val: '1987' }, { label: 'Renovated', val: '2022' }, { label: 'Lot Size', val: '0.42 acres' }, { label: 'HOA Fee', val: 'None' }, { label: 'Taxes (2025)', val: '$17,200/yr' }, { label: 'Cooling', val: 'Multi-Zone Central' }, { label: 'Heating', val: 'Gas Forced Air' }],
-    agent: { name: 'Amanda Kim', title: 'Founding Partner', avatar: '👩‍💼', bio: '18 years in Austin real estate. Tarrytown and Bryker Woods specialist.', phone: '(512) 455-0101' }
-  },
-
-  // ── Page 4 ────────────────────────────────────────────────
-  {
-    id: 19,
-    price: '$344,900',
-    address: '812 Windmill Run, Kyle, TX 78640',
-    mls: 'MLS# ATX-2026-03388',
-    img: 'https://images.unsplash.com/photo-1592595896551-12b371d546d5?w=900&q=80',
-    badges: [{ label: 'For Sale', cls: '' }, { label: 'New Construction', cls: 'green' }],
-    beds: 3, baths: 2, sqft: '1,720', garage: '2-Car', lot: '0.14 ac',
-    desc: 'Brand-new construction in Kyle\'s fastest-growing community — Anthem. This 3-bedroom home features an open floor plan, 9-ft ceilings, and energy-efficient construction throughout. The kitchen has granite counters, a large pantry, and a center island. Community amenities include a pool, splash pad, fitness center, and dog park.',
-    features: ['New construction', 'Energy efficient', '9-ft ceilings', 'Community pool & splash pad', 'Fitness center', 'Granite countertops', 'Large pantry', 'Builder warranty'],
-    details: [{ label: 'Property Type', val: 'Single Family' }, { label: 'Year Built', val: '2026' }, { label: 'Lot Size', val: '0.14 acres' }, { label: 'HOA Fee', val: '$110/mo' }, { label: 'Taxes (2025)', val: '$5,200/yr' }, { label: 'Cooling', val: 'Central Air' }, { label: 'Heating', val: 'Gas Forced Air' }, { label: 'Parking', val: '2-Car Attached Garage' }],
-    agent: { name: 'Jason Martinez', title: 'Senior Agent', avatar: '👨‍💼', bio: 'Expert in new construction and master-planned communities in the Austin metro.', phone: '(512) 455-0102' }
-  },
-  {
-    id: 20,
-    price: '$599,000',
-    address: '1107 Treemont St, Austin, TX 78741',
-    mls: 'MLS# ATX-2026-06003',
-    img: 'https://images.unsplash.com/photo-1588880331179-bc9b93a8cb5e?w=900&q=80',
-    badges: [{ label: 'For Sale', cls: '' }, { label: 'Open House Sun 2–5pm', cls: 'blue' }],
-    beds: 4, baths: 3, sqft: '2,350', garage: '2-Car', lot: '0.21 ac',
-    desc: 'Fully remodeled 4-bedroom home in the up-and-coming 78741 zip code, just minutes to downtown Austin via SH-71. Gut renovation in 2024 includes all-new electrical, plumbing, roof, HVAC, and finishes. Chef\'s kitchen with waterfall quartz island. Primary suite has a spa bath with a walk-in shower and soaking tub.',
-    features: ['Full gut renovation (2024)', 'New roof, plumbing, electrical', 'Waterfall quartz island', 'Spa primary bath', 'Close to downtown', 'Private backyard oasis', 'EV charger installed', 'No HOA'],
-    details: [{ label: 'Property Type', val: 'Single Family' }, { label: 'Year Built', val: '1978' }, { label: 'Renovated', val: '2024' }, { label: 'HOA Fee', val: 'None' }, { label: 'Taxes (2025)', val: '$8,900/yr' }, { label: 'Cooling', val: 'Central Air' }, { label: 'Heating', val: 'Gas Forced Air' }, { label: 'Parking', val: '2-Car Attached Garage + EV Charger' }],
-    agent: { name: 'Carlos Vega', title: 'Commercial & Investment', avatar: '👨‍💼', bio: 'Investment property and remodel specialist in the greater Austin market.', phone: '(512) 455-0104' }
-  },
-  {
-    id: 21,
-    price: '$2,800 / mo',
-    address: '409 W 38th St #201, Austin, TX 78705',
-    mls: 'MLS# ATX-2026-RENT-2101',
-    img: 'https://images.unsplash.com/photo-1527359443443-84a48aec73d2?w=900&q=80',
-    badges: [{ label: 'For Rent', cls: '' }, { label: 'Available Now', cls: 'green' }],
-    beds: 2, baths: 2, sqft: '1,080', garage: '1-Car', lot: 'N/A',
-    desc: 'Modern 2-bed, 2-bath unit in the heart of the Hyde Park neighborhood — just steps from the Drag and UT campus. Open floor plan with tall ceilings, quartz counters, and stainless appliances. Private balcony overlooks a quiet tree-lined street. Covered parking, bike storage, and a rooftop communal terrace.',
-    features: ['Balcony with tree views', 'Rooftop communal terrace', 'Bike storage', 'Steps from UT campus', 'Quartz counters', 'In-unit laundry', 'Covered parking', 'Available immediately'],
-    details: [{ label: 'Property Type', val: 'Condo / Rental' }, { label: 'Year Built', val: '2020' }, { label: 'Lease Term', val: '12 months' }, { label: 'Deposit', val: '$2,800' }, { label: 'Pets', val: 'Yes (50 lbs max)' }, { label: 'Cooling', val: 'Central Air' }, { label: 'Heating', val: 'Electric' }, { label: 'Parking', val: '1 Covered Assigned Space' }],
-    agent: { name: 'Priya Nair', title: 'Buyer\'s Specialist', avatar: '👩‍💼', bio: 'Specializes in Hyde Park, UT area, and Central Austin rentals and purchases.', phone: '(512) 455-0103' }
-  },
-  {
-    id: 22,
-    price: '$748,000',
-    address: '2816 Greystone Rd, Austin, TX 78703',
-    mls: 'MLS# ATX-2026-08771',
-    img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=900&q=80',
-    badges: [{ label: 'For Sale', cls: '' }],
-    beds: 4, baths: 3, sqft: '2,900', garage: '2-Car', lot: '0.31 ac',
-    desc: 'Charming 1950s home in Old West Austin completely reimagined for modern living. The kitchen was opened to the family room and features a La Cornue range and custom cabinetry. White oak hardwoods throughout. The backyard is a private oasis with a natural stone pool, a bocce ball court, and a producing vegetable garden.',
-    features: ['La Cornue range', 'Natural stone pool', 'White oak hardwoods', 'Bocce ball court', 'Vegetable garden', 'Mudroom with built-ins', 'Zip code 78703', 'Walk to Pease Park'],
-    details: [{ label: 'Property Type', val: 'Single Family' }, { label: 'Year Built', val: '1954' }, { label: 'Renovated', val: '2021' }, { label: 'Lot Size', val: '0.31 acres' }, { label: 'HOA Fee', val: 'None' }, { label: 'Taxes (2025)', val: '$12,900/yr' }, { label: 'Cooling', val: 'Dual-Zone Central' }, { label: 'Heating', val: 'Gas Forced Air' }, { label: 'Parking', val: '2-Car Detached Garage' }],
-    agent: { name: 'Amanda Kim', title: 'Founding Partner', avatar: '👩‍💼', bio: 'Old West Austin and Tarrytown specialist. 18 years in Austin real estate.', phone: '(512) 455-0101' }
-  },
-  {
-    id: 23,
-    price: '$412,000',
-    address: '618 Limestone Ridge, Dripping Springs, TX 78620',
-    mls: 'MLS# ATX-2026-04119',
-    img: 'https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=900&q=80',
-    badges: [{ label: 'For Sale', cls: '' }, { label: 'Price Reduced', cls: 'green' }],
-    beds: 3, baths: 2, sqft: '2,010', garage: '2-Car', lot: '0.38 ac',
-    desc: 'Peaceful Hill Country retreat in the charming town of Dripping Springs — voted one of the best small towns in Texas. Sits on a third-acre lot with panoramic views of rolling limestone hills. The interior features an open layout, a wood-burning fireplace, and a sunroom. Minutes from breweries, wineries, and Hamilton Pool Preserve.',
-    features: ['Hill country views', 'Wood-burning fireplace', 'Sunroom', 'Large lot', 'Walk to town square', 'Near Hamilton Pool Preserve', 'Winery & brewery district', 'Dripping Springs ISD'],
-    details: [{ label: 'Property Type', val: 'Single Family' }, { label: 'Year Built', val: '2004' }, { label: 'Lot Size', val: '0.38 acres' }, { label: 'HOA Fee', val: '$55/mo' }, { label: 'Taxes (2025)', val: '$6,200/yr' }, { label: 'Cooling', val: 'Central Air' }, { label: 'Heating', val: 'Gas Forced Air' }, { label: 'Parking', val: '2-Car Attached Garage' }],
-    agent: { name: 'Carlos Vega', title: 'Commercial & Investment', avatar: '👨‍💼', bio: 'Hill Country and investment property specialist. Former CPA.', phone: '(512) 455-0104' }
+    "id": 8,
+    "price": "$817,666",
+    "address": "9569 Greystone Rd, Kyle, TX 78640",
+    "mls": "MLS# ATX-2026-38302",
+    "img": "https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      },
+      {
+        "label": "Price Reduced",
+        "cls": "green"
+      }
+    ],
+    "beds": 3,
+    "baths": 4,
+    "sqft": "2,255",
+    "garage": "1-Car",
+    "lot": "0.3 ac",
+    "desc": "Contemporary single family home blending modern design with comfortable living. Polished concrete floors, exposed beams, and a chef's kitchen with waterfall island. Walking distance to parks and trails.",
+    "features": [
+      "Hardwood floors throughout",
+      "Cul-de-sac street",
+      "Walk-in master closet",
+      "Community pool nearby",
+      "New roof (2024)",
+      "Updated chef's kitchen",
+      "Fresh interior paint",
+      "Dual-zone HVAC"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Single Family Home"
+      },
+      {
+        "label": "Year Built",
+        "val": "2013"
+      },
+      {
+        "label": "Lot Size",
+        "val": "0.3 ac"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "None"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$20,300"
+      },
+      {
+        "label": "Cooling",
+        "val": "Central Air"
+      },
+      {
+        "label": "Heating",
+        "val": "Central Gas"
+      },
+      {
+        "label": "Parking",
+        "val": "1-Car Garage"
+      }
+    ],
+    "agent": {
+      "name": "Trevor Lujan",
+      "title": "Founding Partner",
+      "avatar": "👨‍💼",
+      "bio": "Founding partner with 18 years in Austin real estate. Specializes in luxury homes and relocation clients. Top producer 10 years running.",
+      "phone": "(512) 455-0101",
+      "email": "trevor.l+testaccount@zohotest.com"
+    }
   },
   {
-    id: 24,
-    price: '$835,000',
-    address: '910 Overlook Terrace, Lakeway, TX 78734',
-    mls: 'MLS# ATX-2026-08430',
-    img: 'https://images.unsplash.com/photo-1560184897-ae75f418493e?w=900&q=80',
-    badges: [{ label: 'For Sale', cls: '' }],
-    beds: 5, baths: 4, sqft: '3,480', garage: '3-Car', lot: '0.48 ac',
-    desc: 'Exceptional 5-bedroom home in Lakeway\'s prestigious Overlook Terrace with panoramic views of Lake Travis and the Texas Hill Country. A grand entry opens to soaring 20-ft ceilings and a wall of windows. The gourmet kitchen, butler\'s pantry, and formal dining room make this home exceptional for entertaining. Backs to a greenbelt with no rear neighbors.',
-    features: ['Panoramic lake & hill country views', '20-ft ceilings', 'Butler\'s pantry', 'Backs to greenbelt', 'No rear neighbors', '3-car garage', 'Formal dining room', 'Lake Travis ISD'],
-    details: [{ label: 'Property Type', val: 'Single Family' }, { label: 'Year Built', val: '2013' }, { label: 'Lot Size', val: '0.48 acres' }, { label: 'HOA Fee', val: '$175/mo' }, { label: 'Taxes (2025)', val: '$15,600/yr' }, { label: 'Cooling', val: 'Multi-Zone Central' }, { label: 'Heating', val: 'Gas Forced Air' }, { label: 'Parking', val: '3-Car Attached Garage' }],
-    agent: { name: 'Jason Martinez', title: 'Senior Agent', avatar: '👨‍💼', bio: 'Lake Travis and Lakeway specialist. Certified Negotiation Expert.', phone: '(512) 455-0102' }
+    "id": 9,
+    "price": "$372,920",
+    "address": "1065 Lake Travis Dr, Pflugerville, TX 78660",
+    "mls": "MLS# ATX-2026-17952",
+    "img": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      },
+      {
+        "label": "Price Reduced",
+        "cls": "green"
+      }
+    ],
+    "beds": 2,
+    "baths": 3,
+    "sqft": "1,990",
+    "garage": "1-Car",
+    "lot": "0.04 ac",
+    "desc": "Classic townhouse with timeless curb appeal on a tree-lined street. Formal dining, dedicated home office, and a spacious bonus room. Community pool and amenities included.",
+    "features": [
+      "Dog park nearby",
+      "Built-in shelving",
+      "Rooftop deck with city views",
+      "No lawn maintenance",
+      "Lock-and-leave lifestyle",
+      "Private ground-floor patio",
+      "Gated community",
+      "Epoxy garage floor"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Townhouse"
+      },
+      {
+        "label": "Year Built",
+        "val": "1989"
+      },
+      {
+        "label": "Lot Size",
+        "val": "0.04 ac"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "$250/mo"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$8,200"
+      },
+      {
+        "label": "Cooling",
+        "val": "Window Units"
+      },
+      {
+        "label": "Heating",
+        "val": "Central Gas"
+      },
+      {
+        "label": "Parking",
+        "val": "1-Car Garage"
+      }
+    ],
+    "agent": {
+      "name": "Scott Summers",
+      "title": "Senior Agent",
+      "avatar": "👨‍💼",
+      "bio": "Senior agent specializing in first-time buyers and investment properties across the greater Austin metro.",
+      "phone": "(512) 455-0103",
+      "email": "trevor.l+sales1@zohotest.com"
+    }
+  },
+  {
+    "id": 10,
+    "price": "$498,058",
+    "address": "6680 Crestway Dr #380, Cedar Park, TX 78613",
+    "mls": "MLS# ATX-2026-57429",
+    "img": "https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      },
+      {
+        "label": "New Listing",
+        "cls": "green"
+      }
+    ],
+    "beds": 2,
+    "baths": 1,
+    "sqft": "1,754",
+    "garage": "None",
+    "lot": "N/A",
+    "desc": "Energy-efficient condo built to today's highest standards. Solar panels, tankless water heater, and smart home technology. Low utility bills and eco-friendly materials throughout.",
+    "features": [
+      "Secured building entry",
+      "Private balcony",
+      "Concierge services",
+      "Walk score 95+",
+      "Guest suite available",
+      "Floor-to-ceiling windows",
+      "In-unit washer/dryer",
+      "Fitness center"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Condo"
+      },
+      {
+        "label": "Year Built",
+        "val": "1985"
+      },
+      {
+        "label": "Lot Size",
+        "val": "N/A"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "$250/mo"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$12,600"
+      },
+      {
+        "label": "Cooling",
+        "val": "Mini-Split"
+      },
+      {
+        "label": "Heating",
+        "val": "Heat Pump"
+      },
+      {
+        "label": "Parking",
+        "val": "Street / Lot"
+      }
+    ],
+    "agent": {
+      "name": "Lisa Barlow",
+      "title": "Buyer's Specialist",
+      "avatar": "👩‍💼",
+      "bio": "Buyer's specialist guiding clients with patience and clarity. Expertise in South Austin, Travis Heights, and SoCo neighborhoods.",
+      "phone": "(512) 455-0104",
+      "email": "trevor.l+sales2@zohotest.com"
+    }
+  },
+  {
+    "id": 11,
+    "price": "$447,574",
+    "address": "2987 Slaughter Ln, Round Rock, TX 78681",
+    "mls": "MLS# ATX-2026-87313",
+    "img": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      },
+      {
+        "label": "New Construction",
+        "cls": "green"
+      }
+    ],
+    "beds": 3,
+    "baths": 4,
+    "sqft": "3,590",
+    "garage": "2-Car",
+    "lot": "0.18 ac",
+    "desc": "Stunning single family home nestled in a quiet neighborhood with mature oak trees. Recently updated kitchen with quartz countertops and stainless steel appliances. Master suite features a spa-like bath.",
+    "features": [
+      "Walk-in master closet",
+      "Fresh interior paint",
+      "Smart home pre-wired",
+      "Dual-zone HVAC",
+      "New roof (2024)",
+      "Large backyard",
+      "Covered back patio",
+      "Updated chef's kitchen"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Single Family Home"
+      },
+      {
+        "label": "Year Built",
+        "val": "2016"
+      },
+      {
+        "label": "Lot Size",
+        "val": "0.18 ac"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "$100/mo"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$9,500"
+      },
+      {
+        "label": "Cooling",
+        "val": "Mini-Split"
+      },
+      {
+        "label": "Heating",
+        "val": "Central Electric"
+      },
+      {
+        "label": "Parking",
+        "val": "2-Car Garage"
+      }
+    ],
+    "agent": {
+      "name": "Trevor Lujan",
+      "title": "Founding Partner",
+      "avatar": "👨‍💼",
+      "bio": "Founding partner with 18 years in Austin real estate. Specializes in luxury homes and relocation clients. Top producer 10 years running.",
+      "phone": "(512) 455-0101",
+      "email": "trevor.l+testaccount@zohotest.com"
+    }
+  },
+  {
+    "id": 12,
+    "price": "$419,973",
+    "address": "8858 Hamilton Pool Rd, Georgetown, TX 78628",
+    "mls": "MLS# ATX-2026-17448",
+    "img": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      },
+      {
+        "label": "Townhouse",
+        "cls": "blue"
+      }
+    ],
+    "beds": 3,
+    "baths": 3,
+    "sqft": "1,347",
+    "garage": "1-Car",
+    "lot": "0.05 ac",
+    "desc": "Gorgeous townhouse offering an open-concept floor plan with soaring ceilings. Gourmet kitchen flows into a spacious living area. Large backyard with covered patio, perfect for entertaining.",
+    "features": [
+      "Rooftop deck with city views",
+      "Gated community",
+      "Lock-and-leave lifestyle",
+      "Community pool",
+      "Dog park nearby",
+      "Close to dining & shops",
+      "Private ground-floor patio",
+      "No lawn maintenance"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Townhouse"
+      },
+      {
+        "label": "Year Built",
+        "val": "1992"
+      },
+      {
+        "label": "Lot Size",
+        "val": "0.05 ac"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "$150/mo"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$9,500"
+      },
+      {
+        "label": "Cooling",
+        "val": "Central Air"
+      },
+      {
+        "label": "Heating",
+        "val": "Central Gas"
+      },
+      {
+        "label": "Parking",
+        "val": "1-Car Garage"
+      }
+    ],
+    "agent": {
+      "name": "Lisa Barlow",
+      "title": "Buyer's Specialist",
+      "avatar": "👩‍💼",
+      "bio": "Buyer's specialist guiding clients with patience and clarity. Expertise in South Austin, Travis Heights, and SoCo neighborhoods.",
+      "phone": "(512) 455-0104",
+      "email": "trevor.l+sales2@zohotest.com"
+    }
+  },
+  {
+    "id": 13,
+    "price": "$914,131",
+    "address": "6636 FM 1431, Austin, TX 78704",
+    "mls": "MLS# ATX-2026-64114",
+    "img": "https://images.unsplash.com/photo-1602941525421-8f8b81d3edbb?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      },
+      {
+        "label": "New Construction",
+        "cls": "green"
+      }
+    ],
+    "beds": 3,
+    "baths": 3,
+    "sqft": "1,890",
+    "garage": "2-Car",
+    "lot": "0.25 ac",
+    "desc": "Charming single family home in one of Austin's most sought-after neighborhoods. Original hardwood floors, updated bathrooms, and an expansive deck overlooking the greenbelt.",
+    "features": [
+      "Corner lot",
+      "Sprinkler system",
+      "New roof (2024)",
+      "Updated chef's kitchen",
+      "Community pool nearby",
+      "2-car garage",
+      "Smart home pre-wired",
+      "Large backyard"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Single Family Home"
+      },
+      {
+        "label": "Year Built",
+        "val": "2024"
+      },
+      {
+        "label": "Lot Size",
+        "val": "0.25 ac"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "$75/mo"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$23,300"
+      },
+      {
+        "label": "Cooling",
+        "val": "None"
+      },
+      {
+        "label": "Heating",
+        "val": "Forced Air"
+      },
+      {
+        "label": "Parking",
+        "val": "2-Car Garage"
+      }
+    ],
+    "agent": {
+      "name": "Clark Kent",
+      "title": "Sales Manager",
+      "avatar": "👨‍💼",
+      "bio": "Sales manager and Certified Negotiation Expert with a background in finance. Helps buyers compete in fast-moving markets.",
+      "phone": "(512) 455-0102",
+      "email": "trevor.l+salesmanager@zohotest.com"
+    }
+  },
+  {
+    "id": 14,
+    "price": "$2,907,959",
+    "address": "5671 Chestnut Ave, Austin, TX 78702",
+    "mls": "MLS# ATX-2026-14419",
+    "img": "https://images.unsplash.com/photo-1622015663319-e97e697503ee?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      },
+      {
+        "label": "Open House",
+        "cls": "blue"
+      }
+    ],
+    "beds": 5,
+    "baths": 3,
+    "sqft": "4,197",
+    "garage": "3-Car",
+    "lot": "1.35 ac",
+    "desc": "Move-in ready estate with fresh paint and new carpet throughout. Modern kitchen with island seating and walk-in pantry. Minutes from top-rated schools and shopping.",
+    "features": [
+      "Control4 smart home",
+      "Resort-style heated pool",
+      "Wine cellar",
+      "Tennis court",
+      "Outdoor kitchen & fire pit",
+      "Guest quarters",
+      "EV charger installed",
+      "3-car garage"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Estate"
+      },
+      {
+        "label": "Year Built",
+        "val": "2003"
+      },
+      {
+        "label": "Lot Size",
+        "val": "1.35 ac"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "None"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$69,200"
+      },
+      {
+        "label": "Cooling",
+        "val": "Mini-Split"
+      },
+      {
+        "label": "Heating",
+        "val": "Central Gas"
+      },
+      {
+        "label": "Parking",
+        "val": "3-Car Garage"
+      }
+    ],
+    "agent": {
+      "name": "Lisa Barlow",
+      "title": "Buyer's Specialist",
+      "avatar": "👩‍💼",
+      "bio": "Buyer's specialist guiding clients with patience and clarity. Expertise in South Austin, Travis Heights, and SoCo neighborhoods.",
+      "phone": "(512) 455-0104",
+      "email": "trevor.l+sales2@zohotest.com"
+    }
+  },
+  {
+    "id": 15,
+    "price": "$441,187",
+    "address": "6264 Slaughter Ln #811, Cedar Park, TX 78613",
+    "mls": "MLS# ATX-2026-79941",
+    "img": "https://images.unsplash.com/photo-1561753757-d8880c5a3551?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      },
+      {
+        "label": "Condo",
+        "cls": "blue"
+      }
+    ],
+    "beds": 3,
+    "baths": 2,
+    "sqft": "937",
+    "garage": "None",
+    "lot": "N/A",
+    "desc": "Luxurious condo with custom finishes at every turn. Chef's kitchen with commercial-grade appliances. Primary suite with sitting area, two walk-in closets, and a resort-style bath.",
+    "features": [
+      "Guest suite available",
+      "Rooftop terrace",
+      "In-unit washer/dryer",
+      "Concierge services",
+      "Covered parking",
+      "Floor-to-ceiling windows",
+      "Fitness center",
+      "Secured building entry"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Condo"
+      },
+      {
+        "label": "Year Built",
+        "val": "1982"
+      },
+      {
+        "label": "Lot Size",
+        "val": "N/A"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "$250/mo"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$9,400"
+      },
+      {
+        "label": "Cooling",
+        "val": "Central Air"
+      },
+      {
+        "label": "Heating",
+        "val": "Forced Air"
+      },
+      {
+        "label": "Parking",
+        "val": "Street / Lot"
+      }
+    ],
+    "agent": {
+      "name": "Clark Kent",
+      "title": "Sales Manager",
+      "avatar": "👨‍💼",
+      "bio": "Sales manager and Certified Negotiation Expert with a background in finance. Helps buyers compete in fast-moving markets.",
+      "phone": "(512) 455-0102",
+      "email": "trevor.l+salesmanager@zohotest.com"
+    }
+  },
+  {
+    "id": 16,
+    "price": "$884,231",
+    "address": "1507 Slaughter Ln, Austin, TX 78704",
+    "mls": "MLS# ATX-2026-99261",
+    "img": "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      },
+      {
+        "label": "Open House Sat 1–4pm",
+        "cls": "blue"
+      }
+    ],
+    "beds": 3,
+    "baths": 2,
+    "sqft": "3,264",
+    "garage": "3-Car",
+    "lot": "0.22 ac",
+    "desc": "Light-filled single family home with floor-to-ceiling windows and an enviable location. Open kitchen with breakfast bar, generous storage, and premium finishes throughout.",
+    "features": [
+      "Community pool nearby",
+      "Hardwood floors throughout",
+      "New roof (2024)",
+      "Cul-de-sac street",
+      "Sprinkler system",
+      "Corner lot",
+      "2-car garage",
+      "Covered back patio"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Single Family Home"
+      },
+      {
+        "label": "Year Built",
+        "val": "1978"
+      },
+      {
+        "label": "Lot Size",
+        "val": "0.22 ac"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "$100/mo"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$22,900"
+      },
+      {
+        "label": "Cooling",
+        "val": "None"
+      },
+      {
+        "label": "Heating",
+        "val": "Heat Pump"
+      },
+      {
+        "label": "Parking",
+        "val": "3-Car Garage"
+      }
+    ],
+    "agent": {
+      "name": "Scott Summers",
+      "title": "Senior Agent",
+      "avatar": "👨‍💼",
+      "bio": "Senior agent specializing in first-time buyers and investment properties across the greater Austin metro.",
+      "phone": "(512) 455-0103",
+      "email": "trevor.l+sales1@zohotest.com"
+    }
+  },
+  {
+    "id": 17,
+    "price": "$2,013,103",
+    "address": "8999 Elmwood Ln, Pflugerville, TX 78660",
+    "mls": "MLS# ATX-2026-85268",
+    "img": "https://images.unsplash.com/photo-1505843513577-22bb7d21e455?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      },
+      {
+        "label": "New Listing",
+        "cls": "green"
+      }
+    ],
+    "beds": 5,
+    "baths": 4,
+    "sqft": "5,015",
+    "garage": "2-Car",
+    "lot": "1.66 ac",
+    "desc": "Beautifully maintained estate on a premium lot with hill country views. Updated HVAC, roof, and plumbing. Low-maintenance yard with drought-tolerant landscaping.",
+    "features": [
+      "Whole-home generator",
+      "Guest quarters",
+      "Home theater",
+      "3-car garage",
+      "Resort-style heated pool",
+      "Outdoor kitchen & fire pit",
+      "Tennis court",
+      "EV charger installed"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Estate"
+      },
+      {
+        "label": "Year Built",
+        "val": "1981"
+      },
+      {
+        "label": "Lot Size",
+        "val": "1.66 ac"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "None"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$45,600"
+      },
+      {
+        "label": "Cooling",
+        "val": "Mini-Split"
+      },
+      {
+        "label": "Heating",
+        "val": "Forced Air"
+      },
+      {
+        "label": "Parking",
+        "val": "2-Car Garage"
+      }
+    ],
+    "agent": {
+      "name": "Lisa Barlow",
+      "title": "Buyer's Specialist",
+      "avatar": "👩‍💼",
+      "bio": "Buyer's specialist guiding clients with patience and clarity. Expertise in South Austin, Travis Heights, and SoCo neighborhoods.",
+      "phone": "(512) 455-0104",
+      "email": "trevor.l+sales2@zohotest.com"
+    }
+  },
+  {
+    "id": 18,
+    "price": "$621,629",
+    "address": "8973 Treemont St, Georgetown, TX 78628",
+    "mls": "MLS# ATX-2026-84419",
+    "img": "https://images.unsplash.com/photo-1591474200742-8e512e6f98f8?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      }
+    ],
+    "beds": 3,
+    "baths": 2,
+    "sqft": "1,878",
+    "garage": "3-Car",
+    "lot": "0.18 ac",
+    "desc": "Contemporary single family home blending modern design with comfortable living. Polished concrete floors, exposed beams, and a chef's kitchen with waterfall island. Walking distance to parks and trails.",
+    "features": [
+      "Fresh interior paint",
+      "Walk-in master closet",
+      "2-car garage",
+      "Dual-zone HVAC",
+      "Covered back patio",
+      "Sprinkler system",
+      "Large backyard",
+      "New roof (2024)"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Single Family Home"
+      },
+      {
+        "label": "Year Built",
+        "val": "1980"
+      },
+      {
+        "label": "Lot Size",
+        "val": "0.18 ac"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "None"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$14,200"
+      },
+      {
+        "label": "Cooling",
+        "val": "Window Units"
+      },
+      {
+        "label": "Heating",
+        "val": "Radiant"
+      },
+      {
+        "label": "Parking",
+        "val": "3-Car Garage"
+      }
+    ],
+    "agent": {
+      "name": "Clark Kent",
+      "title": "Sales Manager",
+      "avatar": "👨‍💼",
+      "bio": "Sales manager and Certified Negotiation Expert with a background in finance. Helps buyers compete in fast-moving markets.",
+      "phone": "(512) 455-0102",
+      "email": "trevor.l+salesmanager@zohotest.com"
+    }
+  },
+  {
+    "id": 19,
+    "price": "$359,258",
+    "address": "8173 Bee Cave Rd #157, Austin, TX 78701",
+    "mls": "MLS# ATX-2026-37623",
+    "img": "https://images.unsplash.com/photo-1596436889106-be35e843f974?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      },
+      {
+        "label": "Condo",
+        "cls": "blue"
+      }
+    ],
+    "beds": 3,
+    "baths": 2,
+    "sqft": "1,138",
+    "garage": "1-Car",
+    "lot": "N/A",
+    "desc": "Classic condo with timeless curb appeal on a tree-lined street. Formal dining, dedicated home office, and a spacious bonus room. Community pool and amenities included.",
+    "features": [
+      "Guest suite available",
+      "Secured building entry",
+      "Concierge services",
+      "Private balcony",
+      "Walk score 95+",
+      "In-unit washer/dryer",
+      "Covered parking",
+      "Rooftop terrace"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Condo"
+      },
+      {
+        "label": "Year Built",
+        "val": "1998"
+      },
+      {
+        "label": "Lot Size",
+        "val": "N/A"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "$400/mo"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$9,100"
+      },
+      {
+        "label": "Cooling",
+        "val": "Central Air"
+      },
+      {
+        "label": "Heating",
+        "val": "Central Gas"
+      },
+      {
+        "label": "Parking",
+        "val": "1-Car Garage"
+      }
+    ],
+    "agent": {
+      "name": "Clark Kent",
+      "title": "Sales Manager",
+      "avatar": "👨‍💼",
+      "bio": "Sales manager and Certified Negotiation Expert with a background in finance. Helps buyers compete in fast-moving markets.",
+      "phone": "(512) 455-0102",
+      "email": "trevor.l+salesmanager@zohotest.com"
+    }
+  },
+  {
+    "id": 20,
+    "price": "$653,082",
+    "address": "1419 Lakewood Dr, Austin, TX 78704",
+    "mls": "MLS# ATX-2026-30733",
+    "img": "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      },
+      {
+        "label": "Price Reduced",
+        "cls": "green"
+      }
+    ],
+    "beds": 5,
+    "baths": 2,
+    "sqft": "3,672",
+    "garage": "2-Car",
+    "lot": "0.57 ac",
+    "desc": "Energy-efficient single family home built to today's highest standards. Solar panels, tankless water heater, and smart home technology. Low utility bills and eco-friendly materials throughout.",
+    "features": [
+      "Walk-in master closet",
+      "Large backyard",
+      "Fresh interior paint",
+      "Corner lot",
+      "Dual-zone HVAC",
+      "Community pool nearby",
+      "Sprinkler system",
+      "Covered back patio"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Single Family Home"
+      },
+      {
+        "label": "Year Built",
+        "val": "1988"
+      },
+      {
+        "label": "Lot Size",
+        "val": "0.57 ac"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "$150/mo"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$14,000"
+      },
+      {
+        "label": "Cooling",
+        "val": "Window Units"
+      },
+      {
+        "label": "Heating",
+        "val": "Forced Air"
+      },
+      {
+        "label": "Parking",
+        "val": "2-Car Garage"
+      }
+    ],
+    "agent": {
+      "name": "Lisa Barlow",
+      "title": "Buyer's Specialist",
+      "avatar": "👩‍💼",
+      "bio": "Buyer's specialist guiding clients with patience and clarity. Expertise in South Austin, Travis Heights, and SoCo neighborhoods.",
+      "phone": "(512) 455-0104",
+      "email": "trevor.l+sales2@zohotest.com"
+    }
+  },
+  {
+    "id": 21,
+    "price": "$428,656",
+    "address": "5736 E 6th St, Austin, TX 78703",
+    "mls": "MLS# ATX-2026-87584",
+    "img": "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      }
+    ],
+    "beds": 4,
+    "baths": 2,
+    "sqft": "1,375",
+    "garage": "1-Car",
+    "lot": "0.11 ac",
+    "desc": "Stunning townhouse nestled in a quiet neighborhood with mature oak trees. Recently updated kitchen with quartz countertops and stainless steel appliances. Master suite features a spa-like bath.",
+    "features": [
+      "No lawn maintenance",
+      "Built-in shelving",
+      "Close to dining & shops",
+      "Gated community",
+      "Epoxy garage floor",
+      "Community pool",
+      "Rooftop deck with city views",
+      "Private ground-floor patio"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Townhouse"
+      },
+      {
+        "label": "Year Built",
+        "val": "2016"
+      },
+      {
+        "label": "Lot Size",
+        "val": "0.11 ac"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "$200/mo"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$8,400"
+      },
+      {
+        "label": "Cooling",
+        "val": "Mini-Split"
+      },
+      {
+        "label": "Heating",
+        "val": "Heat Pump"
+      },
+      {
+        "label": "Parking",
+        "val": "1-Car Garage"
+      }
+    ],
+    "agent": {
+      "name": "Clark Kent",
+      "title": "Sales Manager",
+      "avatar": "👨‍💼",
+      "bio": "Sales manager and Certified Negotiation Expert with a background in finance. Helps buyers compete in fast-moving markets.",
+      "phone": "(512) 455-0102",
+      "email": "trevor.l+salesmanager@zohotest.com"
+    }
+  },
+  {
+    "id": 22,
+    "price": "$512,075",
+    "address": "6585 Avery Ranch Blvd, Bee Cave, TX 78738",
+    "mls": "MLS# ATX-2026-98432",
+    "img": "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      },
+      {
+        "label": "Townhouse",
+        "cls": "blue"
+      }
+    ],
+    "beds": 2,
+    "baths": 2,
+    "sqft": "2,399",
+    "garage": "1-Car",
+    "lot": "0.04 ac",
+    "desc": "Gorgeous townhouse offering an open-concept floor plan with soaring ceilings. Gourmet kitchen flows into a spacious living area. Large backyard with covered patio, perfect for entertaining.",
+    "features": [
+      "Dog park nearby",
+      "No lawn maintenance",
+      "Gated community",
+      "Private ground-floor patio",
+      "Community pool",
+      "Lock-and-leave lifestyle",
+      "Rooftop deck with city views",
+      "Epoxy garage floor"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Townhouse"
+      },
+      {
+        "label": "Year Built",
+        "val": "1994"
+      },
+      {
+        "label": "Lot Size",
+        "val": "0.04 ac"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "$250/mo"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$9,800"
+      },
+      {
+        "label": "Cooling",
+        "val": "None"
+      },
+      {
+        "label": "Heating",
+        "val": "Radiant"
+      },
+      {
+        "label": "Parking",
+        "val": "1-Car Garage"
+      }
+    ],
+    "agent": {
+      "name": "Scott Summers",
+      "title": "Senior Agent",
+      "avatar": "👨‍💼",
+      "bio": "Senior agent specializing in first-time buyers and investment properties across the greater Austin metro.",
+      "phone": "(512) 455-0103",
+      "email": "trevor.l+sales1@zohotest.com"
+    }
+  },
+  {
+    "id": 23,
+    "price": "$947,092",
+    "address": "2494 W 2nd St, Buda, TX 78610",
+    "mls": "MLS# ATX-2026-87149",
+    "img": "https://images.unsplash.com/photo-1613977257363-707ba9348227?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      }
+    ],
+    "beds": 3,
+    "baths": 4,
+    "sqft": "2,210",
+    "garage": "1-Car",
+    "lot": "0.52 ac",
+    "desc": "Charming single family home in one of Austin's most sought-after neighborhoods. Original hardwood floors, updated bathrooms, and an expansive deck overlooking the greenbelt.",
+    "features": [
+      "Fresh interior paint",
+      "Covered back patio",
+      "New roof (2024)",
+      "Cul-de-sac street",
+      "Updated chef's kitchen",
+      "Sprinkler system",
+      "Community pool nearby",
+      "Smart home pre-wired"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Single Family Home"
+      },
+      {
+        "label": "Year Built",
+        "val": "1980"
+      },
+      {
+        "label": "Lot Size",
+        "val": "0.52 ac"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "None"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$19,400"
+      },
+      {
+        "label": "Cooling",
+        "val": "Window Units"
+      },
+      {
+        "label": "Heating",
+        "val": "Central Gas"
+      },
+      {
+        "label": "Parking",
+        "val": "1-Car Garage"
+      }
+    ],
+    "agent": {
+      "name": "Trevor Lujan",
+      "title": "Founding Partner",
+      "avatar": "👨‍💼",
+      "bio": "Founding partner with 18 years in Austin real estate. Specializes in luxury homes and relocation clients. Top producer 10 years running.",
+      "phone": "(512) 455-0101",
+      "email": "trevor.l+testaccount@zohotest.com"
+    }
+  },
+  {
+    "id": 24,
+    "price": "$513,540",
+    "address": "3291 Lake Travis Dr #615, Austin, TX 78701",
+    "mls": "MLS# ATX-2026-28889",
+    "img": "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      }
+    ],
+    "beds": 3,
+    "baths": 1,
+    "sqft": "1,374",
+    "garage": "1-Car",
+    "lot": "N/A",
+    "desc": "Move-in ready condo with fresh paint and new carpet throughout. Modern kitchen with island seating and walk-in pantry. Minutes from top-rated schools and shopping.",
+    "features": [
+      "Rooftop terrace",
+      "Concierge services",
+      "Guest suite available",
+      "Floor-to-ceiling windows",
+      "Private balcony",
+      "Fitness center",
+      "In-unit washer/dryer",
+      "Secured building entry"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Condo"
+      },
+      {
+        "label": "Year Built",
+        "val": "1988"
+      },
+      {
+        "label": "Lot Size",
+        "val": "N/A"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "$250/mo"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$13,200"
+      },
+      {
+        "label": "Cooling",
+        "val": "None"
+      },
+      {
+        "label": "Heating",
+        "val": "Central Electric"
+      },
+      {
+        "label": "Parking",
+        "val": "1-Car Garage"
+      }
+    ],
+    "agent": {
+      "name": "Trevor Lujan",
+      "title": "Founding Partner",
+      "avatar": "👨‍💼",
+      "bio": "Founding partner with 18 years in Austin real estate. Specializes in luxury homes and relocation clients. Top producer 10 years running.",
+      "phone": "(512) 455-0101",
+      "email": "trevor.l+testaccount@zohotest.com"
+    }
+  },
+  {
+    "id": 25,
+    "price": "$373,465",
+    "address": "5896 Avery Ranch Blvd, Lakeway, TX 78734",
+    "mls": "MLS# ATX-2026-66752",
+    "img": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      }
+    ],
+    "beds": 3,
+    "baths": 2,
+    "sqft": "1,646",
+    "garage": "2-Car",
+    "lot": "0.05 ac",
+    "desc": "Luxurious townhouse with custom finishes at every turn. Chef's kitchen with commercial-grade appliances. Primary suite with sitting area, two walk-in closets, and a resort-style bath.",
+    "features": [
+      "Community pool",
+      "No lawn maintenance",
+      "Built-in shelving",
+      "Lock-and-leave lifestyle",
+      "Epoxy garage floor",
+      "Close to dining & shops",
+      "Private ground-floor patio",
+      "Rooftop deck with city views"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Townhouse"
+      },
+      {
+        "label": "Year Built",
+        "val": "1990"
+      },
+      {
+        "label": "Lot Size",
+        "val": "0.05 ac"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "$200/mo"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$9,100"
+      },
+      {
+        "label": "Cooling",
+        "val": "Window Units"
+      },
+      {
+        "label": "Heating",
+        "val": "Radiant"
+      },
+      {
+        "label": "Parking",
+        "val": "2-Car Garage"
+      }
+    ],
+    "agent": {
+      "name": "Lisa Barlow",
+      "title": "Buyer's Specialist",
+      "avatar": "👩‍💼",
+      "bio": "Buyer's specialist guiding clients with patience and clarity. Expertise in South Austin, Travis Heights, and SoCo neighborhoods.",
+      "phone": "(512) 455-0104",
+      "email": "trevor.l+sales2@zohotest.com"
+    }
+  },
+  {
+    "id": 26,
+    "price": "$392,103",
+    "address": "2923 Slaughter Ln #1367, Buda, TX 78610",
+    "mls": "MLS# ATX-2026-96052",
+    "img": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      },
+      {
+        "label": "Condo",
+        "cls": "blue"
+      }
+    ],
+    "beds": 1,
+    "baths": 1,
+    "sqft": "1,466",
+    "garage": "1-Car",
+    "lot": "N/A",
+    "desc": "Light-filled condo with floor-to-ceiling windows and an enviable location. Open kitchen with breakfast bar, generous storage, and premium finishes throughout.",
+    "features": [
+      "Concierge services",
+      "Rooftop terrace",
+      "Floor-to-ceiling windows",
+      "Private balcony",
+      "Secured building entry",
+      "In-unit washer/dryer",
+      "Walk score 95+",
+      "Fitness center"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Condo"
+      },
+      {
+        "label": "Year Built",
+        "val": "2019"
+      },
+      {
+        "label": "Lot Size",
+        "val": "N/A"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "$250/mo"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$8,600"
+      },
+      {
+        "label": "Cooling",
+        "val": "Window Units"
+      },
+      {
+        "label": "Heating",
+        "val": "Forced Air"
+      },
+      {
+        "label": "Parking",
+        "val": "1-Car Garage"
+      }
+    ],
+    "agent": {
+      "name": "Scott Summers",
+      "title": "Senior Agent",
+      "avatar": "👨‍💼",
+      "bio": "Senior agent specializing in first-time buyers and investment properties across the greater Austin metro.",
+      "phone": "(512) 455-0103",
+      "email": "trevor.l+sales1@zohotest.com"
+    }
+  },
+  {
+    "id": 27,
+    "price": "$346,834",
+    "address": "9279 Sunset Ridge Rd, Round Rock, TX 78681",
+    "mls": "MLS# ATX-2026-26074",
+    "img": "https://images.unsplash.com/photo-1576941089067-2de3c901e126?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      },
+      {
+        "label": "Townhouse",
+        "cls": "blue"
+      }
+    ],
+    "beds": 2,
+    "baths": 3,
+    "sqft": "1,178",
+    "garage": "2-Car",
+    "lot": "0.07 ac",
+    "desc": "Beautifully maintained townhouse on a premium lot with hill country views. Updated HVAC, roof, and plumbing. Low-maintenance yard with drought-tolerant landscaping.",
+    "features": [
+      "Community pool",
+      "Rooftop deck with city views",
+      "Built-in shelving",
+      "Gated community",
+      "Epoxy garage floor",
+      "Dog park nearby",
+      "No lawn maintenance",
+      "Close to dining & shops"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Townhouse"
+      },
+      {
+        "label": "Year Built",
+        "val": "2010"
+      },
+      {
+        "label": "Lot Size",
+        "val": "0.07 ac"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "$200/mo"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$6,500"
+      },
+      {
+        "label": "Cooling",
+        "val": "Mini-Split"
+      },
+      {
+        "label": "Heating",
+        "val": "Forced Air"
+      },
+      {
+        "label": "Parking",
+        "val": "2-Car Garage"
+      }
+    ],
+    "agent": {
+      "name": "Lisa Barlow",
+      "title": "Buyer's Specialist",
+      "avatar": "👩‍💼",
+      "bio": "Buyer's specialist guiding clients with patience and clarity. Expertise in South Austin, Travis Heights, and SoCo neighborhoods.",
+      "phone": "(512) 455-0104",
+      "email": "trevor.l+sales2@zohotest.com"
+    }
+  },
+  {
+    "id": 28,
+    "price": "$2,908,992",
+    "address": "8382 Chestnut Ave, Round Rock, TX 78664",
+    "mls": "MLS# ATX-2026-91797",
+    "img": "https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      },
+      {
+        "label": "New Listing",
+        "cls": "green"
+      }
+    ],
+    "beds": 4,
+    "baths": 4,
+    "sqft": "5,291",
+    "garage": "2-Car",
+    "lot": "2.4 ac",
+    "desc": "Contemporary estate blending modern design with comfortable living. Polished concrete floors, exposed beams, and a chef's kitchen with waterfall island. Walking distance to parks and trails.",
+    "features": [
+      "Resort-style heated pool",
+      "Outdoor kitchen & fire pit",
+      "Guest quarters",
+      "Whole-home generator",
+      "3-car garage",
+      "EV charger installed",
+      "Wine cellar",
+      "Tennis court"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Estate"
+      },
+      {
+        "label": "Year Built",
+        "val": "1997"
+      },
+      {
+        "label": "Lot Size",
+        "val": "2.4 ac"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "None"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$64,200"
+      },
+      {
+        "label": "Cooling",
+        "val": "Window Units"
+      },
+      {
+        "label": "Heating",
+        "val": "Radiant"
+      },
+      {
+        "label": "Parking",
+        "val": "2-Car Garage"
+      }
+    ],
+    "agent": {
+      "name": "Trevor Lujan",
+      "title": "Founding Partner",
+      "avatar": "👨‍💼",
+      "bio": "Founding partner with 18 years in Austin real estate. Specializes in luxury homes and relocation clients. Top producer 10 years running.",
+      "phone": "(512) 455-0101",
+      "email": "trevor.l+testaccount@zohotest.com"
+    }
+  },
+  {
+    "id": 29,
+    "price": "$510,434",
+    "address": "3419 Pecan Grove Rd, Austin, TX 78745",
+    "mls": "MLS# ATX-2026-55609",
+    "img": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      }
+    ],
+    "beds": 4,
+    "baths": 2,
+    "sqft": "1,492",
+    "garage": "2-Car",
+    "lot": "0.12 ac",
+    "desc": "Classic townhouse with timeless curb appeal on a tree-lined street. Formal dining, dedicated home office, and a spacious bonus room. Community pool and amenities included.",
+    "features": [
+      "Gated community",
+      "Community pool",
+      "Close to dining & shops",
+      "Epoxy garage floor",
+      "Private ground-floor patio",
+      "Dog park nearby",
+      "Lock-and-leave lifestyle",
+      "No lawn maintenance"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Townhouse"
+      },
+      {
+        "label": "Year Built",
+        "val": "2003"
+      },
+      {
+        "label": "Lot Size",
+        "val": "0.12 ac"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "$200/mo"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$11,400"
+      },
+      {
+        "label": "Cooling",
+        "val": "Window Units"
+      },
+      {
+        "label": "Heating",
+        "val": "Central Gas"
+      },
+      {
+        "label": "Parking",
+        "val": "2-Car Garage"
+      }
+    ],
+    "agent": {
+      "name": "Scott Summers",
+      "title": "Senior Agent",
+      "avatar": "👨‍💼",
+      "bio": "Senior agent specializing in first-time buyers and investment properties across the greater Austin metro.",
+      "phone": "(512) 455-0103",
+      "email": "trevor.l+sales1@zohotest.com"
+    }
+  },
+  {
+    "id": 30,
+    "price": "$2,954,552",
+    "address": "3584 W 38th St, Pflugerville, TX 78660",
+    "mls": "MLS# ATX-2026-17036",
+    "img": "https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      }
+    ],
+    "beds": 6,
+    "baths": 6,
+    "sqft": "5,609",
+    "garage": "4-Car",
+    "lot": "0.93 ac",
+    "desc": "Energy-efficient estate built to today's highest standards. Solar panels, tankless water heater, and smart home technology. Low utility bills and eco-friendly materials throughout.",
+    "features": [
+      "Control4 smart home",
+      "Guest quarters",
+      "EV charger installed",
+      "Resort-style heated pool",
+      "Tennis court",
+      "Outdoor kitchen & fire pit",
+      "Wine cellar",
+      "3-car garage"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Estate"
+      },
+      {
+        "label": "Year Built",
+        "val": "2010"
+      },
+      {
+        "label": "Lot Size",
+        "val": "0.93 ac"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "None"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$68,800"
+      },
+      {
+        "label": "Cooling",
+        "val": "Window Units"
+      },
+      {
+        "label": "Heating",
+        "val": "Forced Air"
+      },
+      {
+        "label": "Parking",
+        "val": "4-Car Garage"
+      }
+    ],
+    "agent": {
+      "name": "Trevor Lujan",
+      "title": "Founding Partner",
+      "avatar": "👨‍💼",
+      "bio": "Founding partner with 18 years in Austin real estate. Specializes in luxury homes and relocation clients. Top producer 10 years running.",
+      "phone": "(512) 455-0101",
+      "email": "trevor.l+testaccount@zohotest.com"
+    }
+  },
+  {
+    "id": 31,
+    "price": "$324,401",
+    "address": "8083 Brodie Ln #430, Round Rock, TX 78681",
+    "mls": "MLS# ATX-2026-93579",
+    "img": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      },
+      {
+        "label": "Condo",
+        "cls": "blue"
+      }
+    ],
+    "beds": 3,
+    "baths": 2,
+    "sqft": "1,110",
+    "garage": "None",
+    "lot": "N/A",
+    "desc": "Stunning condo nestled in a quiet neighborhood with mature oak trees. Recently updated kitchen with quartz countertops and stainless steel appliances. Master suite features a spa-like bath.",
+    "features": [
+      "Fitness center",
+      "Rooftop terrace",
+      "Covered parking",
+      "In-unit washer/dryer",
+      "Secured building entry",
+      "Private balcony",
+      "Floor-to-ceiling windows",
+      "Walk score 95+"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Condo"
+      },
+      {
+        "label": "Year Built",
+        "val": "2008"
+      },
+      {
+        "label": "Lot Size",
+        "val": "N/A"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "$400/mo"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$7,400"
+      },
+      {
+        "label": "Cooling",
+        "val": "None"
+      },
+      {
+        "label": "Heating",
+        "val": "Central Gas"
+      },
+      {
+        "label": "Parking",
+        "val": "Street / Lot"
+      }
+    ],
+    "agent": {
+      "name": "Lisa Barlow",
+      "title": "Buyer's Specialist",
+      "avatar": "👩‍💼",
+      "bio": "Buyer's specialist guiding clients with patience and clarity. Expertise in South Austin, Travis Heights, and SoCo neighborhoods.",
+      "phone": "(512) 455-0104",
+      "email": "trevor.l+sales2@zohotest.com"
+    }
+  },
+  {
+    "id": 32,
+    "price": "$1,718,959",
+    "address": "6095 Elmwood Ln, Georgetown, TX 78628",
+    "mls": "MLS# ATX-2026-73620",
+    "img": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      },
+      {
+        "label": "New Listing",
+        "cls": "green"
+      }
+    ],
+    "beds": 7,
+    "baths": 6,
+    "sqft": "4,799",
+    "garage": "4-Car",
+    "lot": "1.88 ac",
+    "desc": "Gorgeous estate offering an open-concept floor plan with soaring ceilings. Gourmet kitchen flows into a spacious living area. Large backyard with covered patio, perfect for entertaining.",
+    "features": [
+      "Tennis court",
+      "Control4 smart home",
+      "EV charger installed",
+      "Wine cellar",
+      "Outdoor kitchen & fire pit",
+      "Home theater",
+      "Whole-home generator",
+      "Resort-style heated pool"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Estate"
+      },
+      {
+        "label": "Year Built",
+        "val": "2022"
+      },
+      {
+        "label": "Lot Size",
+        "val": "1.88 ac"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "$50/mo"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$37,900"
+      },
+      {
+        "label": "Cooling",
+        "val": "Mini-Split"
+      },
+      {
+        "label": "Heating",
+        "val": "Central Gas"
+      },
+      {
+        "label": "Parking",
+        "val": "4-Car Garage"
+      }
+    ],
+    "agent": {
+      "name": "Clark Kent",
+      "title": "Sales Manager",
+      "avatar": "👨‍💼",
+      "bio": "Sales manager and Certified Negotiation Expert with a background in finance. Helps buyers compete in fast-moving markets.",
+      "phone": "(512) 455-0102",
+      "email": "trevor.l+salesmanager@zohotest.com"
+    }
+  },
+  {
+    "id": 33,
+    "price": "$541,206",
+    "address": "1153 Oltorf St #314, Round Rock, TX 78681",
+    "mls": "MLS# ATX-2026-12018",
+    "img": "https://images.unsplash.com/photo-1602941525421-8f8b81d3edbb?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      }
+    ],
+    "beds": 2,
+    "baths": 2,
+    "sqft": "1,556",
+    "garage": "1-Car",
+    "lot": "N/A",
+    "desc": "Charming condo in one of Austin's most sought-after neighborhoods. Original hardwood floors, updated bathrooms, and an expansive deck overlooking the greenbelt.",
+    "features": [
+      "Walk score 95+",
+      "Floor-to-ceiling windows",
+      "Private balcony",
+      "Rooftop terrace",
+      "Covered parking",
+      "Fitness center",
+      "Guest suite available",
+      "Secured building entry"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Condo"
+      },
+      {
+        "label": "Year Built",
+        "val": "1988"
+      },
+      {
+        "label": "Lot Size",
+        "val": "N/A"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "$350/mo"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$12,900"
+      },
+      {
+        "label": "Cooling",
+        "val": "None"
+      },
+      {
+        "label": "Heating",
+        "val": "Radiant"
+      },
+      {
+        "label": "Parking",
+        "val": "1-Car Garage"
+      }
+    ],
+    "agent": {
+      "name": "Scott Summers",
+      "title": "Senior Agent",
+      "avatar": "👨‍💼",
+      "bio": "Senior agent specializing in first-time buyers and investment properties across the greater Austin metro.",
+      "phone": "(512) 455-0103",
+      "email": "trevor.l+sales1@zohotest.com"
+    }
+  },
+  {
+    "id": 34,
+    "price": "$415,433",
+    "address": "2547 Overlook Terrace, Buda, TX 78610",
+    "mls": "MLS# ATX-2026-92805",
+    "img": "https://images.unsplash.com/photo-1622015663319-e97e697503ee?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      }
+    ],
+    "beds": 4,
+    "baths": 3,
+    "sqft": "2,383",
+    "garage": "1-Car",
+    "lot": "0.08 ac",
+    "desc": "Move-in ready townhouse with fresh paint and new carpet throughout. Modern kitchen with island seating and walk-in pantry. Minutes from top-rated schools and shopping.",
+    "features": [
+      "Epoxy garage floor",
+      "Rooftop deck with city views",
+      "Lock-and-leave lifestyle",
+      "Gated community",
+      "Private ground-floor patio",
+      "No lawn maintenance",
+      "Dog park nearby",
+      "Built-in shelving"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Townhouse"
+      },
+      {
+        "label": "Year Built",
+        "val": "1999"
+      },
+      {
+        "label": "Lot Size",
+        "val": "0.08 ac"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "$175/mo"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$8,500"
+      },
+      {
+        "label": "Cooling",
+        "val": "Central Air"
+      },
+      {
+        "label": "Heating",
+        "val": "Forced Air"
+      },
+      {
+        "label": "Parking",
+        "val": "1-Car Garage"
+      }
+    ],
+    "agent": {
+      "name": "Trevor Lujan",
+      "title": "Founding Partner",
+      "avatar": "👨‍💼",
+      "bio": "Founding partner with 18 years in Austin real estate. Specializes in luxury homes and relocation clients. Top producer 10 years running.",
+      "phone": "(512) 455-0101",
+      "email": "trevor.l+testaccount@zohotest.com"
+    }
+  },
+  {
+    "id": 35,
+    "price": "$253,674",
+    "address": "4506 Elmwood Ln #633, Austin, TX 78703",
+    "mls": "MLS# ATX-2026-11976",
+    "img": "https://images.unsplash.com/photo-1561753757-d8880c5a3551?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      }
+    ],
+    "beds": 2,
+    "baths": 1,
+    "sqft": "1,088",
+    "garage": "1-Car",
+    "lot": "N/A",
+    "desc": "Luxurious condo with custom finishes at every turn. Chef's kitchen with commercial-grade appliances. Primary suite with sitting area, two walk-in closets, and a resort-style bath.",
+    "features": [
+      "In-unit washer/dryer",
+      "Covered parking",
+      "Floor-to-ceiling windows",
+      "Private balcony",
+      "Fitness center",
+      "Guest suite available",
+      "Secured building entry",
+      "Walk score 95+"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Condo"
+      },
+      {
+        "label": "Year Built",
+        "val": "2007"
+      },
+      {
+        "label": "Lot Size",
+        "val": "N/A"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "$400/mo"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$5,400"
+      },
+      {
+        "label": "Cooling",
+        "val": "None"
+      },
+      {
+        "label": "Heating",
+        "val": "Central Electric"
+      },
+      {
+        "label": "Parking",
+        "val": "1-Car Garage"
+      }
+    ],
+    "agent": {
+      "name": "Lisa Barlow",
+      "title": "Buyer's Specialist",
+      "avatar": "👩‍💼",
+      "bio": "Buyer's specialist guiding clients with patience and clarity. Expertise in South Austin, Travis Heights, and SoCo neighborhoods.",
+      "phone": "(512) 455-0104",
+      "email": "trevor.l+sales2@zohotest.com"
+    }
+  },
+  {
+    "id": 36,
+    "price": "$2,352,472",
+    "address": "9161 Parmer Ln, Cedar Park, TX 78613",
+    "mls": "MLS# ATX-2026-82487",
+    "img": "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      },
+      {
+        "label": "Open House",
+        "cls": "blue"
+      }
+    ],
+    "beds": 7,
+    "baths": 3,
+    "sqft": "5,240",
+    "garage": "3-Car",
+    "lot": "2.21 ac",
+    "desc": "Light-filled estate with floor-to-ceiling windows and an enviable location. Open kitchen with breakfast bar, generous storage, and premium finishes throughout.",
+    "features": [
+      "Wine cellar",
+      "Outdoor kitchen & fire pit",
+      "Whole-home generator",
+      "Control4 smart home",
+      "Resort-style heated pool",
+      "3-car garage",
+      "EV charger installed",
+      "Tennis court"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Estate"
+      },
+      {
+        "label": "Year Built",
+        "val": "1995"
+      },
+      {
+        "label": "Lot Size",
+        "val": "2.21 ac"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "None"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$50,500"
+      },
+      {
+        "label": "Cooling",
+        "val": "None"
+      },
+      {
+        "label": "Heating",
+        "val": "Central Gas"
+      },
+      {
+        "label": "Parking",
+        "val": "3-Car Garage"
+      }
+    ],
+    "agent": {
+      "name": "Clark Kent",
+      "title": "Sales Manager",
+      "avatar": "👨‍💼",
+      "bio": "Sales manager and Certified Negotiation Expert with a background in finance. Helps buyers compete in fast-moving markets.",
+      "phone": "(512) 455-0102",
+      "email": "trevor.l+salesmanager@zohotest.com"
+    }
+  },
+  {
+    "id": 37,
+    "price": "$3,340,276",
+    "address": "3405 Westover Hills Blvd, Pflugerville, TX 78660",
+    "mls": "MLS# ATX-2026-70610",
+    "img": "https://images.unsplash.com/photo-1505843513577-22bb7d21e455?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      }
+    ],
+    "beds": 5,
+    "baths": 6,
+    "sqft": "4,322",
+    "garage": "2-Car",
+    "lot": "2.31 ac",
+    "desc": "Beautifully maintained estate on a premium lot with hill country views. Updated HVAC, roof, and plumbing. Low-maintenance yard with drought-tolerant landscaping.",
+    "features": [
+      "Resort-style heated pool",
+      "Tennis court",
+      "Wine cellar",
+      "3-car garage",
+      "Outdoor kitchen & fire pit",
+      "Home theater",
+      "Control4 smart home",
+      "Guest quarters"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Estate"
+      },
+      {
+        "label": "Year Built",
+        "val": "2005"
+      },
+      {
+        "label": "Lot Size",
+        "val": "2.31 ac"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "None"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$63,700"
+      },
+      {
+        "label": "Cooling",
+        "val": "Mini-Split"
+      },
+      {
+        "label": "Heating",
+        "val": "Radiant"
+      },
+      {
+        "label": "Parking",
+        "val": "2-Car Garage"
+      }
+    ],
+    "agent": {
+      "name": "Lisa Barlow",
+      "title": "Buyer's Specialist",
+      "avatar": "👩‍💼",
+      "bio": "Buyer's specialist guiding clients with patience and clarity. Expertise in South Austin, Travis Heights, and SoCo neighborhoods.",
+      "phone": "(512) 455-0104",
+      "email": "trevor.l+sales2@zohotest.com"
+    }
+  },
+  {
+    "id": 38,
+    "price": "$528,393",
+    "address": "351 Elmwood Ln, Round Rock, TX 78664",
+    "mls": "MLS# ATX-2026-68401",
+    "img": "https://images.unsplash.com/photo-1591474200742-8e512e6f98f8?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      },
+      {
+        "label": "Townhouse",
+        "cls": "blue"
+      }
+    ],
+    "beds": 3,
+    "baths": 3,
+    "sqft": "1,533",
+    "garage": "1-Car",
+    "lot": "0.07 ac",
+    "desc": "Contemporary townhouse blending modern design with comfortable living. Polished concrete floors, exposed beams, and a chef's kitchen with waterfall island. Walking distance to parks and trails.",
+    "features": [
+      "Epoxy garage floor",
+      "Gated community",
+      "Lock-and-leave lifestyle",
+      "Community pool",
+      "Dog park nearby",
+      "Rooftop deck with city views",
+      "Built-in shelving",
+      "Close to dining & shops"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Townhouse"
+      },
+      {
+        "label": "Year Built",
+        "val": "2004"
+      },
+      {
+        "label": "Lot Size",
+        "val": "0.07 ac"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "$150/mo"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$10,500"
+      },
+      {
+        "label": "Cooling",
+        "val": "None"
+      },
+      {
+        "label": "Heating",
+        "val": "Central Gas"
+      },
+      {
+        "label": "Parking",
+        "val": "1-Car Garage"
+      }
+    ],
+    "agent": {
+      "name": "Trevor Lujan",
+      "title": "Founding Partner",
+      "avatar": "👨‍💼",
+      "bio": "Founding partner with 18 years in Austin real estate. Specializes in luxury homes and relocation clients. Top producer 10 years running.",
+      "phone": "(512) 455-0101",
+      "email": "trevor.l+testaccount@zohotest.com"
+    }
+  },
+  {
+    "id": 39,
+    "price": "$306,268",
+    "address": "6540 Treemont St, Pflugerville, TX 78660",
+    "mls": "MLS# ATX-2026-91143",
+    "img": "https://images.unsplash.com/photo-1596436889106-be35e843f974?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      }
+    ],
+    "beds": 2,
+    "baths": 2,
+    "sqft": "1,182",
+    "garage": "1-Car",
+    "lot": "0.06 ac",
+    "desc": "Classic townhouse with timeless curb appeal on a tree-lined street. Formal dining, dedicated home office, and a spacious bonus room. Community pool and amenities included.",
+    "features": [
+      "No lawn maintenance",
+      "Gated community",
+      "Private ground-floor patio",
+      "Built-in shelving",
+      "Dog park nearby",
+      "Close to dining & shops",
+      "Epoxy garage floor",
+      "Lock-and-leave lifestyle"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Townhouse"
+      },
+      {
+        "label": "Year Built",
+        "val": "1986"
+      },
+      {
+        "label": "Lot Size",
+        "val": "0.06 ac"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "$225/mo"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$6,600"
+      },
+      {
+        "label": "Cooling",
+        "val": "Mini-Split"
+      },
+      {
+        "label": "Heating",
+        "val": "Central Gas"
+      },
+      {
+        "label": "Parking",
+        "val": "1-Car Garage"
+      }
+    ],
+    "agent": {
+      "name": "Scott Summers",
+      "title": "Senior Agent",
+      "avatar": "👨‍💼",
+      "bio": "Senior agent specializing in first-time buyers and investment properties across the greater Austin metro.",
+      "phone": "(512) 455-0103",
+      "email": "trevor.l+sales1@zohotest.com"
+    }
+  },
+  {
+    "id": 40,
+    "price": "$453,073",
+    "address": "991 William Cannon Dr, Austin, TX 78701",
+    "mls": "MLS# ATX-2026-10269",
+    "img": "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      },
+      {
+        "label": "Townhouse",
+        "cls": "blue"
+      }
+    ],
+    "beds": 2,
+    "baths": 2,
+    "sqft": "1,435",
+    "garage": "1-Car",
+    "lot": "0.09 ac",
+    "desc": "Energy-efficient townhouse built to today's highest standards. Solar panels, tankless water heater, and smart home technology. Low utility bills and eco-friendly materials throughout.",
+    "features": [
+      "No lawn maintenance",
+      "Built-in shelving",
+      "Close to dining & shops",
+      "Dog park nearby",
+      "Community pool",
+      "Private ground-floor patio",
+      "Gated community",
+      "Epoxy garage floor"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Townhouse"
+      },
+      {
+        "label": "Year Built",
+        "val": "2002"
+      },
+      {
+        "label": "Lot Size",
+        "val": "0.09 ac"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "$250/mo"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$9,600"
+      },
+      {
+        "label": "Cooling",
+        "val": "Central Air"
+      },
+      {
+        "label": "Heating",
+        "val": "Central Electric"
+      },
+      {
+        "label": "Parking",
+        "val": "1-Car Garage"
+      }
+    ],
+    "agent": {
+      "name": "Clark Kent",
+      "title": "Sales Manager",
+      "avatar": "👨‍💼",
+      "bio": "Sales manager and Certified Negotiation Expert with a background in finance. Helps buyers compete in fast-moving markets.",
+      "phone": "(512) 455-0102",
+      "email": "trevor.l+salesmanager@zohotest.com"
+    }
+  },
+  {
+    "id": 41,
+    "price": "$418,064",
+    "address": "4068 Lamar Blvd, Pflugerville, TX 78660",
+    "mls": "MLS# ATX-2026-06929",
+    "img": "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      },
+      {
+        "label": "Open House Sat 1–4pm",
+        "cls": "blue"
+      }
+    ],
+    "beds": 5,
+    "baths": 3,
+    "sqft": "2,095",
+    "garage": "2-Car",
+    "lot": "0.38 ac",
+    "desc": "Stunning single family home nestled in a quiet neighborhood with mature oak trees. Recently updated kitchen with quartz countertops and stainless steel appliances. Master suite features a spa-like bath.",
+    "features": [
+      "Smart home pre-wired",
+      "Covered back patio",
+      "Updated chef's kitchen",
+      "Hardwood floors throughout",
+      "Cul-de-sac street",
+      "2-car garage",
+      "Walk-in master closet",
+      "Community pool nearby"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Single Family Home"
+      },
+      {
+        "label": "Year Built",
+        "val": "2019"
+      },
+      {
+        "label": "Lot Size",
+        "val": "0.38 ac"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "None"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$8,600"
+      },
+      {
+        "label": "Cooling",
+        "val": "None"
+      },
+      {
+        "label": "Heating",
+        "val": "Radiant"
+      },
+      {
+        "label": "Parking",
+        "val": "2-Car Garage"
+      }
+    ],
+    "agent": {
+      "name": "Clark Kent",
+      "title": "Sales Manager",
+      "avatar": "👨‍💼",
+      "bio": "Sales manager and Certified Negotiation Expert with a background in finance. Helps buyers compete in fast-moving markets.",
+      "phone": "(512) 455-0102",
+      "email": "trevor.l+salesmanager@zohotest.com"
+    }
+  },
+  {
+    "id": 42,
+    "price": "$1,741,691",
+    "address": "9063 Spicewood Springs Rd, Round Rock, TX 78681",
+    "mls": "MLS# ATX-2026-05515",
+    "img": "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      },
+      {
+        "label": "New Listing",
+        "cls": "green"
+      }
+    ],
+    "beds": 6,
+    "baths": 6,
+    "sqft": "6,697",
+    "garage": "3-Car",
+    "lot": "0.85 ac",
+    "desc": "Gorgeous estate offering an open-concept floor plan with soaring ceilings. Gourmet kitchen flows into a spacious living area. Large backyard with covered patio, perfect for entertaining.",
+    "features": [
+      "Home theater",
+      "3-car garage",
+      "Whole-home generator",
+      "Wine cellar",
+      "Resort-style heated pool",
+      "Tennis court",
+      "Guest quarters",
+      "Outdoor kitchen & fire pit"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Estate"
+      },
+      {
+        "label": "Year Built",
+        "val": "2008"
+      },
+      {
+        "label": "Lot Size",
+        "val": "0.85 ac"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "None"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$37,700"
+      },
+      {
+        "label": "Cooling",
+        "val": "Window Units"
+      },
+      {
+        "label": "Heating",
+        "val": "Forced Air"
+      },
+      {
+        "label": "Parking",
+        "val": "3-Car Garage"
+      }
+    ],
+    "agent": {
+      "name": "Clark Kent",
+      "title": "Sales Manager",
+      "avatar": "👨‍💼",
+      "bio": "Sales manager and Certified Negotiation Expert with a background in finance. Helps buyers compete in fast-moving markets.",
+      "phone": "(512) 455-0102",
+      "email": "trevor.l+salesmanager@zohotest.com"
+    }
+  },
+  {
+    "id": 43,
+    "price": "$347,854",
+    "address": "4669 Treemont St #608, Round Rock, TX 78664",
+    "mls": "MLS# ATX-2026-67156",
+    "img": "https://images.unsplash.com/photo-1613977257363-707ba9348227?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      }
+    ],
+    "beds": 1,
+    "baths": 2,
+    "sqft": "1,573",
+    "garage": "1-Car",
+    "lot": "N/A",
+    "desc": "Charming condo in one of Austin's most sought-after neighborhoods. Original hardwood floors, updated bathrooms, and an expansive deck overlooking the greenbelt.",
+    "features": [
+      "Secured building entry",
+      "Fitness center",
+      "Rooftop terrace",
+      "Floor-to-ceiling windows",
+      "Walk score 95+",
+      "Guest suite available",
+      "Private balcony",
+      "In-unit washer/dryer"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Condo"
+      },
+      {
+        "label": "Year Built",
+        "val": "2009"
+      },
+      {
+        "label": "Lot Size",
+        "val": "N/A"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "$300/mo"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$8,600"
+      },
+      {
+        "label": "Cooling",
+        "val": "None"
+      },
+      {
+        "label": "Heating",
+        "val": "Central Electric"
+      },
+      {
+        "label": "Parking",
+        "val": "1-Car Garage"
+      }
+    ],
+    "agent": {
+      "name": "Lisa Barlow",
+      "title": "Buyer's Specialist",
+      "avatar": "👩‍💼",
+      "bio": "Buyer's specialist guiding clients with patience and clarity. Expertise in South Austin, Travis Heights, and SoCo neighborhoods.",
+      "phone": "(512) 455-0104",
+      "email": "trevor.l+sales2@zohotest.com"
+    }
+  },
+  {
+    "id": 44,
+    "price": "$434,844",
+    "address": "468 Westover Hills Blvd, Pflugerville, TX 78660",
+    "mls": "MLS# ATX-2026-83532",
+    "img": "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      },
+      {
+        "label": "Townhouse",
+        "cls": "blue"
+      }
+    ],
+    "beds": 3,
+    "baths": 3,
+    "sqft": "2,320",
+    "garage": "2-Car",
+    "lot": "0.04 ac",
+    "desc": "Move-in ready townhouse with fresh paint and new carpet throughout. Modern kitchen with island seating and walk-in pantry. Minutes from top-rated schools and shopping.",
+    "features": [
+      "Private ground-floor patio",
+      "Epoxy garage floor",
+      "Close to dining & shops",
+      "Gated community",
+      "No lawn maintenance",
+      "Community pool",
+      "Rooftop deck with city views",
+      "Dog park nearby"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Townhouse"
+      },
+      {
+        "label": "Year Built",
+        "val": "2024"
+      },
+      {
+        "label": "Lot Size",
+        "val": "0.04 ac"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "$225/mo"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$9,200"
+      },
+      {
+        "label": "Cooling",
+        "val": "Mini-Split"
+      },
+      {
+        "label": "Heating",
+        "val": "Forced Air"
+      },
+      {
+        "label": "Parking",
+        "val": "2-Car Garage"
+      }
+    ],
+    "agent": {
+      "name": "Clark Kent",
+      "title": "Sales Manager",
+      "avatar": "👨‍💼",
+      "bio": "Sales manager and Certified Negotiation Expert with a background in finance. Helps buyers compete in fast-moving markets.",
+      "phone": "(512) 455-0102",
+      "email": "trevor.l+salesmanager@zohotest.com"
+    }
+  },
+  {
+    "id": 45,
+    "price": "$2,029,442",
+    "address": "8196 Slaughter Ln, Pflugerville, TX 78660",
+    "mls": "MLS# ATX-2026-95916",
+    "img": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      }
+    ],
+    "beds": 4,
+    "baths": 3,
+    "sqft": "5,005",
+    "garage": "3-Car",
+    "lot": "1.88 ac",
+    "desc": "Luxurious estate with custom finishes at every turn. Chef's kitchen with commercial-grade appliances. Primary suite with sitting area, two walk-in closets, and a resort-style bath.",
+    "features": [
+      "Outdoor kitchen & fire pit",
+      "Tennis court",
+      "Home theater",
+      "EV charger installed",
+      "Control4 smart home",
+      "Whole-home generator",
+      "Wine cellar",
+      "3-car garage"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Estate"
+      },
+      {
+        "label": "Year Built",
+        "val": "2011"
+      },
+      {
+        "label": "Lot Size",
+        "val": "1.88 ac"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "None"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$42,200"
+      },
+      {
+        "label": "Cooling",
+        "val": "Window Units"
+      },
+      {
+        "label": "Heating",
+        "val": "Forced Air"
+      },
+      {
+        "label": "Parking",
+        "val": "3-Car Garage"
+      }
+    ],
+    "agent": {
+      "name": "Clark Kent",
+      "title": "Sales Manager",
+      "avatar": "👨‍💼",
+      "bio": "Sales manager and Certified Negotiation Expert with a background in finance. Helps buyers compete in fast-moving markets.",
+      "phone": "(512) 455-0102",
+      "email": "trevor.l+salesmanager@zohotest.com"
+    }
+  },
+  {
+    "id": 46,
+    "price": "$2,066,946",
+    "address": "8363 Eagle Ridge Dr, Austin, TX 78701",
+    "mls": "MLS# ATX-2026-90977",
+    "img": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      },
+      {
+        "label": "Open House",
+        "cls": "blue"
+      }
+    ],
+    "beds": 6,
+    "baths": 5,
+    "sqft": "4,829",
+    "garage": "2-Car",
+    "lot": "1.94 ac",
+    "desc": "Light-filled estate with floor-to-ceiling windows and an enviable location. Open kitchen with breakfast bar, generous storage, and premium finishes throughout.",
+    "features": [
+      "Home theater",
+      "Resort-style heated pool",
+      "Control4 smart home",
+      "EV charger installed",
+      "Guest quarters",
+      "Whole-home generator",
+      "Outdoor kitchen & fire pit",
+      "3-car garage"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Estate"
+      },
+      {
+        "label": "Year Built",
+        "val": "2022"
+      },
+      {
+        "label": "Lot Size",
+        "val": "1.94 ac"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "None"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$40,300"
+      },
+      {
+        "label": "Cooling",
+        "val": "None"
+      },
+      {
+        "label": "Heating",
+        "val": "Central Electric"
+      },
+      {
+        "label": "Parking",
+        "val": "2-Car Garage"
+      }
+    ],
+    "agent": {
+      "name": "Trevor Lujan",
+      "title": "Founding Partner",
+      "avatar": "👨‍💼",
+      "bio": "Founding partner with 18 years in Austin real estate. Specializes in luxury homes and relocation clients. Top producer 10 years running.",
+      "phone": "(512) 455-0101",
+      "email": "trevor.l+testaccount@zohotest.com"
+    }
+  },
+  {
+    "id": 47,
+    "price": "$409,266",
+    "address": "7495 Crestway Dr, Austin, TX 78702",
+    "mls": "MLS# ATX-2026-83282",
+    "img": "https://images.unsplash.com/photo-1576941089067-2de3c901e126?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      },
+      {
+        "label": "Price Reduced",
+        "cls": "green"
+      }
+    ],
+    "beds": 2,
+    "baths": 2,
+    "sqft": "1,706",
+    "garage": "1-Car",
+    "lot": "0.05 ac",
+    "desc": "Beautifully maintained townhouse on a premium lot with hill country views. Updated HVAC, roof, and plumbing. Low-maintenance yard with drought-tolerant landscaping.",
+    "features": [
+      "No lawn maintenance",
+      "Private ground-floor patio",
+      "Rooftop deck with city views",
+      "Gated community",
+      "Community pool",
+      "Lock-and-leave lifestyle",
+      "Dog park nearby",
+      "Built-in shelving"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Townhouse"
+      },
+      {
+        "label": "Year Built",
+        "val": "1995"
+      },
+      {
+        "label": "Lot Size",
+        "val": "0.05 ac"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "$175/mo"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$7,500"
+      },
+      {
+        "label": "Cooling",
+        "val": "Window Units"
+      },
+      {
+        "label": "Heating",
+        "val": "Central Gas"
+      },
+      {
+        "label": "Parking",
+        "val": "1-Car Garage"
+      }
+    ],
+    "agent": {
+      "name": "Trevor Lujan",
+      "title": "Founding Partner",
+      "avatar": "👨‍💼",
+      "bio": "Founding partner with 18 years in Austin real estate. Specializes in luxury homes and relocation clients. Top producer 10 years running.",
+      "phone": "(512) 455-0101",
+      "email": "trevor.l+testaccount@zohotest.com"
+    }
+  },
+  {
+    "id": 48,
+    "price": "$867,198",
+    "address": "1248 Treemont St, Austin, TX 78703",
+    "mls": "MLS# ATX-2026-87415",
+    "img": "https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      }
+    ],
+    "beds": 3,
+    "baths": 4,
+    "sqft": "2,764",
+    "garage": "3-Car",
+    "lot": "0.33 ac",
+    "desc": "Contemporary single family home blending modern design with comfortable living. Polished concrete floors, exposed beams, and a chef's kitchen with waterfall island. Walking distance to parks and trails.",
+    "features": [
+      "Sprinkler system",
+      "2-car garage",
+      "Cul-de-sac street",
+      "Large backyard",
+      "Community pool nearby",
+      "Walk-in master closet",
+      "Updated chef's kitchen",
+      "Fresh interior paint"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Single Family Home"
+      },
+      {
+        "label": "Year Built",
+        "val": "2008"
+      },
+      {
+        "label": "Lot Size",
+        "val": "0.33 ac"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "$125/mo"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$16,300"
+      },
+      {
+        "label": "Cooling",
+        "val": "None"
+      },
+      {
+        "label": "Heating",
+        "val": "Central Gas"
+      },
+      {
+        "label": "Parking",
+        "val": "3-Car Garage"
+      }
+    ],
+    "agent": {
+      "name": "Trevor Lujan",
+      "title": "Founding Partner",
+      "avatar": "👨‍💼",
+      "bio": "Founding partner with 18 years in Austin real estate. Specializes in luxury homes and relocation clients. Top producer 10 years running.",
+      "phone": "(512) 455-0101",
+      "email": "trevor.l+testaccount@zohotest.com"
+    }
+  },
+  {
+    "id": 49,
+    "price": "$464,318",
+    "address": "3462 Lakewood Dr, Kyle, TX 78640",
+    "mls": "MLS# ATX-2026-65742",
+    "img": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      },
+      {
+        "label": "New Construction",
+        "cls": "green"
+      }
+    ],
+    "beds": 3,
+    "baths": 2,
+    "sqft": "2,844",
+    "garage": "2-Car",
+    "lot": "0.18 ac",
+    "desc": "Classic single family home with timeless curb appeal on a tree-lined street. Formal dining, dedicated home office, and a spacious bonus room. Community pool and amenities included.",
+    "features": [
+      "Hardwood floors throughout",
+      "Fresh interior paint",
+      "New roof (2024)",
+      "Community pool nearby",
+      "Walk-in master closet",
+      "Cul-de-sac street",
+      "Corner lot",
+      "2-car garage"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Single Family Home"
+      },
+      {
+        "label": "Year Built",
+        "val": "2006"
+      },
+      {
+        "label": "Lot Size",
+        "val": "0.18 ac"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "$100/mo"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$11,700"
+      },
+      {
+        "label": "Cooling",
+        "val": "None"
+      },
+      {
+        "label": "Heating",
+        "val": "Heat Pump"
+      },
+      {
+        "label": "Parking",
+        "val": "2-Car Garage"
+      }
+    ],
+    "agent": {
+      "name": "Clark Kent",
+      "title": "Sales Manager",
+      "avatar": "👨‍💼",
+      "bio": "Sales manager and Certified Negotiation Expert with a background in finance. Helps buyers compete in fast-moving markets.",
+      "phone": "(512) 455-0102",
+      "email": "trevor.l+salesmanager@zohotest.com"
+    }
+  },
+  {
+    "id": 50,
+    "price": "$652,501",
+    "address": "2515 Mesa Dr, Cedar Park, TX 78613",
+    "mls": "MLS# ATX-2026-86397",
+    "img": "https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=900&q=80",
+    "badges": [
+      {
+        "label": "For Sale",
+        "cls": ""
+      },
+      {
+        "label": "Price Reduced",
+        "cls": "green"
+      }
+    ],
+    "beds": 3,
+    "baths": 4,
+    "sqft": "2,464",
+    "garage": "1-Car",
+    "lot": "0.2 ac",
+    "desc": "Energy-efficient single family home built to today's highest standards. Solar panels, tankless water heater, and smart home technology. Low utility bills and eco-friendly materials throughout.",
+    "features": [
+      "Hardwood floors throughout",
+      "Community pool nearby",
+      "Sprinkler system",
+      "Walk-in master closet",
+      "Updated chef's kitchen",
+      "Large backyard",
+      "Cul-de-sac street",
+      "Fresh interior paint"
+    ],
+    "details": [
+      {
+        "label": "Property Type",
+        "val": "Single Family Home"
+      },
+      {
+        "label": "Year Built",
+        "val": "2004"
+      },
+      {
+        "label": "Lot Size",
+        "val": "0.2 ac"
+      },
+      {
+        "label": "HOA Fee",
+        "val": "$100/mo"
+      },
+      {
+        "label": "Annual Taxes",
+        "val": "$14,000"
+      },
+      {
+        "label": "Cooling",
+        "val": "None"
+      },
+      {
+        "label": "Heating",
+        "val": "Forced Air"
+      },
+      {
+        "label": "Parking",
+        "val": "1-Car Garage"
+      }
+    ],
+    "agent": {
+      "name": "Lisa Barlow",
+      "title": "Buyer's Specialist",
+      "avatar": "👩‍💼",
+      "bio": "Buyer's specialist guiding clients with patience and clarity. Expertise in South Austin, Travis Heights, and SoCo neighborhoods.",
+      "phone": "(512) 455-0104",
+      "email": "trevor.l+sales2@zohotest.com"
+    }
   }
 ];
 
@@ -1078,6 +4393,7 @@ function openModal(id) {
   document.getElementById('modal-agent-title').textContent = d.agent.title;
   document.getElementById('modal-agent-bio').textContent = d.agent.bio;
   document.getElementById('modal-agent-phone').textContent = '📞 ' + d.agent.phone;
+  document.getElementById('modal-agent-email').innerHTML = '✉️ <a href="mailto:' + d.agent.email + '" style="color:var(--gold);">' + d.agent.email + '</a>';
 
   // Reset tabs to Overview
   document.querySelectorAll('.modal-tab').forEach(t => t.classList.remove('active'));
