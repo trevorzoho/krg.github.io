@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Property Listings — Keystone Realty Group</title>
   <link rel="stylesheet" href="style.css" />
+  <script>
+    // Capture and clear any listing hash immediately — before the browser scrolls to it.
+    window._listingHash = window.location.hash;
+    if (/^#listing-\d+$/.test(window._listingHash)) {
+      history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+  </script>
   <style>
     /* Filters */
     .filter-bar {
@@ -375,7 +382,7 @@
 <nav>
   <div class="container nav-inner">
     <a href="index.html" class="nav-logo">
-      <img src="krg-logo-nav.png" alt="Keystone Realty Group" height="40" style="display:block;" />
+      <img src="krg-logo-nav.png" alt="Keystone Realty Group" height="48" style="display:block;" />
     </a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
@@ -1018,14 +1025,14 @@ renderPage(1);
 // If the URL contains #listing-{id}, navigate to the right page and open the modal.
 // Works when linked from the home page, external sites, or shared directly.
 (function () {
-  const match = window.location.hash.match(/^#listing-(\d+)$/);
+  const match = (window._listingHash || '').match(/^#listing-(\d+)$/);
   if (!match) return;
   const id = parseInt(match[1]);
   const idx = listings.findIndex(l => l.id === id);
   if (idx === -1) return;
   const page = Math.floor(idx / PER_PAGE) + 1;
   if (page !== 1) renderPage(page);
-  // Small delay so the card grid is in the DOM before the modal opens
+  window.scrollTo(0, 0);
   setTimeout(() => openModal(id), 60);
 })();
 
