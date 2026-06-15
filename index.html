@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Keystone Realty Group — Find Your Perfect Home</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, #1B2A4A 0%, #2c4272 100%);
+      color: #fff;
+      padding: 100px 0 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1400&q=60') center/cover no-repeat;
+      opacity: 0.18;
+    }
+    .hero-content { position: relative; max-width: 680px; }
+    .hero h1 { color: #fff; font-size: 3rem; margin-bottom: 16px; line-height: 1.15; }
+    .hero p { color: rgba(255,255,255,0.82); font-size: 1.15rem; margin-bottom: 36px; }
+
+    .search-bar {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 8px;
+      display: flex;
+      gap: 8px;
+      max-width: 560px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+    }
+    .search-bar input {
+      flex: 1;
+      border: none;
+      outline: none;
+      font-size: 0.95rem;
+      padding: 10px 14px;
+      color: #222;
+      background: transparent;
+    }
+    .search-bar .btn { white-space: nowrap; }
+
+    /* Feature icons */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+    .feature-card {
+      text-align: center;
+      padding: 40px 28px;
+      border-radius: var(--radius);
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+    .feature-icon {
+      width: 64px; height: 64px;
+      background: rgba(200,151,58,0.12);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem;
+      margin: 0 auto 20px;
+    }
+    .feature-card h3 { margin-bottom: 10px; }
+    .feature-card p { font-size: 0.92rem; color: var(--gray); }
+
+    /* Testimonial */
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .testimonial-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+    .testimonial-stars { color: var(--gold); font-size: 1rem; margin-bottom: 12px; }
+    .testimonial-text { font-size: 0.92rem; color: #444; margin-bottom: 20px; font-style: italic; }
+    .testimonial-author { font-weight: 600; font-size: 0.88rem; color: var(--navy); }
+    .testimonial-role { font-size: 0.82rem; color: var(--gray); }
+
+    /* CTA Band */
+    .cta-band {
+      background: var(--navy);
+      padding: 64px 0;
+      text-align: center;
+    }
+    .cta-band h2 { color: var(--white); margin-bottom: 12px; }
+    .cta-band p { color: rgba(255,255,255,0.75); margin-bottom: 32px; max-width: 500px; margin-left: auto; margin-right: auto; }
+    .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="logo-icon">K</div>
+      Keystone Realty Group
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="listings.html">Listings</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="contact.html" class="nav-cta">Contact Us</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <p class="section-label" style="color: var(--gold);">Trusted Since 1998</p>
+      <h1>Find the Home You've Always Dreamed Of</h1>
+      <p>Keystone Realty Group connects buyers and sellers across the greater metro area with expert guidance, proven results, and personalized service.</p>
+      <div class="search-bar">
+        <input type="text" placeholder="Enter city, zip code, or neighborhood..." />
+        <a href="listings.html" class="btn btn-primary">Search Homes</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Bar -->
+<div class="stats-bar">
+  <div class="container">
+    <div class="stats-grid">
+      <div>
+        <div class="stat-number">1,200+</div>
+        <div class="stat-label">Homes Sold</div>
+      </div>
+      <div>
+        <div class="stat-number">98%</div>
+        <div class="stat-label">Client Satisfaction</div>
+      </div>
+      <div>
+        <div class="stat-number">25+</div>
+        <div class="stat-label">Years in Business</div>
+      </div>
+      <div>
+        <div class="stat-number">$2.4B</div>
+        <div class="stat-label">Total Sales Volume</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Featured Listings -->
+<section class="bg-light">
+  <div class="container">
+    <p class="section-label">Hot on the Market</p>
+    <h2 class="section-title">Featured Properties</h2>
+    <p class="section-subtitle">Handpicked listings from our agents — fresh inventory updated daily.</p>
+    <div class="card-grid">
+
+      <div class="property-card">
+        <div class="card-img-wrap">
+          <div class="card-img" style="background:#d4e0f0; font-size:3rem;">🏡</div>
+          <span class="card-badge">For Sale</span>
+        </div>
+        <div class="card-body">
+          <div class="card-price">$649,000</div>
+          <div class="card-address">142 Maplewood Drive, Austin, TX 78701</div>
+          <div class="card-specs">
+            <span class="card-spec">🛏 4 Beds</span>
+            <span class="card-spec">🚿 3 Baths</span>
+            <span class="card-spec">📐 2,450 sq ft</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="property-card">
+        <div class="card-img-wrap">
+          <div class="card-img" style="background:#d4ead8; font-size:3rem;">🏠</div>
+          <span class="card-badge">New Listing</span>
+        </div>
+        <div class="card-body">
+          <div class="card-price">$432,500</div>
+          <div class="card-address">87 Elmwood Lane, Round Rock, TX 78664</div>
+          <div class="card-specs">
+            <span class="card-spec">🛏 3 Beds</span>
+            <span class="card-spec">🚿 2 Baths</span>
+            <span class="card-spec">📐 1,890 sq ft</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="property-card">
+        <div class="card-img-wrap">
+          <div class="card-img" style="background:#e8d4f0; font-size:3rem;">🏘</div>
+          <span class="card-badge">Open House</span>
+        </div>
+        <div class="card-body">
+          <div class="card-price">$1,150,000</div>
+          <div class="card-address">310 Ridgeline Blvd, Westlake Hills, TX 78746</div>
+          <div class="card-specs">
+            <span class="card-spec">🛏 5 Beds</span>
+            <span class="card-spec">🚿 4 Baths</span>
+            <span class="card-spec">📐 4,100 sq ft</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="text-center mt-8">
+      <a href="listings.html" class="btn btn-outline">View All Listings</a>
+    </div>
+  </div>
+</section>
+
+<!-- Why Keystone -->
+<section>
+  <div class="container">
+    <p class="section-label text-center">Why Clients Choose Us</p>
+    <h2 class="section-title text-center">The Keystone Difference</h2>
+    <div class="divider"></div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🔑</div>
+        <h3>Local Expertise</h3>
+        <p>Our agents have deep roots in the communities we serve, giving you an insider edge in any market condition.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Data-Driven Pricing</h3>
+        <p>We use live market analytics to price your home right the first time — maximizing your return with less time on market.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🤝</div>
+        <h3>End-to-End Support</h3>
+        <p>From your first tour to closing day, your dedicated agent guides every step of the journey.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="bg-light">
+  <div class="container">
+    <p class="section-label text-center">Client Stories</p>
+    <h2 class="section-title text-center">What Our Clients Say</h2>
+    <div class="divider"></div>
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Keystone made buying our first home completely stress-free. Our agent was patient, knowledgeable, and always available. We closed in 30 days!"</p>
+        <div class="testimonial-author">Sarah & Mark T.</div>
+        <div class="testimonial-role">First-time Homebuyers, Austin TX</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"We listed on a Thursday and had multiple offers by Sunday. Keystone's pricing strategy and marketing were exceptional. Sold above asking price!"</p>
+        <div class="testimonial-author">David R.</div>
+        <div class="testimonial-role">Home Seller, Round Rock TX</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"As an out-of-state buyer, I was nervous about the process. My agent at Keystone handled everything virtually and found us a perfect home. Highly recommend."</p>
+        <div class="testimonial-author">Jennifer L.</div>
+        <div class="testimonial-role">Relocation Buyer, Westlake Hills TX</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Band -->
+<div class="cta-band">
+  <div class="container">
+    <h2>Ready to Make Your Move?</h2>
+    <p>Whether you're buying, selling, or just exploring — our team is here to help every step of the way.</p>
+    <div class="cta-buttons">
+      <a href="listings.html" class="btn btn-primary">Browse Listings</a>
+      <a href="contact.html" class="btn btn-outline-white">Talk to an Agent</a>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">Keystone Realty Group</div>
+        <p class="footer-tagline">Austin's most trusted real estate team since 1998. Helping families find their place to call home.</p>
+      </div>
+      <div>
+        <div class="footer-heading">Navigate</div>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="listings.html">Listings</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading">Services</div>
+        <ul class="footer-links">
+          <li><a href="#">Buy a Home</a></li>
+          <li><a href="#">Sell a Home</a></li>
+          <li><a href="#">Property Management</a></li>
+          <li><a href="#">Relocation Services</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading">Contact</div>
+        <ul class="footer-links">
+          <li><a href="tel:+15124550100">(512) 455-0100</a></li>
+          <li><a href="mailto:hello@keystonerealty.com">hello@keystonerealty.com</a></li>
+          <li><a href="#">820 Congress Ave, Suite 400<br>Austin, TX 78701</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Keystone Realty Group. All rights reserved.</span>
+      <span>Privacy Policy · Terms of Use · Equal Housing Opportunity</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

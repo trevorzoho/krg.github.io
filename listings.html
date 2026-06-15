@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Property Listings — Keystone Realty Group</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Filters */
+    .filter-bar {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 0;
+      position: sticky;
+      top: 68px;
+      z-index: 90;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .filter-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .filter-row select,
+    .filter-row input {
+      padding: 9px 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 0.9rem;
+      color: #333;
+      background: var(--white);
+      cursor: pointer;
+    }
+    .filter-row .btn { padding: 9px 22px; font-size: 0.9rem; }
+    .filter-count {
+      margin-left: auto;
+      font-size: 0.88rem;
+      color: var(--gray);
+      white-space: nowrap;
+    }
+
+    /* Listings layout */
+    .listings-section { padding: 48px 0; background: var(--light); min-height: 60vh; }
+    .listings-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; }
+    .listings-header h2 { font-size: 1.5rem; }
+
+    .sort-select {
+      padding: 8px 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 0.88rem;
+      color: #333;
+      background: var(--white);
+    }
+
+    .listing-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .listing-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    }
+    .listing-img {
+      width: 100%;
+      height: 210px;
+      overflow: hidden;
+    }
+    .listing-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .listing-card:hover .listing-img img { transform: scale(1.04); }
+    .listing-body { padding: 20px; }
+    .listing-price { font-size: 1.5rem; font-weight: 700; color: var(--navy); font-family: var(--font); }
+    .listing-address { font-size: 0.88rem; color: var(--gray); margin: 4px 0 14px; }
+    .listing-desc { font-size: 0.88rem; color: #555; margin-bottom: 14px; line-height: 1.5; }
+    .listing-specs {
+      display: flex; gap: 14px; font-size: 0.84rem; color: #555;
+      padding-top: 14px; border-top: 1px solid var(--border);
+    }
+    .listing-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+    .listing-tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: rgba(200,151,58,0.12);
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .listing-tag.blue { background: rgba(27,42,74,0.1); color: var(--navy); }
+    .listing-tag.green { background: rgba(34,197,94,0.12); color: #16a34a; }
+
+    .listing-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 20px; border-top: 1px solid var(--border);
+    }
+    .listing-agent { font-size: 0.82rem; color: var(--gray); }
+    .listing-agent strong { color: var(--navy); }
+
+    /* Map placeholder */
+    .map-placeholder {
+      background: #dde3ed;
+      border-radius: var(--radius);
+      height: 340px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 12px;
+      color: var(--navy);
+      margin-bottom: 48px;
+    }
+    .map-placeholder span { font-size: 3rem; }
+    .map-placeholder p { font-weight: 600; font-size: 1rem; color: #777; }
+
+    /* Pagination */
+    .pagination {
+      display: flex; gap: 8px; justify-content: center; margin-top: 40px;
+    }
+    .page-btn {
+      width: 38px; height: 38px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.88rem;
+      color: var(--navy);
+      cursor: pointer;
+      background: var(--white);
+      transition: all 0.15s;
+      text-decoration: none;
+    }
+    .page-btn.active { background: var(--navy); color: var(--white); border-color: var(--navy); }
+    .page-btn:hover:not(.active) { background: var(--light); text-decoration: none; }
+
+    /* Clickable card */
+    .listing-card { cursor: pointer; }
+
+    /* ── Modal Overlay ── */
+    .modal-overlay {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(10,20,40,0.6);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      backdrop-filter: blur(3px);
+    }
+    .modal-overlay.open { display: flex; }
+
+    .modal {
+      background: var(--white);
+      border-radius: 12px;
+      width: 100%;
+      max-width: 860px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.3);
+      animation: modalIn 0.22s ease;
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: translateY(20px) scale(0.98); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* Modal image header */
+    .modal-img {
+      width: 100%;
+      height: 300px;
+      border-radius: 12px 12px 0 0;
+      position: relative;
+      overflow: hidden;
+      background-size: cover;
+      background-position: center;
+      background-color: #dde3ed;
+    }
+    .modal-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .modal-close {
+      position: absolute;
+      top: 16px; right: 16px;
+      width: 36px; height: 36px;
+      background: rgba(0,0,0,0.45);
+      color: white;
+      border: none; border-radius: 50%;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      line-height: 1;
+      transition: background 0.15s;
+    }
+    .modal-close:hover { background: rgba(0,0,0,0.7); }
+
+    .modal-badges {
+      position: absolute;
+      bottom: 16px; left: 16px;
+      display: flex; gap: 8px;
+    }
+    .modal-badge {
+      background: var(--gold);
+      color: white;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .modal-badge.blue { background: var(--navy); }
+    .modal-badge.green { background: #16a34a; }
+
+    /* Modal body */
+    .modal-body { padding: 32px; }
+
+    .modal-header-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .modal-price {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--navy);
+      font-family: var(--font);
+      line-height: 1.1;
+    }
+    .modal-address {
+      font-size: 0.92rem;
+      color: var(--gray);
+      margin-top: 4px;
+    }
+    .modal-mls {
+      font-size: 0.78rem;
+      color: #aaa;
+      margin-top: 2px;
+    }
+    .modal-save-btn {
+      background: var(--light);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 10px 18px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--navy);
+      cursor: pointer;
+      white-space: nowrap;
+      display: flex; align-items: center; gap: 6px;
+      transition: all 0.15s;
+    }
+    .modal-save-btn:hover { background: var(--navy); color: white; border-color: var(--navy); }
+
+    /* Specs row */
+    .modal-specs {
+      display: flex;
+      gap: 0;
+      background: var(--light);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 28px;
+    }
+    .modal-spec {
+      flex: 1;
+      text-align: center;
+      padding: 16px 10px;
+      border-right: 1px solid var(--border);
+    }
+    .modal-spec:last-child { border-right: none; }
+    .modal-spec-val { font-size: 1.15rem; font-weight: 700; color: var(--navy); }
+    .modal-spec-label { font-size: 0.75rem; color: var(--gray); margin-top: 2px; text-transform: uppercase; letter-spacing: 0.05em; }
+
+    /* Tabs */
+    .modal-tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 2px solid var(--border);
+      margin-bottom: 24px;
+    }
+    .modal-tab {
+      padding: 10px 20px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--gray);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      transition: all 0.15s;
+    }
+    .modal-tab.active { color: var(--navy); border-bottom-color: var(--gold); }
+    .modal-tab:hover:not(.active) { color: var(--navy); }
+
+    .modal-tab-content { display: none; }
+    .modal-tab-content.active { display: block; }
+
+    /* Description tab */
+    .modal-desc { font-size: 0.95rem; color: #444; line-height: 1.7; margin-bottom: 24px; }
+
+    .modal-features-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .modal-feature {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.88rem;
+      color: #444;
+    }
+    .modal-feature::before {
+      content: '✓';
+      color: var(--gold);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* Details tab */
+    .modal-details-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .modal-detail-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.88rem;
+    }
+    .modal-detail-row:nth-last-child(-n+2) { border-bottom: none; }
+    .modal-detail-label { color: var(--gray); }
+    .modal-detail-val { font-weight: 600; color: var(--navy); }
+
+    /* Agent tab */
+    .modal-agent-card {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      padding: 20px;
+      background: var(--light);
+      border-radius: var(--radius);
+      margin-bottom: 20px;
+    }
+    .modal-agent-avatar {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+      flex-shrink: 0;
+      box-shadow: var(--shadow);
+    }
+    .modal-agent-name { font-weight: 700; color: var(--navy); font-size: 1.05rem; }
+    .modal-agent-title { font-size: 0.8rem; color: var(--gold); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin: 3px 0 8px; }
+    .modal-agent-bio { font-size: 0.88rem; color: #555; line-height: 1.5; }
+    .modal-agent-phone { font-size: 0.88rem; color: var(--navy); font-weight: 600; margin-top: 10px; }
+
+    /* CTA footer */
+    .modal-cta {
+      display: flex;
+      gap: 12px;
+      padding: 24px 32px;
+      border-top: 1px solid var(--border);
+      background: var(--light);
+      border-radius: 0 0 12px 12px;
+    }
+    .modal-cta .btn { flex: 1; text-align: center; }
+  </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="logo-icon">K</div>
+      Keystone Realty Group
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="listings.html" class="active">Listings</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="contact.html" class="nav-cta">Contact Us</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Page Hero -->
+<div class="page-hero">
+  <div class="container">
+    <h1>Property Listings</h1>
+    <p>Browse available homes across Austin and the greater metro area.</p>
+  </div>
+</div>
+
+<!-- Filter Bar -->
+<div class="filter-bar">
+  <div class="container">
+    <div class="filter-row">
+      <select><option>All Types</option><option>Single Family</option><option>Condo</option><option>Townhouse</option><option>Land</option></select>
+      <select><option>Any Price</option><option>Under $300K</option><option>$300K–$500K</option><option>$500K–$800K</option><option>$800K+</option></select>
+      <select><option>Any Beds</option><option>1+ Beds</option><option>2+ Beds</option><option>3+ Beds</option><option>4+ Beds</option></select>
+      <select><option>Any Baths</option><option>1+</option><option>2+</option><option>3+</option></select>
+      <input type="text" placeholder="Zip or neighborhood" style="width:180px;" />
+      <a href="#" class="btn btn-primary">Search</a>
+      <span class="filter-count" id="filter-count">Showing <strong>1–6</strong> of 24 results</span>
+    </div>
+  </div>
+</div>
+
+<!-- Map -->
+<div class="container" style="padding-top: 32px;">
+  <div class="map-placeholder">
+    <span>🗺️</span>
+    <p>Interactive Map — Austin Metro Area</p>
+  </div>
+</div>
+
+<!-- Listings Grid -->
+<section class="listings-section" id="listings-section">
+  <div class="container">
+    <div class="listings-header">
+      <h2 id="listings-count">24 Homes Available</h2>
+      <select class="sort-select" id="sort-select">
+        <option>Sort: Newest First</option>
+        <option>Price: Low to High</option>
+        <option>Price: High to Low</option>
+        <option>Most Popular</option>
+      </select>
+    </div>
+
+    <div class="card-grid" id="card-grid"></div>
+
+    <div class="pagination" id="pagination"></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     PROPERTY DETAIL MODAL
+══════════════════════════════════════ -->
+<div class="modal-overlay" id="listingModal" role="dialog" aria-modal="true">
+  <div class="modal">
+
+    <!-- Image header -->
+    <div class="modal-img" id="modal-img">
+      <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+      <div class="modal-badges" id="modal-badges"></div>
+    </div>
+
+    <!-- Body -->
+    <div class="modal-body">
+
+      <!-- Price + address -->
+      <div class="modal-header-row">
+        <div>
+          <div class="modal-price" id="modal-price"></div>
+          <div class="modal-address" id="modal-address"></div>
+          <div class="modal-mls" id="modal-mls"></div>
+        </div>
+        <button class="modal-save-btn" id="modal-save">♡ Save</button>
+      </div>
+
+      <!-- Quick specs -->
+      <div class="modal-specs">
+        <div class="modal-spec"><div class="modal-spec-val" id="ms-beds"></div><div class="modal-spec-label">Bedrooms</div></div>
+        <div class="modal-spec"><div class="modal-spec-val" id="ms-baths"></div><div class="modal-spec-label">Bathrooms</div></div>
+        <div class="modal-spec"><div class="modal-spec-val" id="ms-sqft"></div><div class="modal-spec-label">Sq Ft</div></div>
+        <div class="modal-spec"><div class="modal-spec-val" id="ms-garage"></div><div class="modal-spec-label">Garage</div></div>
+        <div class="modal-spec"><div class="modal-spec-val" id="ms-lot"></div><div class="modal-spec-label">Lot Size</div></div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="modal-tabs">
+        <div class="modal-tab active" data-tab="overview">Overview</div>
+        <div class="modal-tab" data-tab="details">Property Details</div>
+        <div class="modal-tab" data-tab="agent">Agent Info</div>
+      </div>
+
+      <!-- Tab: Overview -->
+      <div class="modal-tab-content active" id="tab-overview">
+        <p class="modal-desc" id="modal-desc"></p>
+        <h4 style="margin-bottom:14px; color:var(--navy);">Features & Amenities</h4>
+        <div class="modal-features-grid" id="modal-features"></div>
+      </div>
+
+      <!-- Tab: Property Details -->
+      <div class="modal-tab-content" id="tab-details">
+        <div class="modal-details-grid" id="modal-details"></div>
+      </div>
+
+      <!-- Tab: Agent Info -->
+      <div class="modal-tab-content" id="tab-agent">
+        <div class="modal-agent-card">
+          <div class="modal-agent-avatar" id="modal-agent-avatar"></div>
+          <div>
+            <div class="modal-agent-name" id="modal-agent-name"></div>
+            <div class="modal-agent-title" id="modal-agent-title"></div>
+            <div class="modal-agent-bio" id="modal-agent-bio"></div>
+            <div class="modal-agent-phone" id="modal-agent-phone"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CTA footer -->
+    <div class="modal-cta">
+      <a href="contact.html" class="btn btn-primary">Schedule a Tour</a>
+      <a href="contact.html" class="btn btn-outline">Contact Agent</a>
+    </div>
+
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">Keystone Realty Group</div>
+        <p class="footer-tagline">Austin's most trusted real estate team since 1998. Helping families find their place to call home.</p>
+      </div>
+      <div>
+        <div class="footer-heading">Navigate</div>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="listings.html">Listings</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading">Services</div>
+        <ul class="footer-links">
+          <li><a href="#">Buy a Home</a></li>
+          <li><a href="#">Sell a Home</a></li>
+          <li><a href="#">Property Management</a></li>
+          <li><a href="#">Relocation Services</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading">Contact</div>
+        <ul class="footer-links">
+          <li><a href="tel:+15124550100">(512) 455-0100</a></li>
+          <li><a href="mailto:hello@keystonerealty.com">hello@keystonerealty.com</a></li>
+          <li><a href="#">820 Congress Ave, Suite 400<br>Austin, TX 78701</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Keystone Realty Group. All rights reserved.</span>
+      <span>Privacy Policy · Terms of Use · Equal Housing Opportunity</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Property Data ──────────────────────────────────────────
+const listings = [
+  {
+    id: 1,
+    price: '$649,000',
+    address: '142 Maplewood Drive, Austin, TX 78701',
+    mls: 'MLS# ATX-2026-04831',
+    img: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=900&q=80',
+    badges: [{ label: 'For Sale', cls: '' }, { label: 'New Listing', cls: 'green' }],
+    beds: 4, baths: 3, sqft: '2,450', garage: '2-Car', lot: '0.28 ac',
+    desc: 'Gorgeous 4-bedroom colonial on a quiet cul-de-sac in the heart of Austin. Fully updated kitchen with quartz countertops and stainless appliances, hardwood floors throughout the main level, and a dedicated home office. The spacious backyard features a large deck and mature oak trees — perfect for entertaining. Located in top-rated AISD schools. Walking distance to Barton Creek greenbelt trailheads.',
+    features: ['Updated chef\'s kitchen', 'Hardwood floors throughout', 'Dedicated home office', 'Large backyard deck', 'Walk-in master closet', 'Dual-zone HVAC', 'Ring doorbell & smart locks', 'Top-rated AISD schools'],
+    details: [
+      { label: 'Property Type', val: 'Single Family' },
+      { label: 'Year Built', val: '2008' },
+      { label: 'Lot Size', val: '0.28 acres' },
+      { label: 'HOA Fee', val: '$120/mo' },
+      { label: 'Taxes (2025)', val: '$9,840/yr' },
+      { label: 'Cooling', val: 'Dual-Zone Central' },
+      { label: 'Heating', val: 'Gas Forced Air' },
+      { label: 'Parking', val: '2-Car Attached Garage' },
+    ],
+    agent: { name: 'Amanda Kim', title: 'Founding Partner', avatar: '👩‍💼', bio: '18 years in Austin real estate. Specializes in luxury homes and relocation clients. Top producer 10 years running.', phone: '(512) 455-0101' }
+  },
+  {
+    id: 2,
+    price: '$432,500',
+    address: '87 Elmwood Lane, Round Rock, TX 78664',
+    mls: 'MLS# ATX-2026-03217',
+    img: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=900&q=80',
+    badges: [{ label: 'For Sale', cls: '' }, { label: 'Open House Sat 1–4pm', cls: 'blue' }],
+    beds: 3, baths: 2, sqft: '1,890', garage: '2-Car', lot: '0.19 ac',
+    desc: 'Charming 3-bedroom ranch-style home in one of Round Rock\'s most sought-after neighborhoods. The recently renovated master bath features a frameless glass shower and dual vanity. Open-concept living and kitchen area is ideal for entertaining, with a large island and modern pendant lighting. A generous covered patio overlooks the beautifully landscaped backyard with mature trees providing natural shade.',
+    features: ['Renovated master bathroom', 'Open-concept kitchen & living', 'Large kitchen island', 'Covered patio', 'Mature shade trees', 'New roof (2024)', 'Sprinkler system', 'Close to Dell Diamond & 45 toll'],
+    details: [
+      { label: 'Property Type', val: 'Single Family' },
+      { label: 'Year Built', val: '2002' },
+      { label: 'Lot Size', val: '0.19 acres' },
+      { label: 'HOA Fee', val: 'None' },
+      { label: 'Taxes (2025)', val: '$6,210/yr' },
+      { label: 'Cooling', val: 'Central Air' },
+      { label: 'Heating', val: 'Gas Forced Air' },
+      { label: 'Parking', val: '2-Car Attached Garage' },
+    ],
+    agent: { name: 'Jason Martinez', title: 'Senior Agent', avatar: '👨‍💼', bio: 'Certified Negotiation Expert with a background in finance. Helps buyers compete in fast-moving markets.', phone: '(512) 455-0102' }
+  },
+  {
+    id: 3,
+    price: '$1,150,000',
+    address: '310 Ridgeline Blvd, Westlake Hills, TX 78746',
+    mls: 'MLS# ATX-2026-07752',
+    img: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=900&q=80',
+    badges: [{ label: 'For Sale', cls: '' }],
+    beds: 5, baths: 4, sqft: '4,100', garage: '3-Car', lot: '1.2 ac',
+    desc: 'Stunning contemporary estate perched in Westlake Hills with sweeping hill country views. The chef\'s kitchen is outfitted with Wolf and Sub-Zero appliances, a 12-foot island, and custom cabinetry. Resort-style backyard features a heated pool, spa, and outdoor kitchen. The media room, game room, and dedicated gym make this home perfect for every lifestyle. Located in the prestigious Eanes ISD — consistently ranked #1 in Texas.',
+    features: ['Wolf & Sub-Zero appliances', 'Resort-style heated pool & spa', 'Outdoor kitchen & fire pit', 'Media room & home gym', 'Three-car garage with EV charger', 'Control4 smart home system', 'Whole-home generator', 'Eanes ISD schools (#1 in TX)'],
+    details: [
+      { label: 'Property Type', val: 'Single Family Estate' },
+      { label: 'Year Built', val: '2017' },
+      { label: 'Lot Size', val: '1.2 acres' },
+      { label: 'HOA Fee', val: '$350/mo' },
+      { label: 'Taxes (2025)', val: '$21,400/yr' },
+      { label: 'Cooling', val: 'Multi-Zone Central' },
+      { label: 'Heating', val: 'Radiant + Gas' },
+      { label: 'Parking', val: '3-Car Attached Garage + Circular Drive' },
+    ],
+    agent: { name: 'Priya Nair', title: 'Buyer\'s Specialist', avatar: '👩‍💼', bio: 'Guides buyers with patience and clarity. Expertise in South Austin, Travis Heights, SoCo, and Westlake neighborhoods.', phone: '(512) 455-0103' }
+  },
+  {
+    id: 4,
+    price: '$378,000',
+    address: '500 W 2nd St #1204, Austin, TX 78701',
+    mls: 'MLS# ATX-2026-02109',
+    img: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=900&q=80',
+    badges: [{ label: 'For Sale', cls: '' }, { label: 'Condo', cls: 'blue' }],
+    beds: 2, baths: 2, sqft: '1,120', garage: '1-Car', lot: 'N/A',
+    desc: 'Sleek downtown high-rise condo on the 12th floor with floor-to-ceiling windows showcasing panoramic Austin skyline views. Open floor plan with polished concrete floors, quartz countertops, and custom built-ins throughout. Building amenities include 24-hour concierge, rooftop pool and lounge, state-of-the-art fitness center, and secured parking. Steps from 2nd Street District restaurants, Lady Bird Lake, and the hike-and-bike trail.',
+    features: ['Panoramic skyline views', 'Floor-to-ceiling windows', 'Rooftop pool & lounge', '24-hour concierge', 'Fitness center & yoga studio', 'Secured underground parking', 'Guest suite available', 'Walk score: 98'],
+    details: [
+      { label: 'Property Type', val: 'High-Rise Condo' },
+      { label: 'Year Built', val: '2019' },
+      { label: 'Floor', val: '12th of 28' },
+      { label: 'HOA Fee', val: '$680/mo' },
+      { label: 'Taxes (2025)', val: '$5,940/yr' },
+      { label: 'Cooling', val: 'Central Air' },
+      { label: 'Heating', val: 'Electric' },
+      { label: 'Parking', val: '1 Secured Underground Space' },
+    ],
+    agent: { name: 'Carlos Vega', title: 'Commercial & Investment', avatar: '👨‍💼', bio: 'Specializes in multi-family and commercial properties. Former CPA, bringing financial rigor to every deal.', phone: '(512) 455-0104' }
+  },
+  {
+    id: 5,
+    price: '$519,900',
+    address: '2214 Barton Creek Blvd, Austin, TX 78735',
+    mls: 'MLS# ATX-2026-05488',
+    img: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900&q=80',
+    badges: [{ label: 'For Sale', cls: '' }, { label: 'Price Reduced', cls: 'green' }],
+    beds: 4, baths: 3, sqft: '2,200', garage: '2-Car', lot: '0.22 ac',
+    desc: 'Well-maintained 4-bedroom home steps from the Barton Creek Greenbelt, offering miles of hiking and biking trails right from your neighborhood. Soaring vaulted ceilings and abundant natural light define the main living areas. A sun-filled sunroom off the kitchen makes a perfect reading nook or home office. The backyard is beautifully landscaped with raised garden beds, a fountain, and a flagstone patio. Updated appliances and fresh interior paint throughout.',
+    features: ['Greenbelt access nearby', 'Vaulted ceilings', 'Sun-filled sunroom', 'Flagstone patio', 'Raised garden beds', 'Updated appliances (2023)', 'Fresh interior paint', 'Large master walk-in closet'],
+    details: [
+      { label: 'Property Type', val: 'Single Family' },
+      { label: 'Year Built', val: '1999' },
+      { label: 'Lot Size', val: '0.22 acres' },
+      { label: 'HOA Fee', val: '$85/mo' },
+      { label: 'Taxes (2025)', val: '$7,760/yr' },
+      { label: 'Cooling', val: 'Central Air' },
+      { label: 'Heating', val: 'Gas Forced Air' },
+      { label: 'Parking', val: '2-Car Attached Garage' },
+    ],
+    agent: { name: 'Amanda Kim', title: 'Founding Partner', avatar: '👩‍💼', bio: '18 years in Austin real estate. Specializes in luxury homes and relocation clients. Top producer 10 years running.', phone: '(512) 455-0101' }
+  },
+  {
+    id: 6,
+    price: '$3,200 / mo',
+    address: '904 Lamar Blvd, Austin, TX 78703',
+    mls: 'MLS# ATX-2026-RENT-0812',
+    img: 'https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=900&q=80',
+    badges: [{ label: 'For Rent', cls: '' }],
+    beds: 3, baths: 2, sqft: '1,640', garage: '1-Car', lot: '0.14 ac',
+    desc: 'Stylish 3-bedroom craftsman bungalow just steps from the South Lamar corridor — one of Austin\'s most vibrant neighborhoods packed with restaurants, coffee shops, and boutiques. The fully updated kitchen features quartz countertops, subway tile backsplash, and a farmhouse sink. A private fenced backyard with a deck and string lights is perfect for year-round outdoor living. Available July 1. Pets welcome (up to 2, 50 lbs each, with deposit).',
+    features: ['Updated quartz kitchen', 'Private fenced backyard', 'Off-street parking', 'Pet friendly (up to 2 pets)', 'Walk to South Lamar dining', 'In-unit washer/dryer', 'Central A/C & heat', 'Available July 1'],
+    details: [
+      { label: 'Property Type', val: 'Craftsman Bungalow' },
+      { label: 'Year Built', val: '1962' },
+      { label: 'Lease Term', val: '12 months' },
+      { label: 'Deposit', val: '$3,200' },
+      { label: 'Pets', val: 'Yes (deposit required)' },
+      { label: 'Cooling', val: 'Central Air' },
+      { label: 'Heating', val: 'Gas Forced Air' },
+      { label: 'Parking', val: '1 Driveway Space' },
+    ],
+    agent: { name: 'Jason Martinez', title: 'Senior Agent', avatar: '👨‍💼', bio: 'Certified Negotiation Expert with a background in finance. Helps buyers compete in fast-moving markets.', phone: '(512) 455-0102' }
+  },
+
+  // ── Page 2 ────────────────────────────────────────────────
+  {
+    id: 7,
+    price: '$289,000',
+    address: '418 Willow Creek Ct, Cedar Park, TX 78613',
+    mls: 'MLS# ATX-2026-01143',
+    img: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=900&q=80',
+    badges: [{ label: 'For Sale', cls: '' }, { label: 'Starter Home', cls: 'blue' }],
+    beds: 2, baths: 2, sqft: '1,340', garage: '1-Car', lot: '0.12 ac',
+    desc: 'An affordable and move-in-ready 2-bedroom starter home in Cedar Park\'s desirable Crossing at Carriage Hills community. Open floor plan, updated fixtures, and a cozy backyard patio. Close to H-E-B, Dell Children\'s North, and the new Metro Rail station.',
+    features: ['Move-in ready', 'Updated light fixtures', 'Backyard patio', 'Near metro rail', 'Low HOA', 'Fresh interior paint', 'Stainless appliances', 'Community pool'],
+    details: [{ label: 'Property Type', val: 'Single Family' }, { label: 'Year Built', val: '2003' }, { label: 'Lot Size', val: '0.12 acres' }, { label: 'HOA Fee', val: '$65/mo' }, { label: 'Taxes (2025)', val: '$4,100/yr' }, { label: 'Cooling', val: 'Central Air' }, { label: 'Heating', val: 'Gas' }, { label: 'Parking', val: '1-Car Attached Garage' }],
+    agent: { name: 'Priya Nair', title: 'Buyer\'s Specialist', avatar: '👩‍💼', bio: 'Guides first-time buyers with patience and clarity. Expertise in Austin, Cedar Park, and Round Rock.', phone: '(512) 455-0103' }
+  },
+  {
+    id: 8,
+    price: '$725,000',
+    address: '1902 Berkman Dr, Austin, TX 78723',
+    mls: 'MLS# ATX-2026-06611',
+    img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=80',
+    badges: [{ label: 'For Sale', cls: '' }, { label: 'New Construction', cls: 'green' }],
+    beds: 4, baths: 3, sqft: '2,780', garage: '2-Car', lot: '0.18 ac',
+    desc: 'Brand new construction in the vibrant Mueller neighborhood — one of Austin\'s most walkable communities. Designer finishes throughout including 10-ft ceilings, wide-plank engineered hardwood, and an open chef\'s kitchen with waterfall-edge island. Energy Star certified. Rooftop deck with downtown skyline views.',
+    features: ['New construction', 'Rooftop deck with skyline views', 'Energy Star certified', 'Waterfall-edge island', '10-ft ceilings', 'Wide-plank hardwood', 'Smart home pre-wired', 'Walk to Mueller Lake Park'],
+    details: [{ label: 'Property Type', val: 'Single Family' }, { label: 'Year Built', val: '2026' }, { label: 'Lot Size', val: '0.18 acres' }, { label: 'HOA Fee', val: '$195/mo' }, { label: 'Taxes (2025)', val: '$11,200/yr' }, { label: 'Cooling', val: 'Multi-Zone Central' }, { label: 'Heating', val: 'Gas Forced Air' }, { label: 'Parking', val: '2-Car Attached Garage' }],
+    agent: { name: 'Amanda Kim', title: 'Founding Partner', avatar: '👩‍💼', bio: '18 years in Austin real estate. Specializes in luxury homes and relocation clients. Top producer 10 years running.', phone: '(512) 455-0101' }
+  },
+  {
+    id: 9,
+    price: '$895,000',
+    address: '6204 Lakeside Cove, Lago Vista, TX 78645',
+    mls: 'MLS# ATX-2026-09920',
+    img: 'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=900&q=80',
+    badges: [{ label: 'For Sale', cls: '' }],
+    beds: 4, baths: 3, sqft: '3,200', garage: '2-Car', lot: '0.54 ac',
+    desc: 'Stunning lakefront property on Lake Travis with breathtaking water views from nearly every room. A wraparound deck and private boat dock make this the ultimate waterfront retreat. The open-concept interior features soaring ceilings, a stone fireplace, and floor-to-ceiling windows. Located in a gated community with private lake access.',
+    features: ['Lakefront with private dock', 'Wraparound deck', 'Floor-to-ceiling windows', 'Stone fireplace', 'Gated community', 'Boat storage', 'Sunset views', 'Short-term rental eligible'],
+    details: [{ label: 'Property Type', val: 'Single Family / Waterfront' }, { label: 'Year Built', val: '2011' }, { label: 'Lot Size', val: '0.54 acres' }, { label: 'HOA Fee', val: '$280/mo' }, { label: 'Taxes (2025)', val: '$13,800/yr' }, { label: 'Cooling', val: 'Dual-Zone Central' }, { label: 'Heating', val: 'Gas Forced Air' }, { label: 'Parking', val: '2-Car Attached Garage + Boat Pad' }],
+    agent: { name: 'Carlos Vega', title: 'Commercial & Investment', avatar: '👨‍💼', bio: 'Specializes in investment and waterfront properties. Former CPA, bringing financial rigor to every deal.', phone: '(512) 455-0104' }
+  },
+  {
+    id: 10,
+    price: '$225,000',
+    address: '1414 E 6th St #302, Austin, TX 78702',
+    mls: 'MLS# ATX-2026-01887',
+    img: 'https://images.unsplash.com/photo-1512918728672-1072b369dd8b?w=900&q=80',
+    badges: [{ label: 'For Sale', cls: '' }, { label: 'Condo', cls: 'blue' }],
+    beds: 1, baths: 1, sqft: '680', garage: '1-Car', lot: 'N/A',
+    desc: 'Hip East Austin condo steps from the best bars, restaurants, and coffee shops on 6th Street. This third-floor unit features polished concrete floors, an exposed brick accent wall, custom kitchen cabinetry, and a private balcony. Secured entry, in-unit laundry, and one covered parking spot. Perfect for a first purchase or investment rental.',
+    features: ['Exposed brick accent wall', 'Private balcony', 'In-unit washer/dryer', 'Polished concrete floors', 'Secured building entry', 'Walk to 6th St restaurants', 'Strong rental history', 'Low utilities'],
+    details: [{ label: 'Property Type', val: 'Condo' }, { label: 'Year Built', val: '2015' }, { label: 'Floor', val: '3rd of 4' }, { label: 'HOA Fee', val: '$320/mo' }, { label: 'Taxes (2025)', val: '$3,480/yr' }, { label: 'Cooling', val: 'Central Air' }, { label: 'Heating', val: 'Electric' }, { label: 'Parking', val: '1 Covered Assigned Space' }],
+    agent: { name: 'Jason Martinez', title: 'Senior Agent', avatar: '👨‍💼', bio: 'Certified Negotiation Expert. Helps buyers find value in competitive urban markets.', phone: '(512) 455-0102' }
+  },
+  {
+    id: 11,
+    price: '$1,450,000',
+    address: '205 Pecan Grove Rd, Rollingwood, TX 78746',
+    mls: 'MLS# ATX-2026-11042',
+    img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80',
+    badges: [{ label: 'For Sale', cls: '' }],
+    beds: 6, baths: 5, sqft: '5,400', garage: '3-Car', lot: '1.5 ac',
+    desc: 'An extraordinary 6-bedroom compound in coveted Rollingwood, one of Austin\'s most exclusive zip codes. The resort-style grounds feature a pool, tennis court, outdoor kitchen, and a 1-acre park-like yard backing to a greenbelt. The interior showcases hand-scraped hardwoods, a wine cellar, and a grand foyer with a sweeping staircase. Guest quarters above the garage with private entrance.',
+    features: ['Pool & tennis court', 'Wine cellar', 'Guest quarters above garage', 'Grand foyer & staircase', 'Backs to greenbelt', 'Outdoor kitchen', 'Home theater', 'Eanes ISD schools'],
+    details: [{ label: 'Property Type', val: 'Estate' }, { label: 'Year Built', val: '2005' }, { label: 'Lot Size', val: '1.5 acres' }, { label: 'HOA Fee', val: 'None' }, { label: 'Taxes (2025)', val: '$28,600/yr' }, { label: 'Cooling', val: 'Multi-Zone Central' }, { label: 'Heating', val: 'Radiant + Gas' }, { label: 'Parking', val: '3-Car + Circular Driveway' }],
+    agent: { name: 'Amanda Kim', title: 'Founding Partner', avatar: '👩‍💼', bio: '18 years in Austin real estate. Top producer specializing in Austin\'s most prestigious neighborhoods.', phone: '(512) 455-0101' }
+  },
+  {
+    id: 12,
+    price: '$485,000',
+    address: '3310 S Congress Ave #B, Austin, TX 78704',
+    mls: 'MLS# ATX-2026-04302',
+    img: 'https://images.unsplash.com/photo-1576941089067-2de3c901e126?w=900&q=80',
+    badges: [{ label: 'For Sale', cls: '' }, { label: 'Townhouse', cls: 'blue' }],
+    beds: 3, baths: 2, sqft: '1,750', garage: '1-Car', lot: '0.06 ac',
+    desc: 'Sleek South Congress townhouse in the middle of Austin\'s coolest corridor. Rooftop deck with downtown views, open-concept main floor with quartz counters and a gas range, and a private ground-floor patio. Two blocks from SOCO shops and restaurants. Low-maintenance living with no lawn to maintain — ideal for the modern urban lifestyle.',
+    features: ['Rooftop deck with city views', 'Gas range & quartz counters', 'Private ground-floor patio', 'No HOA', '2 blocks from SOCO', 'Epoxy garage floor', 'Built-in shelving', 'Walkable neighborhood'],
+    details: [{ label: 'Property Type', val: 'Townhouse' }, { label: 'Year Built', val: '2018' }, { label: 'Lot Size', val: '0.06 acres' }, { label: 'HOA Fee', val: 'None' }, { label: 'Taxes (2025)', val: '$7,200/yr' }, { label: 'Cooling', val: 'Central Air' }, { label: 'Heating', val: 'Gas Forced Air' }, { label: 'Parking', val: '1-Car Attached Garage' }],
+    agent: { name: 'Priya Nair', title: 'Buyer\'s Specialist', avatar: '👩‍💼', bio: 'Specializes in South Austin, SoCo, and Travis Heights neighborhoods.', phone: '(512) 455-0103' }
+  },
+
+  // ── Page 3 ────────────────────────────────────────────────
+  {
+    id: 13,
+    price: '$558,000',
+    address: '711 Avery Ranch Blvd, Austin, TX 78717',
+    mls: 'MLS# ATX-2026-05901',
+    img: 'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=900&q=80',
+    badges: [{ label: 'For Sale', cls: '' }],
+    beds: 4, baths: 3, sqft: '2,620', garage: '2-Car', lot: '0.24 ac',
+    desc: 'Beautiful 4-bedroom home in Avery Ranch — one of North Austin\'s most amenity-rich master-planned communities. Features a sparkling community pool, tennis courts, and miles of hike-and-bike trails. The home has an updated kitchen, a game room, and a covered patio. Zoned to highly rated Leander ISD.',
+    features: ['Community pool & tennis', 'Hike & bike trail access', 'Game room', 'Covered back patio', 'Updated kitchen', 'Leander ISD schools', 'Corner lot', 'Near 183A toll road'],
+    details: [{ label: 'Property Type', val: 'Single Family' }, { label: 'Year Built', val: '2006' }, { label: 'Lot Size', val: '0.24 acres' }, { label: 'HOA Fee', val: '$155/mo' }, { label: 'Taxes (2025)', val: '$8,400/yr' }, { label: 'Cooling', val: 'Central Air' }, { label: 'Heating', val: 'Gas Forced Air' }, { label: 'Parking', val: '2-Car Attached Garage' }],
+    agent: { name: 'Jason Martinez', title: 'Senior Agent', avatar: '👨‍💼', bio: 'Certified Negotiation Expert with a background in finance. Helps buyers compete in fast-moving markets.', phone: '(512) 455-0102' }
+  },
+  {
+    id: 14,
+    price: '$315,000',
+    address: '204 Eagle Ridge Dr, Pflugerville, TX 78660',
+    mls: 'MLS# ATX-2026-02744',
+    img: 'https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=900&q=80',
+    badges: [{ label: 'For Sale', cls: '' }, { label: 'Price Reduced', cls: 'green' }],
+    beds: 3, baths: 2, sqft: '1,560', garage: '2-Car', lot: '0.16 ac',
+    desc: 'Charming 3-bedroom home in Pflugerville with recent price reduction — a rare opportunity in this popular suburb. Fresh paint inside and out, new carpet in bedrooms, and a spacious backyard with a wooden deck. The kitchen features updated countertops and a breakfast bar. Close to Lake Pflugerville, Stone Hill Town Center, and new Samsung & Tesla facilities.',
+    features: ['New carpet & fresh paint', 'Wooden deck', 'Breakfast bar', 'Large backyard', 'Close to Lake Pflugerville', 'Near major employers', '2-car garage', 'Cul-de-sac street'],
+    details: [{ label: 'Property Type', val: 'Single Family' }, { label: 'Year Built', val: '2001' }, { label: 'Lot Size', val: '0.16 acres' }, { label: 'HOA Fee', val: '$48/mo' }, { label: 'Taxes (2025)', val: '$4,620/yr' }, { label: 'Cooling', val: 'Central Air' }, { label: 'Heating', val: 'Gas Forced Air' }, { label: 'Parking', val: '2-Car Attached Garage' }],
+    agent: { name: 'Priya Nair', title: 'Buyer\'s Specialist', avatar: '👩‍💼', bio: 'Guides first-time buyers with patience and clarity throughout the greater Austin metro.', phone: '(512) 455-0103' }
+  },
+  {
+    id: 15,
+    price: '$2,100 / mo',
+    address: '1820 Chestnut Ave #4, Austin, TX 78702',
+    mls: 'MLS# ATX-2026-RENT-1501',
+    img: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=900&q=80',
+    badges: [{ label: 'For Rent', cls: '' }],
+    beds: 2, baths: 1, sqft: '950', garage: 'None', lot: 'N/A',
+    desc: 'Bright and airy 2-bedroom apartment in the heart of East Austin with a bohemian flair. Original hardwood floors, high ceilings, and large windows throughout. Updated kitchen with butcher-block countertops. Shared laundry on-site, private front porch, and covered parking. Walking distance to Café Medici, Contigo, and the best coffee in Austin.',
+    features: ['Original hardwood floors', 'High ceilings', 'Private front porch', 'Butcher-block countertops', 'Walk to East 6th dining', 'Covered parking', 'On-site laundry', 'Available Aug 1'],
+    details: [{ label: 'Property Type', val: 'Apartment' }, { label: 'Year Built', val: '1948' }, { label: 'Lease Term', val: '12 months' }, { label: 'Deposit', val: '$2,100' }, { label: 'Pets', val: 'Cats only (deposit req.)' }, { label: 'Cooling', val: 'Window Units' }, { label: 'Heating', val: 'Gas Forced Air' }, { label: 'Parking', val: '1 Covered Space' }],
+    agent: { name: 'Carlos Vega', title: 'Commercial & Investment', avatar: '👨‍💼', bio: 'Manages residential and commercial rental properties across the Austin metro area.', phone: '(512) 455-0104' }
+  },
+  {
+    id: 16,
+    price: '$672,000',
+    address: '5540 River Hills Dr, Georgetown, TX 78628',
+    mls: 'MLS# ATX-2026-07134',
+    img: 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=900&q=80',
+    badges: [{ label: 'For Sale', cls: '' }, { label: 'New Listing', cls: 'green' }],
+    beds: 4, baths: 3, sqft: '2,980', garage: '3-Car', lot: '0.35 ac',
+    desc: 'Stunning 4-bedroom home in Georgetown\'s prestigious River Hills neighborhood with a 3-car garage and resort-style backyard. The kitchen is a chef\'s dream with double ovens, a 6-burner gas range, and a farmhouse sink. The primary suite features a spa bath with a freestanding soaking tub and separate steam shower.',
+    features: ['3-car garage', 'Resort-style backyard', 'Double ovens & 6-burner range', 'Freestanding soaking tub', 'Steam shower', 'Extended covered patio', 'Irrigation system', 'Georgetown ISD'],
+    details: [{ label: 'Property Type', val: 'Single Family' }, { label: 'Year Built', val: '2019' }, { label: 'Lot Size', val: '0.35 acres' }, { label: 'HOA Fee', val: '$90/mo' }, { label: 'Taxes (2025)', val: '$10,100/yr' }, { label: 'Cooling', val: 'Dual-Zone Central' }, { label: 'Heating', val: 'Gas Forced Air' }, { label: 'Parking', val: '3-Car Attached Garage' }],
+    agent: { name: 'Amanda Kim', title: 'Founding Partner', avatar: '👩‍💼', bio: '18 years in Austin real estate. Top producer specializing in luxury and suburban homes.', phone: '(512) 455-0101' }
+  },
+  {
+    id: 17,
+    price: '$487,500',
+    address: '3902 Bee Cave Rd #12, Bee Cave, TX 78738',
+    mls: 'MLS# ATX-2026-04977',
+    img: 'https://images.unsplash.com/photo-1554995207-c18c203602cb?w=900&q=80',
+    badges: [{ label: 'For Sale', cls: '' }, { label: 'Townhouse', cls: 'blue' }],
+    beds: 3, baths: 2, sqft: '1,920', garage: '2-Car', lot: '0.08 ac',
+    desc: 'Lock-and-leave townhouse in Bee Cave near the Hill Country Galleria. Elegant finishes throughout including a quartz kitchen, tray ceilings, and a covered balcony with hill country views. The community features a resort-style pool, dog park, and gated entry. Minutes from Lake Travis, Whole Foods, and top-rated Lake Travis ISD schools.',
+    features: ['Hill country views', 'Lock-and-leave lifestyle', 'Resort-style pool', 'Gated community', 'Dog park', 'Tray ceilings', 'Near Hill Country Galleria', 'Lake Travis ISD'],
+    details: [{ label: 'Property Type', val: 'Townhouse' }, { label: 'Year Built', val: '2021' }, { label: 'Lot Size', val: '0.08 acres' }, { label: 'HOA Fee', val: '$250/mo' }, { label: 'Taxes (2025)', val: '$7,600/yr' }, { label: 'Cooling', val: 'Central Air' }, { label: 'Heating', val: 'Gas Forced Air' }, { label: 'Parking', val: '2-Car Attached Garage' }],
+    agent: { name: 'Priya Nair', title: 'Buyer\'s Specialist', avatar: '👩‍💼', bio: 'Specializes in Westlake, Bee Cave, and Lakeway communities.', phone: '(512) 455-0103' }
+  },
+  {
+    id: 18,
+    price: '$925,000',
+    address: '4411 Crestway Dr, Austin, TX 78731',
+    mls: 'MLS# ATX-2026-09215',
+    img: 'https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?w=900&q=80',
+    badges: [{ label: 'For Sale', cls: '' }],
+    beds: 5, baths: 4, sqft: '3,650', garage: '2-Car', lot: '0.42 ac',
+    desc: 'Timeless 5-bedroom home in Tarrytown, one of Austin\'s most coveted in-town neighborhoods. Classic architecture with a modern interior renovation — custom kitchen with Thermador appliances, a spa-inspired primary bath, and a study lined with built-in bookshelves. The shaded backyard has a sparkling pool, pergola, and room to garden. Just minutes to Lake Austin Spa, Mozart\'s, and UT.',
+    features: ['Thermador appliances', 'Pool & pergola', 'Built-in bookshelves in study', 'Spa-inspired primary bath', 'Walk to Lake Austin', 'Large lot with mature oaks', 'Minutes to UT campus', 'AISD Tarrytown Elementary'],
+    details: [{ label: 'Property Type', val: 'Single Family' }, { label: 'Year Built', val: '1987' }, { label: 'Renovated', val: '2022' }, { label: 'Lot Size', val: '0.42 acres' }, { label: 'HOA Fee', val: 'None' }, { label: 'Taxes (2025)', val: '$17,200/yr' }, { label: 'Cooling', val: 'Multi-Zone Central' }, { label: 'Heating', val: 'Gas Forced Air' }],
+    agent: { name: 'Amanda Kim', title: 'Founding Partner', avatar: '👩‍💼', bio: '18 years in Austin real estate. Tarrytown and Bryker Woods specialist.', phone: '(512) 455-0101' }
+  },
+
+  // ── Page 4 ────────────────────────────────────────────────
+  {
+    id: 19,
+    price: '$344,900',
+    address: '812 Windmill Run, Kyle, TX 78640',
+    mls: 'MLS# ATX-2026-03388',
+    img: 'https://images.unsplash.com/photo-1592595896551-12b371d546d5?w=900&q=80',
+    badges: [{ label: 'For Sale', cls: '' }, { label: 'New Construction', cls: 'green' }],
+    beds: 3, baths: 2, sqft: '1,720', garage: '2-Car', lot: '0.14 ac',
+    desc: 'Brand-new construction in Kyle\'s fastest-growing community — Anthem. This 3-bedroom home features an open floor plan, 9-ft ceilings, and energy-efficient construction throughout. The kitchen has granite counters, a large pantry, and a center island. Community amenities include a pool, splash pad, fitness center, and dog park.',
+    features: ['New construction', 'Energy efficient', '9-ft ceilings', 'Community pool & splash pad', 'Fitness center', 'Granite countertops', 'Large pantry', 'Builder warranty'],
+    details: [{ label: 'Property Type', val: 'Single Family' }, { label: 'Year Built', val: '2026' }, { label: 'Lot Size', val: '0.14 acres' }, { label: 'HOA Fee', val: '$110/mo' }, { label: 'Taxes (2025)', val: '$5,200/yr' }, { label: 'Cooling', val: 'Central Air' }, { label: 'Heating', val: 'Gas Forced Air' }, { label: 'Parking', val: '2-Car Attached Garage' }],
+    agent: { name: 'Jason Martinez', title: 'Senior Agent', avatar: '👨‍💼', bio: 'Expert in new construction and master-planned communities in the Austin metro.', phone: '(512) 455-0102' }
+  },
+  {
+    id: 20,
+    price: '$599,000',
+    address: '1107 Treemont St, Austin, TX 78741',
+    mls: 'MLS# ATX-2026-06003',
+    img: 'https://images.unsplash.com/photo-1588880331179-bc9b93a8cb5e?w=900&q=80',
+    badges: [{ label: 'For Sale', cls: '' }, { label: 'Open House Sun 2–5pm', cls: 'blue' }],
+    beds: 4, baths: 3, sqft: '2,350', garage: '2-Car', lot: '0.21 ac',
+    desc: 'Fully remodeled 4-bedroom home in the up-and-coming 78741 zip code, just minutes to downtown Austin via SH-71. Gut renovation in 2024 includes all-new electrical, plumbing, roof, HVAC, and finishes. Chef\'s kitchen with waterfall quartz island. Primary suite has a spa bath with a walk-in shower and soaking tub.',
+    features: ['Full gut renovation (2024)', 'New roof, plumbing, electrical', 'Waterfall quartz island', 'Spa primary bath', 'Close to downtown', 'Private backyard oasis', 'EV charger installed', 'No HOA'],
+    details: [{ label: 'Property Type', val: 'Single Family' }, { label: 'Year Built', val: '1978' }, { label: 'Renovated', val: '2024' }, { label: 'HOA Fee', val: 'None' }, { label: 'Taxes (2025)', val: '$8,900/yr' }, { label: 'Cooling', val: 'Central Air' }, { label: 'Heating', val: 'Gas Forced Air' }, { label: 'Parking', val: '2-Car Attached Garage + EV Charger' }],
+    agent: { name: 'Carlos Vega', title: 'Commercial & Investment', avatar: '👨‍💼', bio: 'Investment property and remodel specialist in the greater Austin market.', phone: '(512) 455-0104' }
+  },
+  {
+    id: 21,
+    price: '$2,800 / mo',
+    address: '409 W 38th St #201, Austin, TX 78705',
+    mls: 'MLS# ATX-2026-RENT-2101',
+    img: 'https://images.unsplash.com/photo-1527359443443-84a48aec73d2?w=900&q=80',
+    badges: [{ label: 'For Rent', cls: '' }, { label: 'Available Now', cls: 'green' }],
+    beds: 2, baths: 2, sqft: '1,080', garage: '1-Car', lot: 'N/A',
+    desc: 'Modern 2-bed, 2-bath unit in the heart of the Hyde Park neighborhood — just steps from the Drag and UT campus. Open floor plan with tall ceilings, quartz counters, and stainless appliances. Private balcony overlooks a quiet tree-lined street. Covered parking, bike storage, and a rooftop communal terrace.',
+    features: ['Balcony with tree views', 'Rooftop communal terrace', 'Bike storage', 'Steps from UT campus', 'Quartz counters', 'In-unit laundry', 'Covered parking', 'Available immediately'],
+    details: [{ label: 'Property Type', val: 'Condo / Rental' }, { label: 'Year Built', val: '2020' }, { label: 'Lease Term', val: '12 months' }, { label: 'Deposit', val: '$2,800' }, { label: 'Pets', val: 'Yes (50 lbs max)' }, { label: 'Cooling', val: 'Central Air' }, { label: 'Heating', val: 'Electric' }, { label: 'Parking', val: '1 Covered Assigned Space' }],
+    agent: { name: 'Priya Nair', title: 'Buyer\'s Specialist', avatar: '👩‍💼', bio: 'Specializes in Hyde Park, UT area, and Central Austin rentals and purchases.', phone: '(512) 455-0103' }
+  },
+  {
+    id: 22,
+    price: '$748,000',
+    address: '2816 Greystone Rd, Austin, TX 78703',
+    mls: 'MLS# ATX-2026-08771',
+    img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=900&q=80',
+    badges: [{ label: 'For Sale', cls: '' }],
+    beds: 4, baths: 3, sqft: '2,900', garage: '2-Car', lot: '0.31 ac',
+    desc: 'Charming 1950s home in Old West Austin completely reimagined for modern living. The kitchen was opened to the family room and features a La Cornue range and custom cabinetry. White oak hardwoods throughout. The backyard is a private oasis with a natural stone pool, a bocce ball court, and a producing vegetable garden.',
+    features: ['La Cornue range', 'Natural stone pool', 'White oak hardwoods', 'Bocce ball court', 'Vegetable garden', 'Mudroom with built-ins', 'Zip code 78703', 'Walk to Pease Park'],
+    details: [{ label: 'Property Type', val: 'Single Family' }, { label: 'Year Built', val: '1954' }, { label: 'Renovated', val: '2021' }, { label: 'Lot Size', val: '0.31 acres' }, { label: 'HOA Fee', val: 'None' }, { label: 'Taxes (2025)', val: '$12,900/yr' }, { label: 'Cooling', val: 'Dual-Zone Central' }, { label: 'Heating', val: 'Gas Forced Air' }, { label: 'Parking', val: '2-Car Detached Garage' }],
+    agent: { name: 'Amanda Kim', title: 'Founding Partner', avatar: '👩‍💼', bio: 'Old West Austin and Tarrytown specialist. 18 years in Austin real estate.', phone: '(512) 455-0101' }
+  },
+  {
+    id: 23,
+    price: '$412,000',
+    address: '618 Limestone Ridge, Dripping Springs, TX 78620',
+    mls: 'MLS# ATX-2026-04119',
+    img: 'https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=900&q=80',
+    badges: [{ label: 'For Sale', cls: '' }, { label: 'Price Reduced', cls: 'green' }],
+    beds: 3, baths: 2, sqft: '2,010', garage: '2-Car', lot: '0.38 ac',
+    desc: 'Peaceful Hill Country retreat in the charming town of Dripping Springs — voted one of the best small towns in Texas. Sits on a third-acre lot with panoramic views of rolling limestone hills. The interior features an open layout, a wood-burning fireplace, and a sunroom. Minutes from breweries, wineries, and Hamilton Pool Preserve.',
+    features: ['Hill country views', 'Wood-burning fireplace', 'Sunroom', 'Large lot', 'Walk to town square', 'Near Hamilton Pool Preserve', 'Winery & brewery district', 'Dripping Springs ISD'],
+    details: [{ label: 'Property Type', val: 'Single Family' }, { label: 'Year Built', val: '2004' }, { label: 'Lot Size', val: '0.38 acres' }, { label: 'HOA Fee', val: '$55/mo' }, { label: 'Taxes (2025)', val: '$6,200/yr' }, { label: 'Cooling', val: 'Central Air' }, { label: 'Heating', val: 'Gas Forced Air' }, { label: 'Parking', val: '2-Car Attached Garage' }],
+    agent: { name: 'Carlos Vega', title: 'Commercial & Investment', avatar: '👨‍💼', bio: 'Hill Country and investment property specialist. Former CPA.', phone: '(512) 455-0104' }
+  },
+  {
+    id: 24,
+    price: '$835,000',
+    address: '910 Overlook Terrace, Lakeway, TX 78734',
+    mls: 'MLS# ATX-2026-08430',
+    img: 'https://images.unsplash.com/photo-1560184897-ae75f418493e?w=900&q=80',
+    badges: [{ label: 'For Sale', cls: '' }],
+    beds: 5, baths: 4, sqft: '3,480', garage: '3-Car', lot: '0.48 ac',
+    desc: 'Exceptional 5-bedroom home in Lakeway\'s prestigious Overlook Terrace with panoramic views of Lake Travis and the Texas Hill Country. A grand entry opens to soaring 20-ft ceilings and a wall of windows. The gourmet kitchen, butler\'s pantry, and formal dining room make this home exceptional for entertaining. Backs to a greenbelt with no rear neighbors.',
+    features: ['Panoramic lake & hill country views', '20-ft ceilings', 'Butler\'s pantry', 'Backs to greenbelt', 'No rear neighbors', '3-car garage', 'Formal dining room', 'Lake Travis ISD'],
+    details: [{ label: 'Property Type', val: 'Single Family' }, { label: 'Year Built', val: '2013' }, { label: 'Lot Size', val: '0.48 acres' }, { label: 'HOA Fee', val: '$175/mo' }, { label: 'Taxes (2025)', val: '$15,600/yr' }, { label: 'Cooling', val: 'Multi-Zone Central' }, { label: 'Heating', val: 'Gas Forced Air' }, { label: 'Parking', val: '3-Car Attached Garage' }],
+    agent: { name: 'Jason Martinez', title: 'Senior Agent', avatar: '👨‍💼', bio: 'Lake Travis and Lakeway specialist. Certified Negotiation Expert.', phone: '(512) 455-0102' }
+  }
+];
+
+// ── Pagination state ───────────────────────────────────────
+const PER_PAGE = 6;
+let currentPage = 1;
+let filteredListings = listings;
+
+function getTagClass(label) {
+  const l = label.toLowerCase();
+  if (l.includes('new') || l.includes('reduced') || l.includes('available')) return 'green';
+  if (l.includes('open') || l.includes('condo') || l.includes('townhouse')) return 'blue';
+  return '';
+}
+
+function buildCard(d) {
+  const primaryBadge = d.badges[0];
+  const extraBadges = d.badges.slice(1).map(b => `<span class="listing-tag ${b.cls}">${b.label}</span>`).join('');
+  const specs = `🛏 ${d.beds} Beds &nbsp; 🚿 ${d.baths} Baths &nbsp; 📐 ${d.sqft} sqft &nbsp; 🚗 ${d.garage}`;
+  return `
+    <div class="listing-card" data-listing="${d.id}">
+      <div class="listing-img"><img src="${d.img.replace('w=900','w=600')}" alt="${d.address}" loading="lazy" /></div>
+      <div class="listing-body">
+        <div class="listing-tags">
+          <span class="listing-tag">${primaryBadge.label}</span>
+          ${extraBadges}
+        </div>
+        <div class="listing-price">${d.price}</div>
+        <div class="listing-address">${d.address}</div>
+        <div class="listing-desc">${d.desc.substring(0, 120)}…</div>
+        <div class="listing-specs">${specs}</div>
+      </div>
+      <div class="listing-footer">
+        <span class="listing-agent">Listed by <strong>${d.agent.name.split(' ')[0]} ${d.agent.name.split(' ')[1][0]}.</strong></span>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-outline" style="padding:8px 14px;font-size:0.85rem;" onclick="openModal(${d.id});event.stopPropagation();">Details</button>
+          <a href="contact.html" class="btn btn-primary" style="padding:8px 18px;font-size:0.85rem;">Inquire</a>
+        </div>
+      </div>
+    </div>`;
+}
+
+function renderPage(page) {
+  currentPage = page;
+  const total = filteredListings.length;
+  const totalPages = Math.ceil(total / PER_PAGE);
+  const start = (page - 1) * PER_PAGE;
+  const end = Math.min(start + PER_PAGE, total);
+  const pageItems = filteredListings.slice(start, end);
+
+  // Render cards
+  const grid = document.getElementById('card-grid');
+  grid.innerHTML = pageItems.map(buildCard).join('');
+
+  // Attach click handlers
+  grid.querySelectorAll('.listing-card').forEach(card => {
+    card.addEventListener('click', () => openModal(parseInt(card.dataset.listing)));
+  });
+
+  // Update counts
+  document.getElementById('listings-count').textContent = `${total} Homes Available`;
+  document.getElementById('filter-count').innerHTML = `Showing <strong>${start + 1}–${end}</strong> of ${total} results`;
+
+  // Render pagination
+  renderPagination(page, totalPages);
+
+  // Scroll to top of listings section (not the whole page)
+  document.getElementById('listings-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function renderPagination(current, total) {
+  const nav = document.getElementById('pagination');
+  let html = '';
+
+  // Prev arrow
+  html += `<button class="page-btn" ${current === 1 ? 'disabled style="opacity:0.4;cursor:default;"' : ''} onclick="renderPage(${current - 1})">‹</button>`;
+
+  for (let i = 1; i <= total; i++) {
+    html += `<button class="page-btn ${i === current ? 'active' : ''}" onclick="renderPage(${i})">${i}</button>`;
+  }
+
+  // Next arrow
+  html += `<button class="page-btn" ${current === total ? 'disabled style="opacity:0.4;cursor:default;"' : ''} onclick="renderPage(${current + 1})">›</button>`;
+
+  nav.innerHTML = html;
+}
+
+// Initial render
+renderPage(1);
+
+// ── Modal logic ─────────────────────────────────────────────
+function openModal(id) {
+  const d = listings.find(l => l.id === id);
+  if (!d) return;
+
+  // Image
+  const img = document.getElementById('modal-img');
+  img.innerHTML = `
+    <img src="${d.img}" alt="${d.address}" style="width:100%;height:100%;object-fit:cover;display:block;" />
+    <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.45) 0%,transparent 50%);"></div>
+    <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+    <div class="modal-badges" style="position:absolute;bottom:16px;left:16px;display:flex;gap:8px;">${d.badges.map(b => `<span class="modal-badge ${b.cls}">${b.label}</span>`).join('')}</div>
+  `;
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+
+  // Header
+  document.getElementById('modal-price').textContent = d.price;
+  document.getElementById('modal-address').textContent = d.address;
+  document.getElementById('modal-mls').textContent = d.mls;
+
+  // Specs
+  document.getElementById('ms-beds').textContent = d.beds;
+  document.getElementById('ms-baths').textContent = d.baths;
+  document.getElementById('ms-sqft').textContent = d.sqft;
+  document.getElementById('ms-garage').textContent = d.garage;
+  document.getElementById('ms-lot').textContent = d.lot;
+
+  // Overview tab
+  document.getElementById('modal-desc').textContent = d.desc;
+  document.getElementById('modal-features').innerHTML = d.features.map(f => `<div class="modal-feature">${f}</div>`).join('');
+
+  // Details tab
+  document.getElementById('modal-details').innerHTML = d.details.map(r =>
+    `<div class="modal-detail-row"><span class="modal-detail-label">${r.label}</span><span class="modal-detail-val">${r.val}</span></div>`
+  ).join('');
+
+  // Agent tab
+  document.getElementById('modal-agent-avatar').textContent = d.agent.avatar;
+  document.getElementById('modal-agent-name').textContent = d.agent.name;
+  document.getElementById('modal-agent-title').textContent = d.agent.title;
+  document.getElementById('modal-agent-bio').textContent = d.agent.bio;
+  document.getElementById('modal-agent-phone').textContent = '📞 ' + d.agent.phone;
+
+  // Reset tabs to Overview
+  document.querySelectorAll('.modal-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.modal-tab-content').forEach(c => c.classList.remove('active'));
+  document.querySelector('.modal-tab[data-tab="overview"]').classList.add('active');
+  document.getElementById('tab-overview').classList.add('active');
+
+  // Save button toggle
+  const saveBtn = document.getElementById('modal-save');
+  saveBtn.onclick = () => {
+    const saved = saveBtn.textContent.includes('♡');
+    saveBtn.textContent = saved ? '♥ Saved' : '♡ Save';
+    saveBtn.style.background = saved ? 'var(--navy)' : '';
+    saveBtn.style.color = saved ? 'white' : '';
+  };
+
+  document.getElementById('listingModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('listingModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Tab switching
+document.querySelectorAll('.modal-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const target = tab.dataset.tab;
+    document.querySelectorAll('.modal-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.modal-tab-content').forEach(c => c.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('tab-' + target).classList.add('active');
+  });
+});
+
+// Close on overlay click
+document.getElementById('listingModal').addEventListener('click', e => {
+  if (e.target === document.getElementById('listingModal')) closeModal();
+});
+
+// Close on Escape
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+
+</body>
+</html>

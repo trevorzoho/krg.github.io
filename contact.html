@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us — Keystone Realty Group</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    /* Info panel */
+    .contact-info { display: flex; flex-direction: column; gap: 28px; }
+
+    .info-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .info-icon {
+      width: 44px; height: 44px;
+      background: rgba(200,151,58,0.12);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .info-label { font-size: 0.78rem; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+    .info-value { font-size: 0.95rem; color: var(--navy); font-weight: 500; }
+    .info-sub { font-size: 0.82rem; color: var(--gray); margin-top: 2px; }
+
+    /* Hours */
+    .hours-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    .hours-table td { padding: 6px 0; font-size: 0.88rem; color: #444; }
+    .hours-table td:first-child { color: var(--navy); font-weight: 600; }
+    .hours-table td:last-child { text-align: right; }
+
+    /* Map placeholder */
+    .map-box {
+      background: linear-gradient(135deg, #d4e0f0, #dde3ed);
+      border-radius: var(--radius);
+      height: 260px;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 12px;
+      color: #6677aa;
+      margin-top: 8px;
+    }
+    .map-box span { font-size: 2.5rem; }
+    .map-box p { font-size: 0.88rem; font-weight: 600; }
+
+    /* Form card */
+    .form-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 40px;
+      box-shadow: var(--shadow);
+    }
+    .form-card h3 { margin-bottom: 6px; }
+    .form-card > p { color: var(--gray); font-size: 0.92rem; margin-bottom: 28px; }
+
+    .inquiry-type {
+      display: flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap;
+    }
+    .inquiry-btn {
+      padding: 8px 18px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      font-size: 0.85rem;
+      cursor: pointer;
+      background: var(--light);
+      color: #444;
+      font-weight: 500;
+      transition: all 0.15s;
+    }
+    .inquiry-btn.selected {
+      background: var(--navy);
+      color: white;
+      border-color: var(--navy);
+    }
+
+    /* Agent cards */
+    .agent-row {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 48px;
+    }
+    .agent-mini {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+    .agent-avatar {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: var(--light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem;
+      flex-shrink: 0;
+    }
+    .agent-mini-name { font-weight: 700; color: var(--navy); font-size: 0.95rem; }
+    .agent-mini-title { font-size: 0.78rem; color: var(--gold); font-weight: 600; text-transform: uppercase; margin: 2px 0 6px; }
+    .agent-mini-phone { font-size: 0.82rem; color: var(--gray); }
+  </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="logo-icon">K</div>
+      Keystone Realty Group
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="listings.html">Listings</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="contact.html" class="nav-cta active">Contact Us</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Page Hero -->
+<div class="page-hero">
+  <div class="container">
+    <h1>Get in Touch</h1>
+    <p>Our team is ready to help. Reach out anytime — we typically respond within 2 business hours.</p>
+  </div>
+</div>
+
+<!-- Contact Section -->
+<section>
+  <div class="container">
+    <div class="contact-grid">
+
+      <!-- Left: Info -->
+      <div class="contact-info">
+
+        <div class="info-card">
+          <div class="info-icon">📞</div>
+          <div>
+            <div class="info-label">Phone</div>
+            <div class="info-value">(512) 455-0100</div>
+            <div class="info-sub">Mon–Fri 8am–7pm · Sat 9am–5pm</div>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-icon">✉️</div>
+          <div>
+            <div class="info-label">Email</div>
+            <div class="info-value">hello@keystonerealty.com</div>
+            <div class="info-sub">We respond within 2 business hours</div>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-icon">📍</div>
+          <div>
+            <div class="info-label">Main Office</div>
+            <div class="info-value">820 Congress Ave, Suite 400</div>
+            <div class="info-sub">Austin, TX 78701</div>
+            <div class="map-box" style="margin-top:14px; height:180px;">
+              <span>🗺️</span>
+              <p>Downtown Austin · Congress Ave</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-icon">🕐</div>
+          <div style="width: 100%;">
+            <div class="info-label">Office Hours</div>
+            <table class="hours-table">
+              <tr><td>Monday – Friday</td><td>8:00 AM – 7:00 PM</td></tr>
+              <tr><td>Saturday</td><td>9:00 AM – 5:00 PM</td></tr>
+              <tr><td>Sunday</td><td>By Appointment</td></tr>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right: Form -->
+      <div>
+        <div class="form-card">
+          <h3>Send Us a Message</h3>
+          <p>Tell us what you're looking for and an agent will be in touch shortly.</p>
+
+          <div style="margin-bottom:20px;">
+            <div style="font-size:0.85rem; font-weight:600; color:var(--navy); margin-bottom:10px;">I'm interested in:</div>
+            <div class="inquiry-type">
+              <button class="inquiry-btn selected">Buying a Home</button>
+              <button class="inquiry-btn">Selling a Home</button>
+              <button class="inquiry-btn">Renting</button>
+              <button class="inquiry-btn">Investment Property</button>
+              <button class="inquiry-btn">General Inquiry</button>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fname">First Name</label>
+              <input type="text" id="fname" placeholder="Jane" />
+            </div>
+            <div class="form-group">
+              <label for="lname">Last Name</label>
+              <input type="text" id="lname" placeholder="Smith" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" placeholder="jane@example.com" />
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" placeholder="(512) 000-0000" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="agent">Preferred Agent (optional)</label>
+            <select id="agent">
+              <option value="">No preference — assign me to anyone</option>
+              <option>Amanda Kim — Luxury &amp; Relocation</option>
+              <option>Jason Martinez — Buyer Specialist</option>
+              <option>Priya Nair — First-Time Buyers</option>
+              <option>Carlos Vega — Commercial &amp; Investment</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="budget">Budget Range</label>
+            <select id="budget">
+              <option>Under $300,000</option>
+              <option>$300,000 – $500,000</option>
+              <option selected>$500,000 – $800,000</option>
+              <option>$800,000 – $1.2M</option>
+              <option>$1.2M+</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" placeholder="Tell us a bit about what you're looking for — timeline, neighborhoods of interest, must-haves, etc."></textarea>
+          </div>
+
+          <button class="btn btn-primary" style="width:100%; padding:14px;">Send Message</button>
+          <p style="text-align:center; font-size:0.8rem; color:var(--gray); margin-top:12px;">By submitting, you agree to our Privacy Policy. We never share your information.</p>
+        </div>
+
+        <!-- Agent Quick Contact -->
+        <h3 style="margin-top: 40px; margin-bottom: 16px; font-size: 1.15rem;">Reach an Agent Directly</h3>
+        <div class="agent-row">
+          <div class="agent-mini">
+            <div class="agent-avatar">👩‍💼</div>
+            <div>
+              <div class="agent-mini-name">Amanda Kim</div>
+              <div class="agent-mini-title">Founding Partner</div>
+              <div class="agent-mini-phone">(512) 455-0101</div>
+            </div>
+          </div>
+          <div class="agent-mini">
+            <div class="agent-avatar">👨‍💼</div>
+            <div>
+              <div class="agent-mini-name">Jason Martinez</div>
+              <div class="agent-mini-title">Senior Agent</div>
+              <div class="agent-mini-phone">(512) 455-0102</div>
+            </div>
+          </div>
+          <div class="agent-mini">
+            <div class="agent-avatar">👩‍💼</div>
+            <div>
+              <div class="agent-mini-name">Priya Nair</div>
+              <div class="agent-mini-title">Buyer's Specialist</div>
+              <div class="agent-mini-phone">(512) 455-0103</div>
+            </div>
+          </div>
+          <div class="agent-mini">
+            <div class="agent-avatar">👨‍💼</div>
+            <div>
+              <div class="agent-mini-name">Carlos Vega</div>
+              <div class="agent-mini-title">Commercial &amp; Investment</div>
+              <div class="agent-mini-phone">(512) 455-0104</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">Keystone Realty Group</div>
+        <p class="footer-tagline">Austin's most trusted real estate team since 1998. Helping families find their place to call home.</p>
+      </div>
+      <div>
+        <div class="footer-heading">Navigate</div>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="listings.html">Listings</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading">Services</div>
+        <ul class="footer-links">
+          <li><a href="#">Buy a Home</a></li>
+          <li><a href="#">Sell a Home</a></li>
+          <li><a href="#">Property Management</a></li>
+          <li><a href="#">Relocation Services</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading">Contact</div>
+        <ul class="footer-links">
+          <li><a href="tel:+15124550100">(512) 455-0100</a></li>
+          <li><a href="mailto:hello@keystonerealty.com">hello@keystonerealty.com</a></li>
+          <li><a href="#">820 Congress Ave, Suite 400<br>Austin, TX 78701</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Keystone Realty Group. All rights reserved.</span>
+      <span>Privacy Policy · Terms of Use · Equal Housing Opportunity</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Simple inquiry type toggle for demo
+  document.querySelectorAll('.inquiry-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.inquiry-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+    });
+  });
+</script>
+
+</body>
+</html>

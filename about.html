@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us — Keystone Realty Group</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Mission section */
+    .mission-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .mission-img {
+      background: linear-gradient(135deg, #1B2A4A, #2c4272);
+      border-radius: var(--radius);
+      height: 380px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .mission-img::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 40%;
+      background: linear-gradient(transparent, rgba(27,42,74,0.6));
+    }
+    .mission-content p { margin-bottom: 16px; }
+
+    .value-list { list-style: none; margin-top: 24px; display: flex; flex-direction: column; gap: 14px; }
+    .value-item { display: flex; gap: 12px; align-items: flex-start; }
+    .value-check {
+      width: 24px; height: 24px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 0.75rem; flex-shrink: 0; margin-top: 1px;
+    }
+    .value-item p { margin: 0; font-size: 0.95rem; color: #444; }
+
+    /* Team */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .team-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+    .team-photo {
+      width: 100%;
+      height: 200px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 4rem;
+    }
+    .team-body { padding: 20px 16px; }
+    .team-name { font-weight: 700; color: var(--navy); font-family: var(--font); font-size: 1.05rem; }
+    .team-title { font-size: 0.82rem; color: var(--gold); font-weight: 600; margin: 4px 0 10px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .team-bio { font-size: 0.85rem; color: var(--gray); line-height: 1.5; }
+    .team-contact {
+      display: flex; gap: 10px; justify-content: center; margin-top: 14px;
+    }
+    .team-contact a {
+      font-size: 0.8rem; color: var(--navy); background: var(--light);
+      padding: 5px 12px; border-radius: 20px; font-weight: 600;
+    }
+    .team-contact a:hover { background: var(--navy); color: white; text-decoration: none; }
+
+    /* Awards */
+    .awards-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .award-card {
+      text-align: center;
+      padding: 32px 20px;
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .award-icon { font-size: 2.4rem; margin-bottom: 12px; }
+    .award-name { font-weight: 700; color: var(--navy); font-size: 0.95rem; margin-bottom: 4px; }
+    .award-year { font-size: 0.82rem; color: var(--gray); }
+
+    /* Timeline */
+    .timeline { position: relative; padding-left: 32px; margin-top: 40px; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 8px; top: 0; bottom: 0;
+      width: 2px; background: var(--border);
+    }
+    .timeline-item { position: relative; margin-bottom: 36px; }
+    .timeline-dot {
+      position: absolute;
+      left: -28px; top: 4px;
+      width: 16px; height: 16px;
+      background: var(--gold);
+      border-radius: 50%;
+      border: 3px solid var(--white);
+      box-shadow: 0 0 0 2px var(--gold);
+    }
+    .timeline-year { font-size: 0.78rem; color: var(--gold); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+    .timeline-title { font-weight: 700; color: var(--navy); margin-bottom: 4px; font-size: 1rem; }
+    .timeline-desc { font-size: 0.88rem; color: var(--gray); }
+  </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="logo-icon">K</div>
+      Keystone Realty Group
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="listings.html">Listings</a></li>
+      <li><a href="about.html" class="active">About Us</a></li>
+      <li><a href="contact.html" class="nav-cta">Contact Us</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Page Hero -->
+<div class="page-hero">
+  <div class="container">
+    <h1>About Keystone Realty Group</h1>
+    <p>A legacy of trust, expertise, and community built over 25 years in Austin real estate.</p>
+  </div>
+</div>
+
+<!-- Stats -->
+<div class="stats-bar">
+  <div class="container">
+    <div class="stats-grid">
+      <div>
+        <div class="stat-number">1998</div>
+        <div class="stat-label">Founded</div>
+      </div>
+      <div>
+        <div class="stat-number">1,200+</div>
+        <div class="stat-label">Homes Sold</div>
+      </div>
+      <div>
+        <div class="stat-number">18</div>
+        <div class="stat-label">Expert Agents</div>
+      </div>
+      <div>
+        <div class="stat-number">#1</div>
+        <div class="stat-label">Austin Boutique Firm</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Mission -->
+<section>
+  <div class="container">
+    <div class="mission-grid">
+      <div class="mission-img">🏛️</div>
+      <div class="mission-content">
+        <p class="section-label">Our Mission</p>
+        <h2 class="section-title">Built on Relationships, Not Transactions</h2>
+        <div class="divider divider-left"></div>
+        <p>Since 1998, Keystone Realty Group has served the Austin community with a simple belief: that buying or selling a home is one of life's most significant moments — and you deserve an expert you can trust completely.</p>
+        <p>We've grown from a two-agent boutique office to Austin's premier independent real estate team, but our values haven't changed. We show up for our clients the way a trusted friend would.</p>
+        <ul class="value-list">
+          <li class="value-item">
+            <span class="value-check">✓</span>
+            <p><strong>Transparency first</strong> — no hidden fees, no pressure tactics, just honest guidance.</p>
+          </li>
+          <li class="value-item">
+            <span class="value-check">✓</span>
+            <p><strong>Community focus</strong> — we live where we work and are invested in Austin's future.</p>
+          </li>
+          <li class="value-item">
+            <span class="value-check">✓</span>
+            <p><strong>Continuous learning</strong> — our agents complete ongoing training to stay ahead of market shifts.</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Team -->
+<section class="bg-light">
+  <div class="container">
+    <p class="section-label text-center">The People Behind the Sales</p>
+    <h2 class="section-title text-center">Meet Our Agents</h2>
+    <div class="divider"></div>
+    <div class="team-grid">
+
+      <div class="team-card">
+        <div class="team-photo" style="background:#d4e0f0;">👩‍💼</div>
+        <div class="team-body">
+          <div class="team-name">Amanda Kim</div>
+          <div class="team-title">Founding Partner</div>
+          <div class="team-bio">18 years in Austin real estate. Specializes in luxury homes and relocation clients. Top producer 10 years running.</div>
+          <div class="team-contact">
+            <a href="contact.html">Email</a>
+            <a href="#">Profile</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-photo" style="background:#d4ead8;">👨‍💼</div>
+        <div class="team-body">
+          <div class="team-name">Jason Martinez</div>
+          <div class="team-title">Senior Agent</div>
+          <div class="team-bio">Certified Negotiation Expert with a background in finance. Helps buyers compete in fast-moving markets.</div>
+          <div class="team-contact">
+            <a href="contact.html">Email</a>
+            <a href="#">Profile</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-photo" style="background:#e8d4f0;">👩‍💼</div>
+        <div class="team-body">
+          <div class="team-name">Priya Nair</div>
+          <div class="team-title">Buyer's Specialist</div>
+          <div class="team-bio">Guides first-time buyers with patience and clarity. Expertise in South Austin, Travis Heights, and SoCo neighborhoods.</div>
+          <div class="team-contact">
+            <a href="contact.html">Email</a>
+            <a href="#">Profile</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-photo" style="background:#fde8cc;">👨‍💼</div>
+        <div class="team-body">
+          <div class="team-name">Carlos Vega</div>
+          <div class="team-title">Commercial & Investment</div>
+          <div class="team-bio">Specializes in multi-family and commercial properties. Former CPA, bringing financial rigor to every deal.</div>
+          <div class="team-contact">
+            <a href="contact.html">Email</a>
+            <a href="#">Profile</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Our Story / Timeline -->
+<section>
+  <div class="container">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px;">
+      <div>
+        <p class="section-label">Our Story</p>
+        <h2 class="section-title">25 Years of Austin Real Estate</h2>
+        <div class="divider divider-left"></div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">1998</div>
+            <div class="timeline-title">Founded in Downtown Austin</div>
+            <div class="timeline-desc">Amanda Kim and her partner opened Keystone with two agents and a vision for a different kind of real estate firm.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2005</div>
+            <div class="timeline-title">Expanded to 10 Agents</div>
+            <div class="timeline-desc">Word-of-mouth growth led to a new office on Congress Ave and a full property management division.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2014</div>
+            <div class="timeline-title">$500M in Total Sales</div>
+            <div class="timeline-desc">Crossed a major milestone and launched our Relocation Concierge program for out-of-state buyers.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2020</div>
+            <div class="timeline-title">Pivoted to Virtual Tours</div>
+            <div class="timeline-desc">Launched 3D virtual walkthroughs and e-closing capabilities ahead of the industry curve.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2026</div>
+            <div class="timeline-title">Today: $2.4B in Volume</div>
+            <div class="timeline-desc">18 agents, 3 offices, and still independently owned — committed to Austin's communities for the next 25 years.</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p class="section-label">Recognition</p>
+        <h2 class="section-title">Awards & Certifications</h2>
+        <div class="divider divider-left"></div>
+        <div class="awards-grid" style="grid-template-columns: 1fr 1fr; margin-top: 8px;">
+          <div class="award-card">
+            <div class="award-icon">🏆</div>
+            <div class="award-name">Austin Business Journal Best of Business</div>
+            <div class="award-year">2022, 2023, 2024</div>
+          </div>
+          <div class="award-card">
+            <div class="award-icon">⭐</div>
+            <div class="award-name">Zillow Premier Agent 5-Star</div>
+            <div class="award-year">9 Consecutive Years</div>
+          </div>
+          <div class="award-card">
+            <div class="award-icon">🎖️</div>
+            <div class="award-name">Texas REALTORS® Platinum Award</div>
+            <div class="award-year">2019–2025</div>
+          </div>
+          <div class="award-card">
+            <div class="award-icon">🏠</div>
+            <div class="award-name">Equal Housing Opportunity Certified</div>
+            <div class="award-year">All Agents Certified</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-band">
+  <div class="container">
+    <h2>Work With a Team You Can Trust</h2>
+    <p>Let's start the conversation. Whether buying, selling, or investing — we're ready to help.</p>
+    <div class="cta-buttons">
+      <a href="contact.html" class="btn btn-primary">Contact an Agent</a>
+      <a href="listings.html" class="btn btn-outline-white">View Listings</a>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">Keystone Realty Group</div>
+        <p class="footer-tagline">Austin's most trusted real estate team since 1998. Helping families find their place to call home.</p>
+      </div>
+      <div>
+        <div class="footer-heading">Navigate</div>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="listings.html">Listings</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading">Services</div>
+        <ul class="footer-links">
+          <li><a href="#">Buy a Home</a></li>
+          <li><a href="#">Sell a Home</a></li>
+          <li><a href="#">Property Management</a></li>
+          <li><a href="#">Relocation Services</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading">Contact</div>
+        <ul class="footer-links">
+          <li><a href="tel:+15124550100">(512) 455-0100</a></li>
+          <li><a href="mailto:hello@keystonerealty.com">hello@keystonerealty.com</a></li>
+          <li><a href="#">820 Congress Ave, Suite 400<br>Austin, TX 78701</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Keystone Realty Group. All rights reserved.</span>
+      <span>Privacy Policy · Terms of Use · Equal Housing Opportunity</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
