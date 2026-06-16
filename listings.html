@@ -4568,17 +4568,32 @@ renderPage(1);
 
 // ── Deep-link support ──────────────────────────────────────
 // If the URL contains #listing-{id}, navigate to the right page and open the modal.
-// Works when linked from the home page, external sites, or shared directly.
+// IDs 1–100 = residential, 101+ = commercial.
 (function () {
   const match = (window._listingHash || '').match(/^#listing-(\d+)$/);
   if (!match) return;
   const id = parseInt(match[1]);
-  const idx = listings.findIndex(l => l.id === id);
-  if (idx === -1) return;
-  const page = Math.floor(idx / PER_PAGE) + 1;
-  if (page !== 1) renderPage(page);
-  window.scrollTo(0, 0);
-  setTimeout(() => openModal(id), 60);
+
+  if (id >= 101) {
+    // Switch to commercial mode
+    activeMode = 'commercial';
+    filteredListings = commercialListings;
+    document.querySelectorAll('.ltype-tab').forEach(t => t.classList.remove('active'));
+    document.querySelector('.ltype-tab[data-mode="commercial"]').classList.add('active');
+    const idx = commercialListings.findIndex(l => l.id === id);
+    if (idx === -1) return;
+    const page = Math.floor(idx / PER_PAGE) + 1;
+    renderPage(page);
+    window.scrollTo(0, 0);
+    setTimeout(() => openCommercialModal(id), 60);
+  } else {
+    const idx = listings.findIndex(l => l.id === id);
+    if (idx === -1) return;
+    const page = Math.floor(idx / PER_PAGE) + 1;
+    if (page !== 1) renderPage(page);
+    window.scrollTo(0, 0);
+    setTimeout(() => openModal(id), 60);
+  }
 })();
 
 // ── Modal logic ─────────────────────────────────────────────
